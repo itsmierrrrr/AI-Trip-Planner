@@ -1,28 +1,46 @@
 import axios from "axios";
 
+const WEATHER_TIMEOUT_MS = 10000;
+
+const weatherFallback = (cityName, condition = "Weather data unavailable") => ({
+  destination: cityName,
+  temperature: "N/A",
+  condition,
+  humidity: "N/A",
+  windSpeed: "N/A",
+  bestMonths: "Year-round",
+});
+
 /**
  * Fetch weather data and climate info for a destination
  * Uses Open-Meteo API (free, no auth required)
  */
 export const getWeatherByCity = async (cityName) => {
+  const trimmedCity = String(cityName || "").trim();
+
+  if (!trimmedCity) {
+    return weatherFallback("Unknown destination", "Destination not provided");
+  }
+
   try {
     // Get city coordinates via geocoding
     const geoResponse = await axios.get(
       "https://geocoding-api.open-meteo.com/v1/search",
       {
         params: {
-          name: cityName,
+          name: trimmedCity,
           count: 1,
           language: "en",
           format: "json",
         },
+        timeout: WEATHER_TIMEOUT_MS,
       }
     );
 
     const results = geoResponse.data?.results;
     if (!results || results.length === 0) {
       return {
-        destination: cityName,
+        destination: trimmedCity,
         temperature: "Unknown",
         condition: "Data unavailable",
         humidity: "N/A",
@@ -48,6 +66,7 @@ export const getWeatherByCity = async (cityName) => {
           wind_speed_unit: "kmh",
           timezone: "auto",
         },
+        timeout: WEATHER_TIMEOUT_MS,
       }
     );
 
@@ -102,12 +121,16 @@ export const getWeatherByCity = async (cityName) => {
       else bestMonths = "April - October";
     }
 
+    const tempValue = Number(current.temperature_2m);
+    const humidityValue = Number(current.relative_humidity_2m);
+    const windValue = Number(current.wind_speed_10m);
+
     return {
       destination: `${name}, ${country}`,
-      temperature: Math.round(current.temperature_2m || 0) + "°C",
+      temperature: Number.isFinite(tempValue) ? `${Math.round(tempValue)}°C` : "N/A",
       condition: getWeatherDescription(current.weather_code),
-      humidity: current.relative_humidity_2m + "%",
-      windSpeed: Math.round(current.wind_speed_10m || 0) + " km/h",
+      humidity: Number.isFinite(humidityValue) ? `${Math.round(humidityValue)}%` : "N/A",
+      windSpeed: Number.isFinite(windValue) ? `${Math.round(windValue)} km/h` : "N/A",
       bestMonths,
       coordinates: {
         lat: latitude,
@@ -115,15 +138,12 @@ export const getWeatherByCity = async (cityName) => {
       },
     };
   } catch (error) {
+    const reason =
+      error.code === "ECONNABORTED"
+        ? "Weather API timeout"
+        : "Weather data unavailable";
     console.error("Weather API error:", error.message);
-    return {
-      destination: cityName,
-      temperature: "N/A",
-      condition: "Weather data unavailable",
-      humidity: "N/A",
-      windSpeed: "N/A",
-      bestMonths: "Year-round",
-    };
+    return weatherFallback(trimmedCity, reason);
   }
 };
 
@@ -138,13 +158,6 @@ export const getWeatherForDestinations = async (destinations) => {
     return weatherData;
   } catch (error) {
     console.error("Multi-city weather fetch error:", error.message);
-    return destinations.map((dest) => ({
-      destination: dest,
-      temperature: "N/A",
-      condition: "Unavailable",
-      humidity: "N/A",
-      windSpeed: "N/A",
-      bestMonths: "Year-round",
-    }));
+    return destinations.map((dest) => weatherFallback(dest, "Unavailable"));
   }
 };

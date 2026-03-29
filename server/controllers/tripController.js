@@ -25,7 +25,8 @@ hotels: [
 name,
 price,
 rating,
-description
+description,
+bookingLink
 }
 ],
 budgetBreakdown: {
@@ -44,7 +45,11 @@ humidity,
 windSpeed, 
 bestMonths 
 }
-}`;
+}
+
+Rules:
+- Do not include image URLs for hotels.
+- Always include bookingLink as a valid http/https URL for each hotel.`;
 
 const OPENROUTER_API_URL = env.openRouterApiUrl;
 const OPENROUTER_MODEL = env.openRouterModel;
@@ -101,6 +106,42 @@ const parseAIJson = (rawContent) => {
   }
 };
 
+const toHotelSearchLink = (name, destination) => {
+  const query = [name, destination, "hotel booking"]
+    .filter(Boolean)
+    .join(" ")
+    .trim();
+  return `https://www.google.com/travel/hotels?q=${encodeURIComponent(query)}`;
+};
+
+const isHttpUrl = (value) => {
+  if (typeof value !== "string") return false;
+  return /^https?:\/\//i.test(value.trim());
+};
+
+const normalizeHotels = (tripPayload, destination) => {
+  if (!tripPayload || !Array.isArray(tripPayload.hotels)) return tripPayload;
+
+  const normalizedHotels = tripPayload.hotels.map((hotel, index) => {
+    const safeHotel = hotel && typeof hotel === "object" ? hotel : {};
+    const hotelName = safeHotel.name || `Hotel Option ${index + 1}`;
+    const bookingLink = isHttpUrl(safeHotel.bookingLink)
+      ? safeHotel.bookingLink.trim()
+      : toHotelSearchLink(hotelName, destination || tripPayload?.overview?.destination || "");
+
+    return {
+      ...safeHotel,
+      name: hotelName,
+      bookingLink,
+    };
+  });
+
+  return {
+    ...tripPayload,
+    hotels: normalizedHotels,
+  };
+};
+
 const buildFallbackTrip = ({ prompt, destination, budget, days }) => ({
   overview: {
     destination: destination || "Custom Destination",
@@ -125,6 +166,7 @@ const buildFallbackTrip = ({ prompt, destination, budget, days }) => ({
       price: "Varies by season",
       rating: "4.2/5",
       description: "Comfortable location with easy city access",
+      bookingLink: "https://www.google.com/travel/hotels",
     },
   ],
   budgetBreakdown: {
@@ -210,6 +252,8 @@ export const generateTrip = async (req, res) => {
     } catch {
       generatedTrip = buildFallbackTrip({ prompt, destination, budget, days });
     }
+
+    generatedTrip = normalizeHotels(generatedTrip, destination);
 
     // Attach weather data to response
     if (weatherInfo.temperature) {

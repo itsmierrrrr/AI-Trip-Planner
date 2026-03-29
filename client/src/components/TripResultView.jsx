@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { CalendarDays, Cloud, CloudDrizzle, CloudRain, CloudSnow, CloudSun, Droplets, Eye, IndianRupee, Lightbulb, MapPin, Star, Sun, Timer, Wind } from "lucide-react";
+import { CalendarDays, Cloud, CloudDrizzle, CloudRain, CloudSnow, CloudSun, Droplets, ExternalLink, IndianRupee, Lightbulb, MapPin, Star, Sun, Timer, Wind } from "lucide-react";
 
 const cardAnimation = {
   initial: { opacity: 0, y: 16 },
@@ -16,6 +16,13 @@ const getWeatherIcon = (condition) => {
   if (cond.includes("clear") || cond.includes("sunny")) return <Sun size={20} />;
   if (cond.includes("cloud")) return <Cloud size={20} />;
   return <CloudSun size={20} />;
+};
+
+const isHttpUrl = (value) => typeof value === "string" && /^https?:\/\//i.test(value.trim());
+
+const buildFallbackHotelLink = (hotelName, destination) => {
+  const query = [hotelName, destination, "hotel booking"].filter(Boolean).join(" ");
+  return `https://www.google.com/travel/hotels?q=${encodeURIComponent(query)}`;
 };
 
 const TripResultView = ({ trip }) => {
@@ -138,6 +145,13 @@ const TripResultView = ({ trip }) => {
         <h3 className="font-['Space_Grotesk'] text-xl font-semibold text-slate-100">Hotel Recommendations</h3>
         <div className="mt-4 grid gap-4 md:grid-cols-2">
           {hotels.map((hotel, index) => (
+            (() => {
+              const destination = overview?.destination || "";
+              const bookingHref = isHttpUrl(hotel?.bookingLink)
+                ? hotel.bookingLink
+                : buildFallbackHotelLink(hotel?.name || "Hotel", destination);
+
+              return (
             <motion.article 
               key={`${hotel.name}-${index}`} 
               whileHover={{ y: -4 }}
@@ -155,11 +169,19 @@ const TripResultView = ({ trip }) => {
                   <span className="font-semibold">{hotel.price}</span>
                   <span className="inline-flex items-center gap-1 text-amber-400"><Star size={14} className="fill-amber-400" /> {hotel.rating}</span>
                 </div>
-                <button className="mt-3 w-full rounded-xl border border-cyan-300/35 bg-cyan-300/10 px-3 py-1.5 text-xs font-medium text-cyan-200 transition hover:bg-cyan-300/20 hover:border-cyan-300/50">
-                  View Hotel
-                </button>
+                <a
+                  href={bookingHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-3 inline-flex w-full items-center justify-center gap-1 rounded-xl border border-cyan-300/35 bg-cyan-300/10 px-3 py-1.5 text-xs font-medium text-cyan-200 transition hover:bg-cyan-300/20 hover:border-cyan-300/50"
+                >
+                  Hotel link
+                  <ExternalLink size={13} />
+                </a>
               </div>
             </motion.article>
+              );
+            })()
           ))}
         </div>
       </motion.section>
