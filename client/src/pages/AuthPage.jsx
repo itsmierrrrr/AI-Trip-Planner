@@ -73,9 +73,6 @@ const AuthPage = () => {
   const inputClass =
     "neon-input w-full px-4 py-3 text-sm outline-none transition focus:border-cyan-300/70 focus:shadow-[0_0_0_1px_rgba(34,211,238,0.35),0_0_24px_rgba(34,211,238,0.25)]";
 
-  const floatingInputClass =
-    "peer neon-input w-full px-4 pb-2 pt-5 text-sm outline-none transition focus:border-cyan-300/70 focus:shadow-[0_0_0_1px_rgba(34,211,238,0.35),0_0_24px_rgba(34,211,238,0.25)]";
-
   return (
     <div className="relative min-h-screen overflow-hidden px-4 py-8">
       <span className="floating-blob left-[-140px] top-[15%] h-96 w-96 bg-cyan-500/20" />
@@ -137,16 +134,13 @@ const AuthPage = () => {
 
             <form className="space-y-3" onSubmit={onSubmit}>
               {mode === "signup" && (
-                <label className="relative block">
+                <label className="block">
                   <input
-                    placeholder=" "
+                    placeholder="Full name"
                     value={signupForm.name}
                     onChange={(e) => setSignupForm((prev) => ({ ...prev, name: e.target.value }))}
-                    className={floatingInputClass}
+                    className={inputClass}
                   />
-                  <span className="pointer-events-none absolute left-4 top-3 text-xs text-slate-400 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs peer-focus:text-cyan-200">
-                    Full name
-                  </span>
                 </label>
               )}
 
