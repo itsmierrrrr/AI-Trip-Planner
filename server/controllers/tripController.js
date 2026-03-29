@@ -1,0 +1,275 @@
+import axios from "axios";
+import env from "../config/env.js";
+import AIRequest from "../models/AIRequest.js";
+import Trip from "../models/Trip.js";
+import { getWeatherByCity } from "../services/weatherService.js";
+
+const SYSTEM_PROMPT = `You are an AI travel planner. Generate a complete travel plan in valid JSON format with these fields:
+{
+overview: {
+destination,
+duration,
+budget,
+bestTime,
+weather: { temperature, condition, humidity }
+},
+itinerary: [
+{
+day,
+title,
+activities
+}
+],
+hotels: [
+{
+name,
+price,
+rating,
+description
+}
+],
+budgetBreakdown: {
+hotel,
+food,
+travel,
+activities,
+extra
+},
+travelTips: [],
+weather: { 
+destination, 
+temperature, 
+condition, 
+humidity, 
+windSpeed, 
+bestMonths 
+}
+}`;
+
+const OPENROUTER_API_URL = env.openRouterApiUrl;
+const OPENROUTER_MODEL = env.openRouterModel;
+const OPENROUTER_APP_NAME = env.openRouterAppName;
+
+const normalizeContentText = (content) => {
+  if (typeof content === "string") return content;
+
+  if (Array.isArray(content)) {
+    return content
+      .map((item) => {
+        if (typeof item === "string") return item;
+        if (item?.type === "text") return item.text || "";
+        return item?.text || "";
+      })
+      .join("\n");
+  }
+
+  if (content && typeof content === "object") {
+    if (typeof content.text === "string") return content.text;
+    return JSON.stringify(content);
+  }
+
+  return "";
+};
+
+const parseAIJson = (rawContent) => {
+  const text = normalizeContentText(rawContent);
+  const cleaned = text
+    .replace(/```json|```/gi, "")
+    .replace(/[\u201C\u201D]/g, '"')
+    .replace(/[\u2018\u2019]/g, "'")
+    .trim();
+
+  try {
+    return JSON.parse(cleaned);
+  } catch {
+    const start = cleaned.indexOf("{");
+    const end = cleaned.lastIndexOf("}");
+
+    if (start === -1 || end === -1 || end <= start) {
+      throw new Error("AI returned invalid JSON format");
+    }
+
+    const sliced = cleaned.slice(start, end + 1);
+    const noTrailingCommas = sliced.replace(/,\s*([}\]])/g, "$1");
+    return JSON.parse(noTrailingCommas);
+  }
+};
+
+const buildFallbackTrip = ({ prompt, destination, budget, days }) => ({
+  overview: {
+    destination: destination || "Custom Destination",
+    duration: days ? `${days} days` : "Flexible",
+    budget: budget || "As specified in prompt",
+    bestTime: "Based on weather and local season",
+  },
+  itinerary: [
+    {
+      day: 1,
+      title: "Arrival and Local Exploration",
+      activities: [
+        "Check in and settle at accommodation",
+        "Explore nearby landmarks and local food spots",
+        "Plan detailed day-wise activities based on interests",
+      ],
+    },
+  ],
+  hotels: [
+    {
+      name: "Recommended City Stay",
+      price: "Varies by season",
+      rating: "4.2/5",
+      description: "Comfortable location with easy city access",
+    },
+  ],
+  budgetBreakdown: {
+    hotel: "35%",
+    food: "20%",
+    travel: "20%",
+    activities: "20%",
+    extra: "5%",
+  },
+  travelTips: [
+    "Book transport and stay early for better rates",
+    "Keep digital and physical copies of key documents",
+    `Use this prompt as reference for refinements: ${prompt}`,
+  ],
+});
+
+export const generateTrip = async (req, res) => {
+  try {
+    const { prompt, destination, budget, days, travelers, travelStyle } = req.body;
+
+    if (!prompt) {
+      return res.status(400).json({ message: "Trip prompt is required" });
+    }
+
+    // Fetch weather data for destination to enrich the prompt
+    let weatherInfo = {};
+    if (destination) {
+      weatherInfo = await getWeatherByCity(destination);
+    }
+
+    const enrichedPrompt = [
+      `User request: ${prompt}`,
+      destination ? `Destination: ${destination}` : null,
+      budget ? `Budget: ${budget}` : null,
+      days ? `Days: ${days}` : null,
+      travelers ? `Travelers: ${travelers}` : null,
+      travelStyle ? `Travel style: ${travelStyle}` : null,
+      weatherInfo.temperature
+        ? `Current weather: ${weatherInfo.temperature}, ${weatherInfo.condition}, Humidity: ${weatherInfo.humidity}, Best time to visit: ${weatherInfo.bestMonths}`
+        : null,
+    ]
+      .filter(Boolean)
+      .join("\n");
+
+    const response = await axios.post(
+      OPENROUTER_API_URL,
+      {
+        model: OPENROUTER_MODEL,
+        messages: [
+          { role: "system", content: SYSTEM_PROMPT },
+          { role: "user", content: enrichedPrompt },
+        ],
+        temperature: 0.7,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${env.openRouterApiKey}`,
+          "Content-Type": "application/json",
+          "HTTP-Referer": env.clientUrl,
+          "X-Title": OPENROUTER_APP_NAME,
+        },
+      }
+    );
+
+    const content = response.data?.choices?.[0]?.message?.content;
+    if (!content) {
+      return res.status(502).json({ message: "Empty response from OpenRouter" });
+    }
+
+    let generatedTrip;
+
+    try {
+      generatedTrip = parseAIJson(content);
+    } catch {
+      generatedTrip = buildFallbackTrip({ prompt, destination, budget, days });
+    }
+
+    // Attach weather data to response
+    if (weatherInfo.temperature) {
+      generatedTrip.weather = weatherInfo;
+    }
+
+    await AIRequest.create({
+      userId: req.user._id,
+      prompt,
+    });
+
+    const savedTrip = await Trip.create({
+      userId: req.user._id,
+      prompt,
+      generatedTrip,
+    });
+
+    return res.status(200).json({
+      generatedTrip,
+      autoSaved: true,
+      savedTripId: savedTrip._id,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Trip generation failed",
+      error: error.response?.data || error.message,
+    });
+  }
+};
+
+export const saveTrip = async (req, res) => {
+  try {
+    const { prompt, generatedTrip } = req.body;
+
+    if (!prompt || !generatedTrip) {
+      return res.status(400).json({ message: "Prompt and generated trip are required" });
+    }
+
+    const trip = await Trip.create({
+      userId: req.user._id,
+      prompt,
+      generatedTrip,
+    });
+
+    return res.status(201).json(trip);
+  } catch (error) {
+    return res.status(500).json({ message: "Unable to save trip", error: error.message });
+  }
+};
+
+export const getUserTrips = async (req, res) => {
+  try {
+    const trips = await Trip.find({ userId: req.user._id }).sort({ createdAt: -1 });
+    return res.status(200).json(trips);
+  } catch (error) {
+    return res.status(500).json({ message: "Unable to fetch trips", error: error.message });
+  }
+};
+
+export const deleteTrip = async (req, res) => {
+  try {
+    const trip = await Trip.findById(req.params.id);
+
+    if (!trip) {
+      return res.status(404).json({ message: "Trip not found" });
+    }
+
+    const isOwner = trip.userId.toString() === req.user._id.toString();
+    if (!isOwner && req.user.role !== "admin") {
+      return res.status(403).json({ message: "Not authorized to delete this trip" });
+    }
+
+    await trip.deleteOne();
+    return res.status(200).json({ message: "Trip deleted" });
+  } catch (error) {
+    return res.status(500).json({ message: "Unable to delete trip", error: error.message });
+  }
+};

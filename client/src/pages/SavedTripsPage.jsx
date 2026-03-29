@@ -1,0 +1,171 @@
+import { useEffect, useMemo, useState } from "react";
+import { Search, X } from "lucide-react";
+import { deleteSavedTrip, getSavedTrips } from "../services/tripService";
+
+const SavedTripsPage = () => {
+  const [trips, setTrips] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [query, setQuery] = useState("");
+  const [sortBy, setSortBy] = useState("newest");
+  const [error, setError] = useState("");
+  const [selectedTrip, setSelectedTrip] = useState(null);
+
+  const loadTrips = async () => {
+    setLoading(true);
+    try {
+      const data = await getSavedTrips();
+      setTrips(data);
+    } catch (err) {
+      setError(err.response?.data?.message || "Unable to fetch trips.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadTrips();
+  }, []);
+
+  const filteredTrips = useMemo(() => {
+    const scoped = !query.trim()
+      ? trips
+      : trips.filter((trip) => trip.prompt.toLowerCase().includes(query.toLowerCase()));
+
+    return [...scoped].sort((a, b) => {
+      if (sortBy === "oldest") return new Date(a.createdAt) - new Date(b.createdAt);
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
+  }, [trips, query, sortBy]);
+
+  const destinationPalette = (destination = "") => {
+    const map = {
+      tokyo: "from-fuchsia-500/35 via-indigo-500/30 to-cyan-500/25",
+      dubai: "from-amber-400/30 via-orange-500/20 to-rose-500/20",
+      goa: "from-cyan-400/30 via-teal-500/30 to-blue-500/20",
+      switzerland: "from-slate-200/25 via-cyan-300/20 to-blue-500/20",
+    };
+
+    const key = Object.keys(map).find((item) => destination.toLowerCase().includes(item));
+    return map[key] || "from-violet-500/25 via-blue-500/20 to-cyan-500/20";
+  };
+
+  const onDelete = async (id) => {
+    try {
+      await deleteSavedTrip(id);
+      setTrips((prev) => prev.filter((trip) => trip._id !== id));
+    } catch (err) {
+      setError(err.response?.data?.message || "Unable to delete trip.");
+    }
+  };
+
+  return (
+    <section className="space-y-4">
+      <div className="neon-panel p-6">
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+          <h1 className="font-['Space_Grotesk'] text-3xl font-bold text-slate-100">Saved Trips</h1>
+          <p className="text-sm text-slate-400">{filteredTrips.length} trips</p>
+        </div>
+
+        <div className="flex flex-col gap-3 md:flex-row">
+          <div className="neon-input flex flex-1 items-center gap-2 px-3 py-2">
+            <Search size={16} className="text-cyan-200" />
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search your saved adventures"
+              className="w-full bg-transparent text-sm text-slate-100 outline-none"
+            />
+          </div>
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className="neon-input px-3 py-2 text-sm text-slate-100 outline-none"
+          >
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+          </select>
+        </div>
+      </div>
+
+      {loading ? <p className="text-sm text-slate-400">Loading trips...</p> : null}
+      {error ? <p className="mb-3 text-sm text-rose-300">{error}</p> : null}
+
+      <div className="grid gap-3 md:grid-cols-2">
+        {filteredTrips.map((trip) => (
+          <article key={trip._id} className="neon-soft overflow-hidden p-0">
+            <div className={`relative h-36 bg-gradient-to-br ${destinationPalette(trip.generatedTrip?.overview?.destination)}`}>
+              <div className="absolute inset-0 bg-black/35" />
+              <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
+                <h3 className="text-lg font-semibold text-white">{trip.generatedTrip?.overview?.destination || "Custom Trip"}</h3>
+                <p className="text-xs text-slate-200">{new Date(trip.createdAt).toLocaleDateString()}</p>
+              </div>
+            </div>
+            <div className="p-4">
+              <p className="text-sm text-slate-300">{trip.prompt}</p>
+              <div className="mt-3 flex items-center gap-2">
+                <button
+                  onClick={() => setSelectedTrip(trip)}
+                  className="neon-input rounded-xl px-3 py-1.5 text-sm text-slate-200 transition hover:border-cyan-300/60"
+                >
+                  View Trip
+                </button>
+                <button
+                  onClick={() => onDelete(trip._id)}
+                  className="rounded-xl border border-rose-300/35 bg-rose-300/10 px-3 py-1.5 text-sm text-rose-300 transition hover:bg-rose-300/20"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      {selectedTrip && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
+          onClick={() => setSelectedTrip(null)}
+        >
+          <div
+            className="neon-panel max-h-[80vh] w-full max-w-2xl overflow-y-auto p-6"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="mb-4 flex items-start justify-between">
+              <div>
+                <h3 className="font-['Space_Grotesk'] text-xl font-bold text-slate-100">Trip Details</h3>
+                <p className="mt-1 text-sm text-slate-400">{selectedTrip.prompt}</p>
+              </div>
+              <button
+                onClick={() => setSelectedTrip(null)}
+                className="neon-input p-2 text-slate-300"
+              >
+                <X size={16} />
+              </button>
+            </div>
+
+            <div className="grid gap-3 md:grid-cols-2">
+              <div className="neon-soft p-3">
+                <p className="text-xs text-slate-400">Destination</p>
+                <p className="mt-1 text-slate-100">{selectedTrip.generatedTrip?.overview?.destination || "Custom Trip"}</p>
+              </div>
+              <div className="neon-soft p-3">
+                <p className="text-xs text-slate-400">Duration</p>
+                <p className="mt-1 text-slate-100">{selectedTrip.generatedTrip?.overview?.duration || "-"}</p>
+              </div>
+              <div className="neon-soft p-3">
+                <p className="text-xs text-slate-400">Budget</p>
+                <p className="mt-1 text-slate-100">{selectedTrip.generatedTrip?.overview?.budget || "-"}</p>
+              </div>
+              <div className="neon-soft p-3">
+                <p className="text-xs text-slate-400">Best Time</p>
+                <p className="mt-1 text-slate-100">{selectedTrip.generatedTrip?.overview?.bestTime || "-"}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+};
+
+export default SavedTripsPage;

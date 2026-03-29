@@ -1,0 +1,263 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  color: #eef2ff;
+  background-color: #05070f;
+  --bg-main: linear-gradient(180deg, #05070f 0%, #070a14 45%, #04060c 100%);
+  --bg-orb-a: rgba(34, 211, 238, 0.18);
+  --bg-orb-b: rgba(168, 85, 247, 0.2);
+  --text-main: #d6deff;
+  --panel-bg: rgba(15, 23, 42, 0.45);
+  --panel-border: rgba(103, 232, 249, 0.2);
+  --panel-shadow: 0 18px 50px rgba(2, 6, 23, 0.8);
+  --soft-bg: rgba(15, 23, 42, 0.4);
+  --soft-border: rgba(165, 180, 252, 0.2);
+  --input-bg: rgba(2, 6, 23, 0.65);
+  --input-border: rgba(199, 210, 254, 0.2);
+  --input-text: #e2e8f0;
+  --btn-shadow: 0 0 24px rgba(34, 211, 238, 0.45);
+  --nav-bg: rgba(2, 6, 23, 0.35);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root.theme-light {
+  color: #0f172a;
+  background-color: #f8fafc;
+  --bg-main: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 45%, #eef2ff 100%);
+  --bg-orb-a: rgba(56, 189, 248, 0.14);
+  --bg-orb-b: rgba(99, 102, 241, 0.14);
+  --text-main: #1e293b;
+  --panel-bg: rgba(255, 255, 255, 0.78);
+  --panel-border: rgba(148, 163, 184, 0.28);
+  --panel-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+  --soft-bg: rgba(248, 250, 252, 0.88);
+  --soft-border: rgba(148, 163, 184, 0.22);
+  --input-bg: rgba(255, 255, 255, 0.95);
+  --input-border: rgba(148, 163, 184, 0.35);
+  --input-text: #0f172a;
+  --btn-shadow: 0 10px 24px rgba(37, 99, 235, 0.18);
+  --nav-bg: rgba(248, 250, 252, 0.72);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 12% 8%, var(--bg-orb-a) 0%, rgba(5, 7, 15, 0) 36%),
+    radial-gradient(circle at 82% 14%, var(--bg-orb-b) 0%, rgba(5, 7, 15, 0) 34%),
+    var(--bg-main);
+  color: var(--text-main);
+  transition: background 240ms ease, color 240ms ease;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+@layer components {
+  .neon-panel {
+    @apply rounded-3xl backdrop-blur-xl transition-all duration-300;
+    border: 1px solid var(--panel-border);
+    background: var(--panel-bg);
+    box-shadow: var(--panel-shadow);
+  }
+
+  .neon-soft {
+    @apply rounded-2xl backdrop-blur-lg transition-all duration-300;
+    border: 1px solid var(--soft-border);
+    background: var(--soft-bg);
+  }
+
+  .neon-input {
+    @apply rounded-2xl backdrop-blur-md transition-all duration-300 focus-within:border-cyan-300/50 focus-within:shadow-[0_0_20px_rgba(34,211,238,0.15)];
+    border: 1px solid var(--input-border);
+    background: var(--input-bg);
+    color: var(--input-text);
+  }
+
+  .neon-btn {
+    @apply rounded-2xl bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 px-5 py-2.5 font-semibold text-slate-950 transition duration-300 hover:scale-[1.02] hover:shadow-[0_0_34px_rgba(139,92,246,0.5)] active:scale-95;
+    box-shadow: var(--btn-shadow);
+  }
+
+  .neon-heading {
+    @apply bg-gradient-to-r from-cyan-200 via-sky-200 to-violet-300 bg-clip-text text-transparent;
+  }
+
+  .grid-backdrop {
+    background-image:
+      linear-gradient(rgba(56, 189, 248, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(56, 189, 248, 0.08) 1px, transparent 1px);
+    background-size: 34px 34px;
+  }
+
+  .floating-blob {
+    @apply pointer-events-none absolute rounded-full blur-3xl;
+    animation: blobFloat 10s ease-in-out infinite;
+  }
+
+  .ring-loader {
+    width: 84px;
+    height: 84px;
+    border-radius: 999px;
+    border: 2px solid rgba(125, 211, 252, 0.2);
+    border-top-color: rgba(103, 232, 249, 1);
+    border-right-color: rgba(168, 85, 247, 1);
+    animation: spin 1s linear infinite;
+    box-shadow: 0 0 28px rgba(34, 211, 238, 0.45);
+  }
+
+  .shimmer {
+    animation: shimmer 2s infinite;
+  }
+
+  .glow-cyan {
+    @apply shadow-[0_0_20px_rgba(34,211,238,0.3)];
+  }
+
+  .glow-violet {
+    @apply shadow-[0_0_20px_rgba(168,85,247,0.3)];
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-cyan-300 to-violet-400 bg-clip-text text-transparent;
+  }
+}
+
+:root.theme-light .bg-slate-950\/35,
+:root.theme-light .bg-slate-950\/45,
+:root.theme-light .bg-slate-950\/60,
+:root.theme-light .bg-slate-900\/70,
+:root.theme-light .bg-slate-900\/45,
+:root.theme-light .bg-slate-900\/40,
+:root.theme-light .bg-slate-800\/50,
+:root.theme-light .bg-slate-800\/40,
+:root.theme-light .bg-slate-800\/30 {
+  background-color: rgba(255, 255, 255, 0.78) !important;
+}
+
+:root.theme-light .text-slate-100,
+:root.theme-light .text-slate-200,
+:root.theme-light .text-slate-300 {
+  color: #1e293b !important;
+}
+
+:root.theme-light .text-slate-400,
+:root.theme-light .text-slate-500 {
+  color: #64748b !important;
+}
+
+:root.theme-light .text-cyan-100,
+:root.theme-light .text-cyan-200,
+:root.theme-light .text-cyan-300,
+:root.theme-light .text-cyan-400 {
+  color: #0e7490 !important;
+}
+
+:root.theme-light .text-violet-200,
+:root.theme-light .text-violet-300,
+:root.theme-light .text-violet-400,
+:root.theme-light .text-indigo-300,
+:root.theme-light .text-indigo-400 {
+  color: #6d28d9 !important;
+}
+
+:root.theme-light .text-rose-300,
+:root.theme-light .text-rose-400 {
+  color: #be123c !important;
+}
+
+:root.theme-light .text-amber-100,
+:root.theme-light .text-amber-200,
+:root.theme-light .text-amber-300 {
+  color: #b45309 !important;
+}
+
+:root.theme-light .border-slate-700\/50,
+:root.theme-light .border-slate-800,
+:root.theme-light .border-slate-800\/50 {
+  border-color: rgba(148, 163, 184, 0.28) !important;
+}
+
+:root.theme-light .border-cyan-300\/20,
+:root.theme-light .border-cyan-300\/25,
+:root.theme-light .border-cyan-300\/30,
+:root.theme-light .border-cyan-300\/35,
+:root.theme-light .border-cyan-300\/40,
+:root.theme-light .border-cyan-300\/45,
+:root.theme-light .border-cyan-300\/50,
+:root.theme-light .border-violet-300\/30,
+:root.theme-light .border-violet-300\/35,
+:root.theme-light .border-rose-300\/35,
+:root.theme-light .border-indigo-300\/20 {
+  border-color: rgba(14, 116, 144, 0.35) !important;
+}
+
+:root.theme-light .bg-cyan-300\/10,
+:root.theme-light .bg-cyan-300\/15,
+:root.theme-light .bg-cyan-300\/20,
+:root.theme-light .bg-cyan-300\/30,
+:root.theme-light .bg-violet-300\/10,
+:root.theme-light .bg-violet-300\/20,
+:root.theme-light .bg-violet-400\/30,
+:root.theme-light .bg-indigo-900\/70,
+:root.theme-light .bg-rose-300\/10,
+:root.theme-light .bg-rose-400\/10,
+:root.theme-light .bg-rose-400\/15 {
+  background-color: rgba(14, 116, 144, 0.1) !important;
+}
+
+:root.theme-light .neon-heading {
+  background-image: linear-gradient(90deg, #0e7490 0%, #2563eb 50%, #6d28d9 100%) !important;
+}
+
+:root.theme-light .gradient-text {
+  background-image: linear-gradient(90deg, #0284c7 0%, #6d28d9 100%) !important;
+}
+
+:root.theme-light .grid-backdrop {
+  background-image:
+    linear-gradient(rgba(59, 130, 246, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.06) 1px, transparent 1px);
+}
+
+@keyframes blobFloat {
+  0%,
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-16px) scale(1.04);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
