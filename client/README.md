@@ -1,16 +1,31 @@
-# React + Vite
+# AI Trip Planner Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend application for AI Trip Planner, built with React and Vite.
 
-Currently, two official plugins are available:
+## Commands
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Install dependencies: `npm install`
+- Run development server: `npm run dev`
+- Build for production: `npm run build`
+- Preview production build: `npm run preview`
 
-## React Compiler
+## Environment Variables
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Create a local `client/.env` file:
 
-## Expanding the ESLint configuration
+```env
+VITE_API_URL=http://localhost:5000/api
+VITE_GOOGLE_CLIENT_ID=<your_google_oauth_client_id>
+VITE_APP_NAME=TripOS AI
+VITE_HERO_HEADLINE=Your Next Trip, Designed by AI
+VITE_HERO_SUBHEADING=A futuristic travel intelligence layer that builds routes, budgets, and discoveries.
+VITE_HERO_PROMPT_EXAMPLE=Plan me a 7-day Japan trip under 1000 USD
+VITE_PLANNER_PROMPT_PLACEHOLDER=Plan me a 5-day Goa trip under 300 USD
+VITE_LOADING_MESSAGES=Scanning destinations...|Comparing routes...|Building your itinerary...
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Security Notes
+
+- Do not place private API keys or server-side secrets in client environment variables.
+- Any value prefixed with `VITE_` is embedded in the frontend bundle and publicly visible.
+- Keep OAuth client secret and API provider secrets on the backend only.
