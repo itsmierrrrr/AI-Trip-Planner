@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import { Search, X } from "lucide-react";
 import { deleteSavedTrip, getSavedTrips } from "../services/tripService";
 
+const PLACE_IMAGE = "/place.jpg";
+
 const SavedTripsPage = () => {
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -36,18 +38,6 @@ const SavedTripsPage = () => {
       return new Date(b.createdAt) - new Date(a.createdAt);
     });
   }, [trips, query, sortBy]);
-
-  const destinationPalette = (destination = "") => {
-    const map = {
-      tokyo: "from-fuchsia-500/35 via-indigo-500/30 to-cyan-500/25",
-      dubai: "from-amber-400/30 via-orange-500/20 to-rose-500/20",
-      goa: "from-cyan-400/30 via-teal-500/30 to-blue-500/20",
-      switzerland: "from-slate-200/25 via-cyan-300/20 to-blue-500/20",
-    };
-
-    const key = Object.keys(map).find((item) => destination.toLowerCase().includes(item));
-    return map[key] || "from-violet-500/25 via-blue-500/20 to-cyan-500/20";
-  };
 
   const onDelete = async (id) => {
     try {
@@ -93,7 +83,13 @@ const SavedTripsPage = () => {
       <div className="grid gap-3 md:grid-cols-2">
         {filteredTrips.map((trip) => (
           <article key={trip._id} className="neon-soft overflow-hidden p-0">
-            <div className={`relative h-36 bg-gradient-to-br ${destinationPalette(trip.generatedTrip?.overview?.destination)}`}>
+            <div className="relative h-36">
+              <img
+                src={PLACE_IMAGE}
+                alt="Destination"
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
               <div className="absolute inset-0 bg-black/35" />
               <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
                 <h3 className="text-lg font-semibold text-white">{trip.generatedTrip?.overview?.destination || "Custom Trip"}</h3>
