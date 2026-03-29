@@ -71,6 +71,9 @@ const AuthPage = () => {
   };
 
   const inputClass =
+    "neon-input w-full px-4 py-3 text-sm outline-none transition focus:border-cyan-300/70 focus:shadow-[0_0_0_1px_rgba(34,211,238,0.35),0_0_24px_rgba(34,211,238,0.25)]";
+
+  const floatingInputClass =
     "peer neon-input w-full px-4 pb-2 pt-5 text-sm outline-none transition focus:border-cyan-300/70 focus:shadow-[0_0_0_1px_rgba(34,211,238,0.35),0_0_24px_rgba(34,211,238,0.25)]";
 
   return (
@@ -139,7 +142,7 @@ const AuthPage = () => {
                     placeholder=" "
                     value={signupForm.name}
                     onChange={(e) => setSignupForm((prev) => ({ ...prev, name: e.target.value }))}
-                    className={inputClass}
+                    className={floatingInputClass}
                   />
                   <span className="pointer-events-none absolute left-4 top-3 text-xs text-slate-400 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs peer-focus:text-cyan-200">
                     Full name
@@ -147,10 +150,10 @@ const AuthPage = () => {
                 </label>
               )}
 
-              <label className="relative block">
+              <label className="block">
                 <input
                   type="email"
-                  placeholder=" "
+                  placeholder="Email address"
                   value={mode === "signup" ? signupForm.email : loginForm.email}
                   onChange={(e) =>
                     mode === "signup"
@@ -159,15 +162,12 @@ const AuthPage = () => {
                   }
                   className={inputClass}
                 />
-                <span className="pointer-events-none absolute left-4 top-3 text-xs text-slate-400 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs peer-focus:text-cyan-200">
-                  Email address
-                </span>
               </label>
 
-              <label className="relative block">
+              <label className="block">
                 <input
                   type="password"
-                  placeholder=" "
+                  placeholder="Password"
                   value={mode === "signup" ? signupForm.password : loginForm.password}
                   onChange={(e) =>
                     mode === "signup"
@@ -176,9 +176,6 @@ const AuthPage = () => {
                   }
                   className={inputClass}
                 />
-                <span className="pointer-events-none absolute left-4 top-3 text-xs text-slate-400 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs peer-focus:text-cyan-200">
-                  Password
-                </span>
               </label>
 
               {error && <p className="text-sm text-rose-300">{error}</p>}
