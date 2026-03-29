@@ -61,6 +61,20 @@ const isPlaceholderKey = (value) => {
   return normalized.includes("your_openrouter_api_key") || normalized === "changeme";
 };
 
+const hasUsableWeather = (weather) => {
+  if (!weather || typeof weather !== "object") return false;
+  const temp = String(weather.temperature || "").trim().toLowerCase();
+  const condition = String(weather.condition || "").trim().toLowerCase();
+
+  const invalidTemp = !temp || temp === "n/a" || temp === "unknown";
+  const invalidCondition =
+    !condition ||
+    condition.includes("unavailable") ||
+    condition.includes("not provided");
+
+  return !invalidTemp && !invalidCondition;
+};
+
 const normalizeContentText = (content) => {
   if (typeof content === "string") return content;
 
@@ -204,7 +218,7 @@ export const generateTrip = async (req, res) => {
       days ? `Days: ${days}` : null,
       travelers ? `Travelers: ${travelers}` : null,
       travelStyle ? `Travel style: ${travelStyle}` : null,
-      weatherInfo.temperature
+      hasUsableWeather(weatherInfo)
         ? `Current weather: ${weatherInfo.temperature}, ${weatherInfo.condition}, Humidity: ${weatherInfo.humidity}, Best time to visit: ${weatherInfo.bestMonths}`
         : null,
     ]
@@ -255,8 +269,8 @@ export const generateTrip = async (req, res) => {
 
     generatedTrip = normalizeHotels(generatedTrip, destination);
 
-    // Attach weather data to response
-    if (weatherInfo.temperature) {
+    // Attach external weather only when it is valid, otherwise preserve AI-provided weather.
+    if (hasUsableWeather(weatherInfo)) {
       generatedTrip.weather = weatherInfo;
     }
 
