@@ -190,9 +190,20 @@ const AuthPage = () => {
 
             <div className="my-5 h-px bg-slate-700/80" />
 
-            <div className="flex justify-center">
-              <GoogleLogin onSuccess={onGoogleSuccess} onError={() => setError("Google login failed")} />
-            </div>
+            <motion.div
+              className="flex justify-center"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+              whileHover={{ scale: 1.05 }}
+            >
+              <GoogleLogin 
+                onSuccess={onGoogleSuccess} 
+                onError={() => setError("Google login failed")}
+                text="logo_only"
+                size="large"
+              />
+            </motion.div>
           </motion.div>
         </section>
       </div>
