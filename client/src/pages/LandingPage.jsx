@@ -121,6 +121,20 @@ const LandingPage = () => {
             {env.heroSubheading}
           </motion.p>
 
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-7"
+          >
+            <Link
+              to="/auth"
+              className="inline-flex items-center justify-center rounded-2xl border border-cyan-300/40 bg-cyan-300/15 px-7 py-3 font-['Space_Grotesk'] text-sm font-bold uppercase tracking-[0.12em] text-cyan-100 shadow-[0_0_24px_rgba(34,211,238,0.25)] transition hover:border-cyan-200/70 hover:bg-cyan-300/25 hover:text-white"
+            >
+              Generate Now
+            </Link>
+          </motion.div>
+
           <div className="relative mx-auto mt-10 max-w-5xl overflow-hidden rounded-3xl border border-cyan-300/20 bg-slate-900/35 py-4">
             <motion.div
               className="flex w-max gap-3 px-3"
