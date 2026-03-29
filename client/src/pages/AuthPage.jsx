@@ -191,17 +191,21 @@ const AuthPage = () => {
             <div className="my-5 h-px bg-slate-700/80" />
 
             <motion.div
-              className="flex justify-center"
+              className="google-fullwidth flex w-full rounded-2xl"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.4, duration: 0.5 }}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.01 }}
             >
               <GoogleLogin 
                 onSuccess={onGoogleSuccess} 
                 onError={() => setError("Google login failed")}
-                text="logo_only"
+                text="continue_with"
+                theme="filled_black"
+                shape="rectangular"
                 size="large"
+                width="100%"
+                logo_alignment="left"
               />
             </motion.div>
           </motion.div>

@@ -288,6 +288,11 @@ body {
   border-color: rgba(6, 182, 212, 0.35) !important;
 }
 
+.google-fullwidth > div,
+.google-fullwidth iframe {
+  width: 100% !important;
+}
+
 @keyframes blobFloat {
   0%,
   100% {
