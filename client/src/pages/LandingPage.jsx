@@ -198,7 +198,7 @@ const LandingPage = () => {
               </h2>
             </div>
             <p className="max-w-xl text-sm text-slate-300">
-              TripOS combines AI planning logic, destination context, weather signals, and budgeting to generate practical and exciting plans.
+              lessgo ai combines AI planning logic, destination context, weather signals, and budgeting to generate practical and exciting plans.
             </p>
           </div>
 

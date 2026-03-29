@@ -12,6 +12,7 @@ import PlannerPage from "./pages/PlannerPage";
 import ProfilePage from "./pages/ProfilePage";
 import SavedTripsPage from "./pages/SavedTripsPage";
 import SettingsPage from "./pages/SettingsPage";
+import UserDashboardPage from "./pages/UserDashboardPage";
 
 const App = () => {
   return (
@@ -32,7 +33,7 @@ const App = () => {
             }
           >
             <Route path="/planner" element={<PlannerPage />} />
-            <Route path="/dashboard" element={<Navigate to="/planner" replace />} />
+            <Route path="/dashboard" element={<UserDashboardPage />} />
             <Route path="/saved-trips" element={<SavedTripsPage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/settings" element={<SettingsPage />} />

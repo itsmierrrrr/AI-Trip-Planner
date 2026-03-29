@@ -1,5 +1,5 @@
 import express from "express";
-import { getStats, getTrips, getUsers, getUsersWithTrips, verifyAdminCode } from "../controllers/adminController.js";
+import { deleteUser, getStats, getTrips, getUsers, getUsersWithTrips, verifyAdminCode } from "../controllers/adminController.js";
 
 const router = express.Router();
 
@@ -19,5 +19,6 @@ router.get("/stats", verifyAdminToken, getStats);
 router.get("/users", verifyAdminToken, getUsers);
 router.get("/users-with-trips", verifyAdminToken, getUsersWithTrips);
 router.get("/trips", verifyAdminToken, getTrips);
+router.delete("/users/:id", verifyAdminToken, deleteUser);
 
 export default router;

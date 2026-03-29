@@ -34,6 +34,31 @@ const PlannerPage = () => {
       return;
     }
 
+    if (!payload.destination?.trim()) {
+      setError("Destination is required.");
+      return;
+    }
+
+    if (!payload.budget?.trim()) {
+      setError("Budget is required.");
+      return;
+    }
+
+    if (!payload.days?.trim()) {
+      setError("Days is required.");
+      return;
+    }
+
+    if (!payload.travelers?.trim()) {
+      setError("Travelers is required.");
+      return;
+    }
+
+    if (!payload.travelStyle?.trim()) {
+      setError("Travel style is required.");
+      return;
+    }
+
     setError("");
     setMessage("");
     setAutoSaved(false);
@@ -111,11 +136,26 @@ const PlannerPage = () => {
           />
 
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            <input className={fieldClass} placeholder="Destination" value={form.destination} onChange={(e) => onChange("destination", e.target.value)} />
-            <input className={fieldClass} placeholder="Budget" value={form.budget} onChange={(e) => onChange("budget", e.target.value)} />
-            <input className={fieldClass} placeholder="Days" value={form.days} onChange={(e) => onChange("days", e.target.value)} />
-            <input className={fieldClass} placeholder="Travelers" value={form.travelers} onChange={(e) => onChange("travelers", e.target.value)} />
-            <input className={fieldClass} placeholder="Travel style" value={form.travelStyle} onChange={(e) => onChange("travelStyle", e.target.value)} />
+            <div>
+              <label className="text-xs font-medium text-slate-300">Destination <span className="text-rose-400">*</span></label>
+              <input className={fieldClass} placeholder="e.g., Tokyo, Bali, Dubai" value={form.destination} onChange={(e) => onChange("destination", e.target.value)} required />
+            </div>
+            <div>
+              <label className="text-xs font-medium text-slate-300">Budget <span className="text-rose-400">*</span></label>
+              <input className={fieldClass} placeholder="e.g., ₹50,000 or $500" value={form.budget} onChange={(e) => onChange("budget", e.target.value)} required />
+            </div>
+            <div>
+              <label className="text-xs font-medium text-slate-300">Days <span className="text-rose-400">*</span></label>
+              <input className={fieldClass} placeholder="e.g., 7" value={form.days} onChange={(e) => onChange("days", e.target.value)} required />
+            </div>
+            <div>
+              <label className="text-xs font-medium text-slate-300">Travelers <span className="text-rose-400">*</span></label>
+              <input className={fieldClass} placeholder="e.g., 2-3 people" value={form.travelers} onChange={(e) => onChange("travelers", e.target.value)} required />
+            </div>
+            <div>
+              <label className="text-xs font-medium text-slate-300">Travel style <span className="text-rose-400">*</span></label>
+              <input className={fieldClass} placeholder="e.g., Adventure, Luxury, Peaceful" value={form.travelStyle} onChange={(e) => onChange("travelStyle", e.target.value)} required />
+            </div>
           </div>
 
           <div className="flex flex-wrap gap-3">

@@ -1,7 +1,7 @@
 const env = {
   apiBaseUrl: import.meta.env.VITE_API_URL || "http://localhost:5000/api",
   googleClientId: import.meta.env.VITE_GOOGLE_CLIENT_ID || "YOUR_GOOGLE_CLIENT_ID",
-  appName: import.meta.env.VITE_APP_NAME || "TripOS AI",
+  appName: import.meta.env.VITE_APP_NAME || "lessgo ai",
   heroHeadline: import.meta.env.VITE_HERO_HEADLINE || "Your Next Trip, Designed by AI",
   heroSubheading:
     import.meta.env.VITE_HERO_SUBHEADING ||

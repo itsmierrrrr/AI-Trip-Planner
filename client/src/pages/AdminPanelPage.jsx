@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { AlertCircle, ChevronDown, Eye, Users, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { AlertCircle, BarChart3, ChevronDown, Eye, Radar, Trash2, Users, X } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAdminStats, getAdminUsersWithTrips } from "../services/adminPanelService";
+import { getAdminStats, getAdminUsersWithTrips, removeAdminUser } from "../services/adminPanelService";
 
 const AdminPanelPage = () => {
   const navigate = useNavigate();
@@ -13,6 +13,8 @@ const AdminPanelPage = () => {
   const [expandedUsers, setExpandedUsers] = useState({});
   const [selectedTrip, setSelectedTrip] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [lastUpdated, setLastUpdated] = useState(null);
+  const [autoRefresh, setAutoRefresh] = useState(true);
 
   const adminToken = localStorage.getItem("adminToken");
 
@@ -22,30 +24,107 @@ const AdminPanelPage = () => {
       return;
     }
 
-    const loadData = async () => {
+    const loadData = async (silent = false) => {
       try {
-        setLoading(true);
+        if (!silent) setLoading(true);
         const [usersWithTrips, statsData] = await Promise.all([
           getAdminUsersWithTrips(adminToken),
           getAdminStats(adminToken),
         ]);
         setUsersData(usersWithTrips);
         setStats(statsData);
+        setLastUpdated(new Date());
       } catch (err) {
         setError(err.response?.data?.message || "Failed to load admin data");
       } finally {
-        setLoading(false);
+        if (!silent) setLoading(false);
       }
     };
 
-    loadData();
-  }, [adminToken, navigate]);
+    loadData(false);
+
+    if (!autoRefresh) {
+      return undefined;
+    }
+
+    const refreshTimer = setInterval(() => {
+      loadData(true);
+    }, 15000);
+
+    return () => clearInterval(refreshTimer);
+  }, [adminToken, navigate, autoRefresh]);
+
+  const allTrips = useMemo(
+    () => usersData.flatMap((user) => user.trips || []),
+    [usersData]
+  );
+
+  const destinationCounts = useMemo(() => {
+    const counts = allTrips.reduce((acc, trip) => {
+      const destination = trip.generatedTrip?.overview?.destination || "Unknown";
+      acc[destination] = (acc[destination] || 0) + 1;
+      return acc;
+    }, {});
+
+    return Object.entries(counts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5);
+  }, [allTrips]);
+
+  const monthLabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  const monthlyUsers = useMemo(
+    () =>
+      usersData.reduce((acc, user) => {
+        const month = new Date(user.createdAt).getMonth();
+        acc[month] += 1;
+        return acc;
+      }, Array(12).fill(0)),
+    [usersData]
+  );
+
+  const monthlyTrips = useMemo(
+    () =>
+      allTrips.reduce((acc, trip) => {
+        const month = new Date(trip.createdAt).getMonth();
+        acc[month] += 1;
+        return acc;
+      }, Array(12).fill(0)),
+    [allTrips]
+  );
 
   const toggleUserExpand = (userId) => {
     setExpandedUsers((prev) => ({
       ...prev,
       [userId]: !prev[userId],
     }));
+  };
+
+  const onDeleteUser = async (userId, userRole) => {
+    if (userRole === "admin") {
+      setError("Admin users cannot be deleted.");
+      return;
+    }
+
+    const shouldDelete = window.confirm("Delete this user and all associated trips? This action cannot be undone.");
+    if (!shouldDelete) return;
+
+    try {
+      await removeAdminUser(adminToken, userId);
+      setUsersData((prev) => prev.filter((user) => user._id !== userId));
+      setStats((prev) => ({
+        ...prev,
+        totalUsers: Math.max(prev.totalUsers - 1, 0),
+      }));
+      setExpandedUsers((prev) => {
+        const next = { ...prev };
+        delete next[userId];
+        return next;
+      });
+      setError("");
+    } catch (err) {
+      setError(err.response?.data?.message || "Failed to delete user.");
+    }
   };
 
   const filteredUsers = usersData.filter(
@@ -111,6 +190,108 @@ const AdminPanelPage = () => {
               </div>
             </motion.div>
           ))}
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.15 }}
+          className="mb-6 flex flex-wrap items-center justify-between gap-3"
+        >
+          <p className="text-xs text-slate-500">
+            {autoRefresh ? "Live updates every 15s" : "Auto-refresh paused"}
+            {lastUpdated ? ` • Last synced ${lastUpdated.toLocaleTimeString()}` : ""}
+          </p>
+
+          <button
+            type="button"
+            onClick={() => setAutoRefresh((prev) => !prev)}
+            className={`rounded-xl border px-3 py-1.5 text-xs font-medium uppercase tracking-[0.08em] transition ${
+              autoRefresh
+                ? "border-cyan-300/35 bg-cyan-300/15 text-cyan-200 hover:bg-cyan-300/20"
+                : "border-slate-600 bg-slate-800/60 text-slate-300 hover:bg-slate-700/60"
+            }`}
+          >
+            Realtime: {autoRefresh ? "On" : "Off"}
+          </button>
+        </motion.div>
+
+        {/* Realtime Charts */}
+        <div className="mb-8 grid gap-4 xl:grid-cols-3">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.18 }}
+            className="neon-panel p-5 xl:col-span-1"
+          >
+            <h2 className="inline-flex items-center gap-2 text-lg font-semibold text-slate-100">
+              <Radar size={18} className="text-cyan-200" /> Top Destinations
+            </h2>
+            <div className="mt-4 space-y-3">
+              {destinationCounts.length ? (
+                destinationCounts.map(([destination, count]) => (
+                  <div key={destination}>
+                    <div className="mb-1 flex items-center justify-between text-sm text-slate-300">
+                      <span>{destination}</span>
+                      <span>{count}</span>
+                    </div>
+                    <div className="h-1.5 rounded-full bg-slate-800">
+                      <div
+                        className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-violet-400"
+                        style={{ width: `${Math.max(12, count * 18)}%` }}
+                      />
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p className="text-sm text-slate-400">No destination data yet.</p>
+              )}
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="neon-panel p-5 xl:col-span-2"
+          >
+            <h2 className="inline-flex items-center gap-2 text-lg font-semibold text-slate-100">
+              <Users size={18} className="text-cyan-200" /> Monthly Registrations
+            </h2>
+            <div className="mt-4 grid grid-cols-12 items-end gap-2">
+              {monthlyUsers.map((count, month) => (
+                <div key={month} className="flex flex-col items-center gap-2">
+                  <div
+                    className="w-full rounded-t-md bg-gradient-to-t from-violet-500/70 to-cyan-400/80"
+                    style={{ height: `${Math.max(10, count * 14)}px` }}
+                  />
+                  <span className="text-[10px] text-slate-400">{monthLabels[month]}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.22 }}
+          className="mb-8 neon-panel p-5"
+        >
+          <h2 className="inline-flex items-center gap-2 text-lg font-semibold text-slate-100">
+            <BarChart3 size={18} className="text-cyan-200" /> Trips Created Per Month
+          </h2>
+          <div className="mt-4 grid grid-cols-12 items-end gap-2">
+            {monthlyTrips.map((count, month) => (
+              <div key={month} className="flex flex-col items-center gap-2">
+                <div
+                  className="w-full rounded-t-md bg-gradient-to-t from-cyan-400/70 to-blue-400/80"
+                  style={{ height: `${Math.max(10, count * 14)}px` }}
+                />
+                <span className="text-[10px] text-slate-400">{monthLabels[month]}</span>
+              </div>
+            ))}
+          </div>
         </motion.div>
 
         {error && (
@@ -184,6 +365,17 @@ const AdminPanelPage = () => {
                         <span className="rounded-full bg-cyan-500/20 px-3 py-1 text-xs text-cyan-300 font-medium">
                           {user.tripCount} trips
                         </span>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onDeleteUser(user._id, user.role);
+                          }}
+                          disabled={user.role === "admin"}
+                          className="rounded-lg border border-rose-300/35 bg-rose-300/10 p-2 text-rose-300 transition hover:bg-rose-300/20 disabled:cursor-not-allowed disabled:opacity-40"
+                          title={user.role === "admin" ? "Admin users cannot be deleted" : "Delete user"}
+                        >
+                          <Trash2 size={15} />
+                        </button>
                         <motion.div
                           animate={{ rotate: expandedUsers[user._id] ? 180 : 0 }}
                           transition={{ duration: 0.2 }}

@@ -39,6 +39,7 @@ const AdminSecurityPage = () => {
           transition={{ duration: 0.5 }}
           className="w-full max-w-md"
         >
+          <div className="neon-panel rounded-[2rem] border border-cyan-300/25 p-2 shadow-[0_0_50px_rgba(34,211,238,0.12)]">
           {/* Security Icon */}
           <motion.div
             initial={{ y: -20, opacity: 0 }}
@@ -46,7 +47,7 @@ const AdminSecurityPage = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="mb-8 flex justify-center"
           >
-            <div className="rounded-full border border-cyan-300/35 bg-cyan-300/10 p-4 shadow-[0_0_32px_rgba(34,211,238,0.35)]">
+            <div className="rounded-full border border-cyan-300/45 bg-gradient-to-br from-cyan-300/25 to-violet-400/20 p-4 shadow-[0_0_36px_rgba(34,211,238,0.35)]">
               <Lock size={40} className="text-cyan-300" />
             </div>
           </motion.div>
@@ -76,23 +77,24 @@ const AdminSecurityPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
             onSubmit={handleVerify}
-            className="neon-panel space-y-4 p-6"
+            className="space-y-4 rounded-3xl border border-cyan-300/20 bg-slate-900/55 p-6 backdrop-blur-xl"
           >
             {/* Code Input */}
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">Security Code</label>
+              <label className="mb-2 block text-sm font-medium tracking-[0.06em] text-slate-300">Security Code</label>
               <div className="relative">
                 <Smartphone className="absolute left-4 top-3.5 text-cyan-300" size={18} />
                 <input
-                  type="password"
+                  type="text"
                   value={code}
                   onChange={(e) => {
-                    setCode(e.target.value);
+                    setCode(e.target.value.replace(/\D/g, "").slice(0, 4));
                     setError("");
                   }}
                   placeholder="Enter 4-digit code"
-                  maxLength="4"
-                  className="neon-input w-full pl-12 py-3 text-center text-2xl tracking-widest"
+                  maxLength={4}
+                  inputMode="numeric"
+                  className="neon-input w-full py-3 pl-12 text-center text-2xl font-semibold tracking-[0.45em]"
                   disabled={loading}
                   autoFocus
                 />
@@ -114,7 +116,7 @@ const AdminSecurityPage = () => {
             <button
               type="submit"
               disabled={!code || code.length !== 4 || loading}
-              className="neon-btn w-full disabled:cursor-not-allowed disabled:opacity-50"
+              className="neon-btn w-full rounded-2xl py-3 text-sm tracking-[0.06em] disabled:cursor-not-allowed disabled:opacity-50"
             >
               {loading ? (
                 <span className="inline-flex items-center gap-2">
@@ -127,8 +129,8 @@ const AdminSecurityPage = () => {
             </button>
 
             {/* Info Box */}
-            <div className="rounded-lg border border-cyan-300/20 bg-cyan-300/5 p-3 text-xs text-slate-400">
-              <p className="font-medium text-cyan-300 mb-1">🔐 Secure Access Only</p>
+            <div className="rounded-2xl border border-cyan-300/25 bg-gradient-to-r from-cyan-300/10 to-violet-400/10 p-3 text-xs text-slate-300">
+              <p className="mb-1 font-medium tracking-[0.08em] text-cyan-200">SECURE ACCESS ONLY</p>
               <p>This admin panel displays all registered users and their trip data. Handle with care.</p>
             </div>
           </motion.form>
@@ -142,6 +144,7 @@ const AdminSecurityPage = () => {
           >
             Protected by security code authentication
           </motion.p>
+          </div>
         </motion.div>
       </div>
     </div>

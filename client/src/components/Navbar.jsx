@@ -1,13 +1,12 @@
 import { motion } from "framer-motion";
-import { Compass, LogOut, UserRound } from "lucide-react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Bell, Compass, UserRound } from "lucide-react";
+import { Link, NavLink } from "react-router-dom";
 import env from "../config/env";
 import { useAuth } from "../hooks/useAuth";
 import ThemeToggle from "./ThemeToggle";
 
 const Navbar = () => {
-  const navigate = useNavigate();
-  const { isAuthenticated, user, logout } = useAuth();
+  const { isAuthenticated, user } = useAuth();
 
   const links = isAuthenticated
     ? [
@@ -39,7 +38,7 @@ const Navbar = () => {
         <span className="font-['Space_Grotesk'] text-lg font-semibold tracking-tight transition group-hover:text-cyan-200">{env.appName}</span>
       </Link>
 
-      <div className="hidden items-center gap-2 md:flex">
+      <div className="hidden items-center gap-2 lg:flex">
         {links.map((item) => (
           <NavLink
             key={item.to}
@@ -60,28 +59,27 @@ const Navbar = () => {
       <div className="flex items-center gap-2">
         <ThemeToggle />
 
+        {isAuthenticated ? (
+          <button
+            type="button"
+            className="neon-input inline-flex h-10 w-10 items-center justify-center rounded-full text-slate-300 transition hover:text-cyan-200"
+            aria-label="Notifications"
+          >
+            <Bell size={15} />
+          </button>
+        ) : null}
+
         {isAuthenticated && (
           <Link to="/profile" className="neon-input inline-flex h-10 w-10 items-center justify-center rounded-full">
             {user?.name ? user.name.charAt(0).toUpperCase() : <UserRound size={16} className="text-slate-300" />}
           </Link>
         )}
 
-        {isAuthenticated ? (
-          <button
-            type="button"
-            onClick={() => {
-              logout();
-              navigate("/");
-            }}
-            className="neon-input inline-flex items-center gap-2 px-3 py-2 text-sm text-slate-200 hover:text-rose-300"
-          >
-            <LogOut size={14} /> Logout
-          </button>
-        ) : (
+        {!isAuthenticated ? (
           <Link to="/auth" className="neon-btn inline-flex items-center px-4 py-2 text-sm">
             Login / Signup
           </Link>
-        )}
+        ) : null}
       </div>
       </div>
     </motion.nav>
