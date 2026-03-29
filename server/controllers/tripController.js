@@ -50,6 +50,12 @@ const OPENROUTER_API_URL = env.openRouterApiUrl;
 const OPENROUTER_MODEL = env.openRouterModel;
 const OPENROUTER_APP_NAME = env.openRouterAppName;
 
+const isPlaceholderKey = (value) => {
+  if (!value) return true;
+  const normalized = value.trim().toLowerCase();
+  return normalized.includes("your_openrouter_api_key") || normalized === "changeme";
+};
+
 const normalizeContentText = (content) => {
   if (typeof content === "string") return content;
 
@@ -163,6 +169,14 @@ export const generateTrip = async (req, res) => {
       .filter(Boolean)
       .join("\n");
 
+    if (isPlaceholderKey(env.openRouterApiKey)) {
+      return res.status(500).json({
+        message: "AI service is not configured on the server. Set OPENROUTER_API_KEY in deployment environment variables.",
+      });
+    }
+
+    const requestOrigin = req.get("origin") || req.get("referer") || env.clientUrl;
+
     const response = await axios.post(
       OPENROUTER_API_URL,
       {
@@ -177,9 +191,10 @@ export const generateTrip = async (req, res) => {
         headers: {
           Authorization: `Bearer ${env.openRouterApiKey}`,
           "Content-Type": "application/json",
-          "HTTP-Referer": env.clientUrl,
+          "HTTP-Referer": requestOrigin,
           "X-Title": OPENROUTER_APP_NAME,
         },
+        timeout: 45000,
       }
     );
 
@@ -218,9 +233,42 @@ export const generateTrip = async (req, res) => {
       savedTripId: savedTrip._id,
     });
   } catch (error) {
+    const upstreamStatus = error.response?.status;
+    const upstreamBody = error.response?.data;
+    const upstreamMessage =
+      upstreamBody?.error?.message ||
+      upstreamBody?.message ||
+      error.message ||
+      "Unknown AI provider error";
+
+    if (upstreamStatus === 401 || upstreamStatus === 403) {
+      return res.status(502).json({
+        message:
+          "AI provider authentication failed. Verify OPENROUTER_API_KEY and allowed app settings in deployment.",
+        providerStatus: upstreamStatus,
+        providerMessage: upstreamMessage,
+      });
+    }
+
+    if (upstreamStatus === 429) {
+      return res.status(429).json({
+        message: "AI provider rate limit reached. Please retry in a moment.",
+        providerStatus: upstreamStatus,
+        providerMessage: upstreamMessage,
+      });
+    }
+
+    if (error.code === "ECONNABORTED") {
+      return res.status(504).json({
+        message: "AI provider timed out. Please try again.",
+        providerMessage: upstreamMessage,
+      });
+    }
+
     return res.status(500).json({
       message: "Trip generation failed",
-      error: error.response?.data || error.message,
+      providerStatus: upstreamStatus || null,
+      providerMessage: upstreamMessage,
     });
   }
 };

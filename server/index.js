@@ -46,7 +46,12 @@ app.use("/api/admin-panel", publicAdminRoutes);
 
 app.use((err, _req, res, _next) => {
   console.error(err);
-  res.status(500).json({ message: "Internal server error" });
+
+  if (err?.message?.includes("CORS blocked")) {
+    return res.status(403).json({ message: err.message });
+  }
+
+  return res.status(500).json({ message: "Internal server error" });
 });
 
 app.listen(env.port, () => {
