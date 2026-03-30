@@ -64,7 +64,7 @@ VITE_APP_NAME=TripOS AI
 VITE_HERO_HEADLINE=Your Next Trip, Designed by AI
 VITE_HERO_SUBHEADING=A futuristic travel intelligence layer that builds routes, budgets, and discoveries.
 VITE_HERO_PROMPT_EXAMPLE=Plan me a 7-day Japan trip under 1000 USD
-VITE_PLANNER_PROMPT_PLACEHOLDER=Plan me a 5-day Goa trip under 300 USD
+VITE_PLANNER_PROMPT_PLACEHOLDER=Describe your trip
 VITE_LOADING_MESSAGES=Scanning destinations...|Comparing routes...|Building your itinerary...
 ```
 
