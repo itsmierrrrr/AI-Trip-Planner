@@ -46,6 +46,9 @@ const TripResultView = ({ trip, compact = false }) => {
   const durationLabel = overview?.duration || "your selected duration";
   const budgetLabel = overview?.budget || "your selected budget";
   const bestTimeLabel = overview?.bestTime;
+  const bestTimeContent = [weather?.bestMonths, overview?.bestTime]
+    .map((item) => (typeof item === "string" ? item.trim() : ""))
+    .find(Boolean) || "Year-round";
 
   summaryPoints.push(
     `This trip plans ${destinationLabel} for ${durationLabel} with an estimated budget of ${budgetLabel}${bestTimeLabel ? ` and best time to visit in ${bestTimeLabel}` : ""}.`
@@ -122,7 +125,11 @@ const TripResultView = ({ trip, compact = false }) => {
               className="lg:row-span-1 lg:col-span-1 rounded-2xl bg-gradient-to-br from-amber-500/30 to-orange-500/20 p-6 border border-amber-400/25 flex flex-col justify-center hover:border-amber-400/40 transition"
             >
               <p className="text-xs uppercase tracking-wider text-amber-300 font-semibold">🗓️ Best Time to Visit</p>
-              <p className="mt-4 text-2xl font-bold text-amber-100">{weather.bestMonths}</p>
+              <div className="mt-4 max-h-32 overflow-y-auto rounded-xl border border-amber-300/20 bg-amber-950/20 p-3 pr-2">
+                <p className="text-base font-semibold leading-relaxed text-amber-100 whitespace-pre-wrap break-words">
+                  {bestTimeContent}
+                </p>
+              </div>
               <p className="mt-4 text-sm leading-relaxed text-amber-200/80">
                 Plan your visit during these months for optimal weather conditions and enjoyable experiences.
               </p>
