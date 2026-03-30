@@ -137,7 +137,7 @@ const LandingPage = () => {
             transition={{ duration: 0.5, delay: 0.08 }}
             className="mx-auto inline-flex min-w-[320px] items-center justify-center rounded-2xl border border-violet-300/30 bg-violet-300/15 px-6 py-3 text-center font-['Space_Grotesk'] text-2xl font-bold tracking-[0.08em] text-violet-200 shadow-[0_0_22px_rgba(139,92,246,0.22)] md:min-w-[420px] md:text-3xl"
           >
-            LIVE TIME: {currentTime.toLocaleTimeString()}
+            TIME: {currentTime.toLocaleTimeString()}
           </motion.div>
 
           <motion.h1
