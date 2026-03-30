@@ -22,6 +22,9 @@ const env = {
       "Scanning the planet for hidden gems...",
       "Teaching the AI how to pack a suitcase...",
       "Negotiating hotel prices with imaginary robots...",
+      "Calculating how beautiful you are...",
+      "Can we go to the Moon together...",
+
     ],
 };
 
