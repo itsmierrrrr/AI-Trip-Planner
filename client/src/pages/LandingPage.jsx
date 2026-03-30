@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import env from "../config/env";
 import FeatureCard from "../components/FeatureCard";
+import { useAuth } from "../hooks/useAuth";
 
 const floatingDestinations = [
   { name: "Tokyo", className: "left-6 top-24 md:left-24" },
@@ -101,6 +102,8 @@ const animatedPlaces = [
 
 const LandingPage = () => {
   const [currentTime, setCurrentTime] = useState(() => new Date());
+  const { isAuthenticated } = useAuth();
+  const generateNowPath = isAuthenticated ? "/planner" : "/auth";
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -189,7 +192,7 @@ const LandingPage = () => {
 
           <div className="mt-3">
             <Link
-              to="/auth"
+              to={generateNowPath}
               className="inline-flex items-center justify-center rounded-2xl border border-cyan-300/40 bg-cyan-300/15 px-7 py-3 font-['Space_Grotesk'] text-sm font-bold uppercase tracking-[0.12em] text-cyan-100 shadow-[0_0_24px_rgba(34,211,238,0.25)] transition hover:border-cyan-200/70 hover:bg-cyan-300/25 hover:text-white"
             >
               Generate Now
@@ -318,7 +321,7 @@ const LandingPage = () => {
           <h3 className="font-['Space_Grotesk'] text-2xl font-bold text-slate-100 md:text-3xl">Ready to build your next adventure?</h3>
           <p className="max-w-2xl text-sm text-slate-300">Share your destination, budget, and travel style. The AI will generate the full itinerary in seconds.</p>
           <Link
-            to="/auth"
+            to={generateNowPath}
             className="inline-flex items-center justify-center rounded-2xl border border-cyan-300/40 bg-cyan-300/15 px-7 py-3 font-['Space_Grotesk'] text-sm font-bold uppercase tracking-[0.12em] text-cyan-100 shadow-[0_0_24px_rgba(34,211,238,0.25)] transition hover:border-cyan-200/70 hover:bg-cyan-300/25 hover:text-white"
           >
             Generate Now
