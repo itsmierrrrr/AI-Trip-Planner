@@ -5,7 +5,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import GeneratingOverlay from "../components/GeneratingOverlay";
 import TripResultView from "../components/TripResultView";
 import { generateTripPlan } from "../services/tripService";
-import env from "client/.env";
 
 const PlannerPage = () => {
   const location = useLocation();
