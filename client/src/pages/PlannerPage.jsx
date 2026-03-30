@@ -2,10 +2,10 @@ import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import env from "../config/env";
 import GeneratingOverlay from "../components/GeneratingOverlay";
 import TripResultView from "../components/TripResultView";
 import { generateTripPlan } from "../services/tripService";
+import env from "client/.env";
 
 const PlannerPage = () => {
   const location = useLocation();
@@ -30,7 +30,7 @@ const PlannerPage = () => {
 
   const generateFromPayload = async (payload) => {
     if (!payload.prompt?.trim()) {
-      setError("Please enter a trip prompt.");
+      setError("Please enter a trip description prompt.");
       return;
     }
 
@@ -123,7 +123,7 @@ const PlannerPage = () => {
         animate={{ opacity: 1, y: 0 }}
         className="neon-panel p-6"
       >
-        <h1 className="font-['Space_Grotesk'] text-3xl font-bold text-slate-100">Main Planner Dashboard</h1>
+        <h1 className="font-['Space_Grotesk'] text-3xl font-bold text-slate-100">Planner Dashboard</h1>
         <p className="mt-2 text-sm text-slate-400">Describe your ideal journey and let the travel AI orchestrate every detail.</p>
 
         <form onSubmit={onGenerate} className="mt-5 space-y-4">
@@ -131,7 +131,7 @@ const PlannerPage = () => {
             rows={5}
             value={form.prompt}
             onChange={(e) => onChange("prompt", e.target.value)}
-            placeholder={env.plannerPromptPlaceholder}
+            placeholder="Describe Your Trip..."
             className="neon-input w-full rounded-3xl px-4 py-3 text-sm outline-none transition focus:border-cyan-300/70 focus:shadow-[0_0_24px_rgba(34,211,238,0.25)]"
           />
 
