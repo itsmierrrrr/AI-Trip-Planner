@@ -20,9 +20,13 @@ const getWeatherIcon = (condition) => {
 
 const isHttpUrl = (value) => typeof value === "string" && /^https?:\/\//i.test(value.trim());
 
-const buildFallbackHotelLink = (hotelName, destination) => {
-  const query = [hotelName, destination, "hotel booking"].filter(Boolean).join(" ");
-  return `https://www.google.com/travel/hotels?q=${encodeURIComponent(query)}`;
+const buildMakeMyTripHotelLink = (destination, hotelName) => {
+  const query = [hotelName, destination].filter(Boolean).join(" ");
+  if (!query) {
+    return "https://www.makemytrip.com/hotels/";
+  }
+
+  return `https://www.makemytrip.com/hotels/hotel-listing/?searchText=${encodeURIComponent(query)}`;
 };
 
 const TripResultView = ({ trip, compact = false }) => {
@@ -34,6 +38,43 @@ const TripResultView = ({ trip, compact = false }) => {
     .map((value) => Number(String(value).replace(/[^\d.]/g, "")))
     .filter((value) => Number.isFinite(value) && value > 0);
   const totalBudget = budgetValues.reduce((sum, item) => sum + item, 0);
+
+  const summaryPoints = [];
+
+  const destinationLabel = overview?.destination || "the destination";
+  const durationLabel = overview?.duration || "your selected duration";
+  const budgetLabel = overview?.budget || "your selected budget";
+  const bestTimeLabel = overview?.bestTime;
+
+  summaryPoints.push(
+    `This trip plans ${destinationLabel} for ${durationLabel} with an estimated budget of ${budgetLabel}${bestTimeLabel ? ` and best time to visit in ${bestTimeLabel}` : ""}.`
+  );
+
+  const itineraryHighlights = itinerary
+    .slice(0, 3)
+    .map((dayItem) => dayItem?.title)
+    .filter(Boolean);
+  if (itineraryHighlights.length) {
+    summaryPoints.push(`Key itinerary highlights: ${itineraryHighlights.join(", ")}.`);
+  }
+
+  const topHotels = hotels
+    .slice(0, 3)
+    .map((hotel) => hotel?.name)
+    .filter(Boolean);
+  if (topHotels.length) {
+    summaryPoints.push(`Recommended stays include: ${topHotels.join(", ")}.`);
+  }
+
+  const weatherBits = [weather?.temperature, weather?.condition].filter(Boolean);
+  if (weatherBits.length) {
+    summaryPoints.push(`Expected weather snapshot: ${weatherBits.join(" • ")}.`);
+  }
+
+  const tipHighlights = travelTips.slice(0, 2).filter(Boolean);
+  if (tipHighlights.length) {
+    summaryPoints.push(`Top travel tips: ${tipHighlights.join(" ")}`);
+  }
 
   return (
     <div className={`${compact ? "" : "mt-8 "}space-y-5`}>
@@ -147,9 +188,9 @@ const TripResultView = ({ trip, compact = false }) => {
           {hotels.map((hotel, index) => (
             (() => {
               const destination = overview?.destination || "";
-              const bookingHref = isHttpUrl(hotel?.bookingLink)
+              const bookingHref = isHttpUrl(hotel?.bookingLink) && hotel.bookingLink.includes("makemytrip.com")
                 ? hotel.bookingLink
-                : buildFallbackHotelLink(hotel?.name || "Hotel", destination);
+                : buildMakeMyTripHotelLink(destination, hotel?.name || "Hotel");
 
               return (
             <motion.article 
@@ -175,7 +216,7 @@ const TripResultView = ({ trip, compact = false }) => {
                   rel="noreferrer"
                   className="mt-3 inline-flex w-full items-center justify-center gap-1 rounded-xl border border-cyan-300/35 bg-cyan-300/10 px-3 py-1.5 text-xs font-medium text-cyan-200 transition hover:bg-cyan-300/20 hover:border-cyan-300/50"
                 >
-                  Hotel link
+                  View on MakeMyTrip
                   <ExternalLink size={13} />
                 </a>
               </div>
@@ -229,6 +270,17 @@ const TripResultView = ({ trip, compact = false }) => {
                 <span>{tip}</span>
               </div>
             </motion.li>
+          ))}
+        </ul>
+      </motion.section>
+
+      <motion.section {...cardAnimation} transition={{ duration: 0.35, delay: 0.25 }} className="neon-panel p-6">
+        <h3 className="font-['Space_Grotesk'] text-xl font-semibold text-slate-100">AI Summary</h3>
+        <ul className="mt-4 space-y-2 text-sm text-slate-300">
+          {summaryPoints.map((point, index) => (
+            <li key={`summary-${index}`} className="neon-soft p-3">
+              {point}
+            </li>
           ))}
         </ul>
       </motion.section>
