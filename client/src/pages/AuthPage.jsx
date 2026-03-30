@@ -182,7 +182,7 @@ const AuthPage = () => {
             <div className="my-5 h-px bg-slate-700/80" />
 
             <motion.div
-              className="google-fullwidth flex w-full rounded-2xl"
+              className="google-fullwidth flex w-full items-center justify-center rounded-2xl"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.4, duration: 0.5 }}
@@ -195,7 +195,6 @@ const AuthPage = () => {
                 theme="filled_black"
                 shape="rectangular"
                 size="large"
-                width="100%"
                 logo_alignment="left"
               />
             </motion.div>

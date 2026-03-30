@@ -91,7 +91,6 @@ const AdminSecurityPage = () => {
                     setCode(e.target.value.replace(/\D/g, "").slice(0, 4));
                     setError("");
                   }}
-                  placeholder="Enter 4-digit code"
                   maxLength={4}
                   inputMode="numeric"
                   className="neon-input w-full py-3 pl-12 text-center text-2xl font-semibold tracking-[0.45em]"

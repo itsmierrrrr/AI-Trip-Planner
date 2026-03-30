@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Search, X } from "lucide-react";
 import { deleteSavedTrip, getSavedTrips } from "../services/tripService";
+import TripResultView from "../components/TripResultView";
 
 const PLACE_IMAGE = "/place.jpg";
 
@@ -139,24 +140,7 @@ const SavedTripsPage = () => {
               </button>
             </div>
 
-            <div className="grid gap-3 md:grid-cols-2">
-              <div className="neon-soft p-3">
-                <p className="text-xs text-slate-400">Destination</p>
-                <p className="mt-1 text-slate-100">{selectedTrip.generatedTrip?.overview?.destination || "Custom Trip"}</p>
-              </div>
-              <div className="neon-soft p-3">
-                <p className="text-xs text-slate-400">Duration</p>
-                <p className="mt-1 text-slate-100">{selectedTrip.generatedTrip?.overview?.duration || "-"}</p>
-              </div>
-              <div className="neon-soft p-3">
-                <p className="text-xs text-slate-400">Budget</p>
-                <p className="mt-1 text-slate-100">{selectedTrip.generatedTrip?.overview?.budget || "-"}</p>
-              </div>
-              <div className="neon-soft p-3">
-                <p className="text-xs text-slate-400">Best Time</p>
-                <p className="mt-1 text-slate-100">{selectedTrip.generatedTrip?.overview?.bestTime || "-"}</p>
-              </div>
-            </div>
+            <TripResultView trip={selectedTrip.generatedTrip} compact />
           </div>
         </div>
       )}

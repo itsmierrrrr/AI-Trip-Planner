@@ -54,12 +54,49 @@ const steps = [
   },
 ];
 
-const animatedTrips = [
-  { title: "7-Day Japan Escape", meta: "Tokyo • Kyoto • Osaka", budget: "₹1.2L" },
-  { title: "3-Day Goa Chill Plan", meta: "Beaches • Cafes • Sunset", budget: "₹28K" },
-  { title: "Dubai Luxury Sprint", meta: "Downtown • Desert • Marina", budget: "₹85K" },
-  { title: "Swiss Scenic Route", meta: "Lucerne • Interlaken • Zermatt", budget: "₹1.8L" },
-  { title: "Bali Remote Work Week", meta: "Ubud • Canggu • Nusa", budget: "₹65K" },
+const animatedPlaces = [
+  {
+    place: "Santorini",
+    country: "Greece",
+    vibe: "Sunset Cliffs",
+    image: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    place: "Kyoto",
+    country: "Japan",
+    vibe: "Temples & Gardens",
+    image: "https://images.unsplash.com/photo-1492571350019-22de08371fd3?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    place: "Bali",
+    country: "Indonesia",
+    vibe: "Island Escape",
+    image: "https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    place: "Interlaken",
+    country: "Switzerland",
+    vibe: "Alpine Views",
+    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    place: "Istanbul",
+    country: "Turkey",
+    vibe: "Culture + Food",
+    image: "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    place: "Dubai",
+    country: "UAE",
+    vibe: "Skyline Luxury",
+    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    place: "Goa",
+    country: "India",
+    vibe: "Beach Chill",
+    image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=900&q=80",
+  },
 ];
 
 const LandingPage = () => {
@@ -121,34 +158,42 @@ const LandingPage = () => {
             {env.heroSubheading}
           </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-7"
-          >
-            <Link
-              to="/auth"
-              className="inline-flex items-center justify-center rounded-2xl border border-cyan-300/40 bg-cyan-300/15 px-7 py-3 font-['Space_Grotesk'] text-sm font-bold uppercase tracking-[0.12em] text-cyan-100 shadow-[0_0_24px_rgba(34,211,238,0.25)] transition hover:border-cyan-200/70 hover:bg-cyan-300/25 hover:text-white"
-            >
-              Generate Now
-            </Link>
-          </motion.div>
-
           <div className="relative mx-auto mt-10 max-w-5xl overflow-hidden rounded-3xl border border-cyan-300/20 bg-slate-900/35 py-4">
             <motion.div
               className="flex w-max gap-3 px-3"
               animate={{ x: [0, -980] }}
               transition={{ duration: 24, ease: "linear", repeat: Infinity }}
             >
-              {[...animatedTrips, ...animatedTrips].map((trip, idx) => (
-                <article key={`${trip.title}-${idx}`} className="neon-soft min-w-[240px] p-3 text-left">
-                  <p className="text-sm font-semibold text-slate-100">{trip.title}</p>
-                  <p className="mt-1 text-xs text-slate-300">{trip.meta}</p>
-                  <p className="mt-2 text-xs uppercase tracking-[0.12em] text-cyan-300">{trip.budget}</p>
+              {[...animatedPlaces, ...animatedPlaces].map((place, idx) => (
+                <article key={`${place.place}-${idx}`} className="neon-soft min-w-[230px] p-3 text-left">
+                  <div className="relative h-24 w-full overflow-hidden rounded-xl">
+                    <img
+                      src={place.image}
+                      alt={place.place}
+                      className="h-full w-full object-cover"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 to-transparent" />
+                  </div>
+                  <p className="text-sm font-semibold text-slate-100">{place.place}</p>
+                  <p className="mt-1 text-xs text-slate-300">{place.country}</p>
+                  <p className="mt-2 text-xs uppercase tracking-[0.12em] text-cyan-300">{place.vibe}</p>
                 </article>
               ))}
             </motion.div>
+          </div>
+
+          <p className="mt-4 font-['Space_Grotesk'] text-lg font-semibold uppercase tracking-[0.14em] text-cyan-200">
+            Generate your trip now
+          </p>
+
+          <div className="mt-3">
+            <Link
+              to="/auth"
+              className="inline-flex items-center justify-center rounded-2xl border border-cyan-300/40 bg-cyan-300/15 px-7 py-3 font-['Space_Grotesk'] text-sm font-bold uppercase tracking-[0.12em] text-cyan-100 shadow-[0_0_24px_rgba(34,211,238,0.25)] transition hover:border-cyan-200/70 hover:bg-cyan-300/25 hover:text-white"
+            >
+              Generate Now
+            </Link>
           </div>
 
           <div className="mt-6 text-sm text-slate-400">Trusted by travelers from 110+ countries and 6 imaginary planets.</div>
@@ -265,6 +310,19 @@ const LandingPage = () => {
               </div>
             </div>
           </article>
+        </div>
+      </section>
+
+      <section className="mx-auto mt-10 w-[94%] max-w-6xl">
+        <div className="neon-panel flex flex-col items-center gap-4 p-6 text-center md:p-8">
+          <h3 className="font-['Space_Grotesk'] text-2xl font-bold text-slate-100 md:text-3xl">Ready to build your next adventure?</h3>
+          <p className="max-w-2xl text-sm text-slate-300">Share your destination, budget, and travel style. The AI will generate the full itinerary in seconds.</p>
+          <Link
+            to="/auth"
+            className="inline-flex items-center justify-center rounded-2xl border border-cyan-300/40 bg-cyan-300/15 px-7 py-3 font-['Space_Grotesk'] text-sm font-bold uppercase tracking-[0.12em] text-cyan-100 shadow-[0_0_24px_rgba(34,211,238,0.25)] transition hover:border-cyan-200/70 hover:bg-cyan-300/25 hover:text-white"
+          >
+            Generate Now
+          </Link>
         </div>
       </section>
 

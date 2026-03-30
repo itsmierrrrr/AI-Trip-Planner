@@ -25,7 +25,7 @@ const buildFallbackHotelLink = (hotelName, destination) => {
   return `https://www.google.com/travel/hotels?q=${encodeURIComponent(query)}`;
 };
 
-const TripResultView = ({ trip }) => {
+const TripResultView = ({ trip, compact = false }) => {
   if (!trip) return null;
 
   const { overview, itinerary = [], hotels = [], budgetBreakdown = {}, travelTips = [], weather = {} } = trip;
@@ -36,7 +36,7 @@ const TripResultView = ({ trip }) => {
   const totalBudget = budgetValues.reduce((sum, item) => sum + item, 0);
 
   return (
-    <div className="mt-8 space-y-5">
+    <div className={`${compact ? "" : "mt-8 "}space-y-5`}>
       {/* Weather Widget */}
       {weather.temperature && (
         <motion.section
