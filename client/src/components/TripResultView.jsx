@@ -19,6 +19,7 @@ const getWeatherIcon = (condition) => {
 };
 
 const isHttpUrl = (value) => typeof value === "string" && /^https?:\/\//i.test(value.trim());
+const HOTEL_CARD_IMAGE = "/oggy.png";
 
 const buildMakeMyTripHotelLink = (destination, hotelName) => {
   const query = [hotelName, destination].filter(Boolean).join(" ");
@@ -198,10 +199,14 @@ const TripResultView = ({ trip, compact = false }) => {
               whileHover={{ y: -4 }}
               className="neon-soft group overflow-hidden p-0 transition hover:border-cyan-300/40"
             >
-              <div className="relative h-40 bg-gradient-to-br from-cyan-500/30 via-blue-500/20 to-violet-500/30 transition group-hover:from-cyan-500/40 group-hover:via-blue-500/30 group-hover:to-violet-500/40">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <Star size={32} className="text-cyan-300/30" />
-                </div>
+              <div className="relative h-40 overflow-hidden">
+                <img
+                  src={HOTEL_CARD_IMAGE}
+                  alt="Hotel"
+                  className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/55 to-transparent" />
               </div>
               <div className="p-4">
                 <h4 className="font-medium text-slate-100">{hotel.name}</h4>
