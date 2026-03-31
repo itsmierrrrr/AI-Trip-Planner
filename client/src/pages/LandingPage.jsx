@@ -365,7 +365,7 @@ const LandingPage = () => {
           to="/admin-security"
           className="neon-input inline-flex items-center rounded-xl px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-slate-300 transition hover:border-cyan-300/55 hover:text-cyan-300"
         >
-          🔐 Admin Access
+           Admin Access
         </Link>
       </div>
     </div>
