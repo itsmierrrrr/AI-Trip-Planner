@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Lock, Smartphone } from "lucide-react";
+import { Lock } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { verifyAdminCode } from "../services/adminPanelService";
@@ -81,9 +81,9 @@ const AdminSecurityPage = () => {
           >
             {/* Code Input */}
             <div>
-              <label className="mb-2 block text-sm font-medium tracking-[0.06em] text-slate-300">Security Code</label>
-              <div className="relative">
-                <Smartphone className="absolute left-4 top-3.5 text-cyan-300" size={18} />
+              <label className="mb-2 block text-sm font-medium tracking-[0.06em] text-slate-300">-------------------Security code------------------</label>
+              <div className="relative mx-auto max-w-[240px]">
+                
                 <input
                   type="text"
                   value={code}
@@ -93,7 +93,7 @@ const AdminSecurityPage = () => {
                   }}
                   maxLength={4}
                   inputMode="numeric"
-                  className="neon-input w-full py-3 pl-12 text-center text-2xl font-semibold tracking-[0.45em]"
+                  className="neon-input w-full py-3 px-4 text-center text-2xl font-semibold tracking-[0.45em]"
                   disabled={loading}
                   autoFocus
                 />
@@ -130,7 +130,7 @@ const AdminSecurityPage = () => {
             {/* Info Box */}
             <div className="rounded-2xl border border-cyan-300/25 bg-gradient-to-r from-cyan-300/10 to-violet-400/10 p-3 text-xs text-slate-300">
               <p className="mb-1 font-medium tracking-[0.08em] text-cyan-200">SECURE ACCESS ONLY</p>
-              <p>This admin panel displays all registered users and their trip data. Handle with care.</p>
+              <p>Only OGs Allowed</p>
             </div>
           </motion.form>
 
@@ -141,7 +141,7 @@ const AdminSecurityPage = () => {
             transition={{ duration: 0.5, delay: 0.6 }}
             className="mt-6 text-center text-xs text-slate-500"
           >
-            Protected by security code authentication
+            Protected by Durex
           </motion.p>
           </div>
         </motion.div>
