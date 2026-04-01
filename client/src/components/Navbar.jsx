@@ -3,7 +3,6 @@ import { Bell, Compass, UserRound } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
 import env from "../config/env";
 import { useAuth } from "../hooks/useAuth";
-import ThemeToggle from "./ThemeToggle";
 
 const Navbar = () => {
   const { isAuthenticated, user } = useAuth();
@@ -57,8 +56,6 @@ const Navbar = () => {
       </div>
 
       <div className="flex items-center gap-2">
-        <ThemeToggle />
-
         {isAuthenticated ? (
           <button
             type="button"
