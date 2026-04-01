@@ -288,19 +288,6 @@ body {
   border-color: rgba(6, 182, 212, 0.35) !important;
 }
 
-.google-fullwidth {
-  width: 100%;
-}
-
-.google-fullwidth > div,
-.google-fullwidth iframe {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100% !important;
-  min-width: 0;
-}
-
 @keyframes blobFloat {
   0%,
   100% {
