@@ -286,8 +286,7 @@ const LandingPage = () => {
                 "Destination-specific hotel recommendations",
                 "Budget breakdown across major categories",
                 "Weather-aware best-time suggestions",
-                "Saved trips library for quick reuse",
-                "Admin analytics and user oversight",
+                /*"Saved trips library for quick reuse",*/
               ].map((item) => (
                 <li key={item} className="inline-flex items-start gap-2">
                   <CheckCircle2 size={16} className="mt-0.5 text-cyan-300" />
