@@ -85,7 +85,7 @@ const AuthPage = () => {
             <p className="inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/10 px-4 py-1 text-xs uppercase tracking-[0.2em] text-cyan-200">
               <Orbit size={14} /> Access Portal
             </p>
-            <h2 className="neon-heading mt-5 font-['Space_Grotesk'] text-5xl font-bold leading-tight">
+            <h2 className="neon-heading mt-5 font-['Anton'] text-5xl font-bold leading-tight">
               Sync Your Journey with the AI Grid
             </h2>
             <p className="mt-5 max-w-md text-sm text-slate-300">

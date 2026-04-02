@@ -33,7 +33,7 @@ const ProfilePage = () => {
 
   return (
     <section className="neon-panel p-6">
-      <h1 className="font-['Space_Grotesk'] text-3xl font-bold text-slate-100">Profile</h1>
+      <h1 className="font-['Anton'] text-3xl font-bold text-slate-100">Profile</h1>
 
       <div className="mt-6 flex flex-col gap-4 lg:flex-row lg:items-center">
         <div className="flex h-28 w-28 items-center justify-center rounded-full border border-cyan-300/40 bg-cyan-300/10 text-cyan-200 shadow-[0_0_28px_rgba(34,211,238,0.35)]">
@@ -57,7 +57,7 @@ const ProfilePage = () => {
 
       <div className="mt-6">
         <div className="mb-3 flex items-center justify-between">
-          <h2 className="font-['Space_Grotesk'] text-xl font-bold text-slate-100">Saved Trip Cards</h2>
+          <h2 className="font-['Anton'] text-xl font-bold text-slate-100">Saved Trip Cards</h2>
           <button
             onClick={() => navigate("/saved-trips")}
             className="text-sm text-cyan-300 transition hover:text-cyan-200"

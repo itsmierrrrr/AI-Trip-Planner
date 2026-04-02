@@ -157,7 +157,7 @@ const AdminPanelPage = () => {
           className="mb-8"
         >
           <div>
-            <h1 className="font-['Space_Grotesk'] text-4xl font-bold text-slate-100">Admin Command Deck</h1>
+            <h1 className="font-['Anton'] text-4xl font-bold text-slate-100">Admin Command Deck</h1>
             <p className="mt-2 text-slate-400">Manage all users and their trip data</p>
           </div>
         </motion.div>
@@ -313,7 +313,7 @@ const AdminPanelPage = () => {
           className="neon-panel p-6"
         >
           <div className="mb-6 flex items-center justify-between">
-            <h2 className="flex items-center gap-2 font-['Space_Grotesk'] text-2xl font-bold text-slate-100">
+            <h2 className="flex items-center gap-2 font-['Anton'] text-2xl font-bold text-slate-100">
               <Users size={24} className="text-cyan-300" />
               Registered Users & Their Trips
             </h2>
@@ -462,7 +462,7 @@ const AdminPanelPage = () => {
             >
               <div className="mb-4 flex items-start justify-between">
                 <div>
-                  <h3 className="font-['Space_Grotesk'] text-xl font-bold text-slate-100">Trip Details</h3>
+                  <h3 className="font-['Anton'] text-xl font-bold text-slate-100">Trip Details</h3>
                   <p className="mt-1 text-sm text-slate-400">{selectedTrip.prompt}</p>
                 </div>
                 <button

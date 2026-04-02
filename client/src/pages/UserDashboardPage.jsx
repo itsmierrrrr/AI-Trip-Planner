@@ -73,7 +73,7 @@ const TripCard = ({ trip, onOpen }) => (
         </span>
       </div>
       <div className="absolute bottom-3 left-3 right-3">
-        <h3 className="font-['Space_Grotesk'] text-lg font-semibold text-white">{trip.destination}</h3>
+        <h3 className="font-['Anton'] text-lg font-semibold text-white">{trip.destination}</h3>
         <p className="text-xs text-slate-200">{trip.dates}</p>
       </div>
     </div>
@@ -129,7 +129,7 @@ const UserDashboardPage = () => {
   return (
     <div className="space-y-6">
       <section>
-        <h2 className="mb-4 font-['Space_Grotesk'] text-2xl font-semibold text-slate-100">Upcoming Trips</h2>
+        <h2 className="mb-4 font-['Anton'] text-2xl font-semibold text-slate-100">Upcoming Trips</h2>
 
         {loading ? (
           <div className="flex gap-3 overflow-hidden">
@@ -151,7 +151,7 @@ const UserDashboardPage = () => {
       </section>
 
       <section>
-        <h2 className="mb-4 font-['Space_Grotesk'] text-2xl font-semibold text-slate-100">Previous Trips</h2>
+        <h2 className="mb-4 font-['Anton'] text-2xl font-semibold text-slate-100">Previous Trips</h2>
 
         {previousTripsLoading ? (
           <div className="flex gap-3 overflow-hidden">
@@ -173,7 +173,7 @@ const UserDashboardPage = () => {
       </section>
 
       <section className="neon-panel p-5" id="travel-checklist">
-        <h2 className="mb-4 font-['Space_Grotesk'] text-2xl font-semibold text-slate-100">Travel Checklist</h2>
+        <h2 className="mb-4 font-['Anton'] text-2xl font-semibold text-slate-100">Travel Checklist</h2>
         <div className="space-y-2">
           {[
             { key: "passport", label: "Passport", icon: IdCard },

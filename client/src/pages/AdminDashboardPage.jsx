@@ -82,7 +82,7 @@ const AdminDashboardPage = () => {
 
   return (
     <section className="space-y-5">
-      <h1 className="font-['Space_Grotesk'] text-3xl font-bold text-slate-100">Admin Command Deck</h1>
+      <h1 className="font-['Anton'] text-3xl font-bold text-slate-100">Admin Command Deck</h1>
       {error ? <p className="text-sm text-rose-300">{error}</p> : null}
 
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">

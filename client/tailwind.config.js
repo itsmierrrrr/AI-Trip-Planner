@@ -5,7 +5,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Manrope", "ui-sans-serif", "system-ui", "sans-serif"],
+        sans: ["Exo 2", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["Anton", "ui-sans-serif", "system-ui", "sans-serif"],
       },
     },
   },

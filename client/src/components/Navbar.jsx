@@ -34,7 +34,7 @@ const Navbar = () => {
         >
           <Compass size={18} />
         </motion.span>
-        <span className="font-['Space_Grotesk'] text-lg font-semibold tracking-tight transition group-hover:text-cyan-200">{env.appName}</span>
+        <span className="font-['Anton'] text-lg font-semibold tracking-tight transition group-hover:text-cyan-200">{env.appName}</span>
       </Link>
 
       <div className="hidden items-center gap-2 lg:flex">

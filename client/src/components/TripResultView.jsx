@@ -144,7 +144,7 @@ const TripResultView = ({ trip, compact = false }) => {
       >
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_10%,rgba(34,211,238,0.22),transparent_40%)]" />
         <div className="relative z-10">
-          <h3 className="font-['Space_Grotesk'] text-xl font-semibold text-slate-100">Trip Overview</h3>
+          <h3 className="font-['Anton'] text-xl font-semibold text-slate-100">Trip Overview</h3>
           <div className="mt-4 grid gap-3 text-sm sm:grid-cols-2 lg:grid-cols-4">
             <div className="group neon-soft p-3 transition hover:border-cyan-300/40 hover:shadow-[0_0_20px_rgba(34,211,238,0.2)]">
               <p className="text-slate-400">Destination</p>
@@ -167,7 +167,7 @@ const TripResultView = ({ trip, compact = false }) => {
       </motion.section>
 
       <motion.section {...cardAnimation} transition={{ duration: 0.35, delay: 0.05 }} className="neon-panel p-6">
-        <h3 className="font-['Space_Grotesk'] text-xl font-semibold text-slate-100">Itinerary Timeline</h3>
+        <h3 className="font-['Anton'] text-xl font-semibold text-slate-100">Itinerary Timeline</h3>
         <div className="relative mt-6 space-y-4 border-l border-cyan-300/35 pl-6">
           {itinerary.map((dayItem, index) => (
             <motion.div 
@@ -191,7 +191,7 @@ const TripResultView = ({ trip, compact = false }) => {
       </motion.section>
 
       <motion.section {...cardAnimation} transition={{ duration: 0.35, delay: 0.1 }} className="neon-panel p-6">
-        <h3 className="font-['Space_Grotesk'] text-xl font-semibold text-slate-100">Hotel Recommendations</h3>
+        <h3 className="font-['Anton'] text-xl font-semibold text-slate-100">Hotel Recommendations</h3>
         <div className="mt-4 grid gap-4 md:grid-cols-2">
           {hotels.map((hotel, index) => (
             (() => {
@@ -240,7 +240,7 @@ const TripResultView = ({ trip, compact = false }) => {
       </motion.section>
 
       <motion.section {...cardAnimation} transition={{ duration: 0.35, delay: 0.15 }} className="neon-panel p-6">
-        <h3 className="font-['Space_Grotesk'] text-xl font-semibold text-slate-100">Budget Breakdown</h3>
+        <h3 className="font-['Anton'] text-xl font-semibold text-slate-100">Budget Breakdown</h3>
         <div className="mt-4 grid gap-3 text-sm text-slate-200 sm:grid-cols-2 lg:grid-cols-5">
           {Object.entries(budgetBreakdown).map(([key, value], index) => (
             <motion.div 
@@ -265,7 +265,7 @@ const TripResultView = ({ trip, compact = false }) => {
       </motion.section>
 
       <motion.section {...cardAnimation} transition={{ duration: 0.35, delay: 0.2 }} className="neon-panel p-6">
-        <h3 className="flex items-center gap-2 font-['Space_Grotesk'] text-xl font-semibold text-slate-100">
+        <h3 className="flex items-center gap-2 font-['Anton'] text-xl font-semibold text-slate-100">
           <Lightbulb size={18} className="text-cyan-300" /> Travel Tips
         </h3>
         <ul className="mt-4 grid gap-3 md:grid-cols-2">
@@ -287,7 +287,7 @@ const TripResultView = ({ trip, compact = false }) => {
       </motion.section>
 
       <motion.section {...cardAnimation} transition={{ duration: 0.35, delay: 0.25 }} className="neon-panel p-6">
-        <h3 className="font-['Space_Grotesk'] text-xl font-semibold text-slate-100">AI Summary</h3>
+        <h3 className="font-['Anton'] text-xl font-semibold text-slate-100">AI Summary</h3>
         <ul className="mt-4 space-y-2 text-sm text-slate-300">
           {summaryPoints.map((point, index) => (
             <li key={`summary-${index}`} className="neon-soft p-3">

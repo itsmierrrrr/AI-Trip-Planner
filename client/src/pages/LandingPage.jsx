@@ -138,7 +138,7 @@ const LandingPage = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.08 }}
-            className="mx-auto inline-flex min-w-[320px] items-center justify-center rounded-2xl border border-violet-300/30 bg-violet-300/15 px-6 py-3 text-center font-['Space_Grotesk'] text-2xl font-bold tracking-[0.08em] text-violet-200 shadow-[0_0_22px_rgba(139,92,246,0.22)] md:min-w-[420px] md:text-3xl"
+            className="mx-auto inline-flex min-w-[320px] items-center justify-center rounded-2xl border border-violet-300/30 bg-violet-300/15 px-6 py-3 text-center font-['Anton'] text-2xl font-bold tracking-[0.08em] text-violet-200 shadow-[0_0_22px_rgba(139,92,246,0.22)] md:min-w-[420px] md:text-3xl"
           >
             TIME: {currentTime.toLocaleTimeString()}
           </motion.div>
@@ -147,7 +147,7 @@ const LandingPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="neon-heading mt-6 font-['Space_Grotesk'] text-4xl font-bold leading-tight md:text-7xl"
+            className="neon-heading mt-6 font-['Anton'] text-4xl font-bold leading-tight md:text-7xl"
           >
             {env.heroHeadline}
           </motion.h1>
@@ -186,14 +186,14 @@ const LandingPage = () => {
             </motion.div>
           </div>
 
-          <p className="mt-4 font-['Space_Grotesk'] text-lg font-semibold uppercase tracking-[0.14em] text-cyan-200">
+          <p className="mt-4 font-['Anton'] text-lg font-semibold uppercase tracking-[0.14em] text-cyan-200">
             Generate your trip now
           </p>
 
           <div className="mt-3">
             <Link
               to={generateNowPath}
-              className="inline-flex items-center justify-center rounded-2xl border border-cyan-300/40 bg-cyan-300/15 px-7 py-3 font-['Space_Grotesk'] text-sm font-bold uppercase tracking-[0.12em] text-cyan-100 shadow-[0_0_24px_rgba(34,211,238,0.25)] transition hover:border-cyan-200/70 hover:bg-cyan-300/25 hover:text-white"
+              className="inline-flex items-center justify-center rounded-2xl border border-cyan-300/40 bg-cyan-300/15 px-7 py-3 font-['Anton'] text-sm font-bold uppercase tracking-[0.12em] text-cyan-100 shadow-[0_0_24px_rgba(34,211,238,0.25)] transition hover:border-cyan-200/70 hover:bg-cyan-300/25 hover:text-white"
             >
               Generate Now
             </Link>
@@ -243,7 +243,7 @@ const LandingPage = () => {
               <div className="inline-flex rounded-2xl border border-cyan-300/30 bg-cyan-300/10 p-2 text-cyan-200">
                 <item.icon size={18} />
               </div>
-              <h3 className="mt-4 font-['Space_Grotesk'] text-lg font-semibold text-slate-100">{item.title}</h3>
+              <h3 className="mt-4 font-['Anton'] text-lg font-semibold text-slate-100">{item.title}</h3>
               <p className="mt-2 text-sm text-slate-300">{item.desc}</p>
             </motion.article>
           ))}
@@ -255,7 +255,7 @@ const LandingPage = () => {
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="text-xs uppercase tracking-[0.2em] text-cyan-300">How It Works</p>
-              <h2 className="mt-3 font-['Space_Grotesk'] text-3xl font-bold text-slate-100 md:text-4xl">
+              <h2 className="mt-3 font-['Anton'] text-3xl font-bold text-slate-100 md:text-4xl">
                 One Prompt To Full Travel Blueprint
               </h2>
             </div>
@@ -279,7 +279,7 @@ const LandingPage = () => {
       <section className="mx-auto mt-12 w-[94%] max-w-6xl">
         <div className="grid gap-4 md:grid-cols-2">
           <article className="neon-panel p-6">
-            <h3 className="font-['Space_Grotesk'] text-2xl font-bold text-slate-100">Everything In One Place</h3>
+            <h3 className="font-['Anton'] text-2xl font-bold text-slate-100">Everything In One Place</h3>
             <ul className="mt-4 space-y-3 text-sm text-slate-300">
               {[
                 "Natural language trip generation",
@@ -297,7 +297,7 @@ const LandingPage = () => {
           </article>
 
           <article className="neon-panel p-6">
-            <h3 className="font-['Space_Grotesk'] text-2xl font-bold text-slate-100">Built For Real Travelers</h3>
+            <h3 className="font-['Anton'] text-2xl font-bold text-slate-100">Built For Real Travelers</h3>
             <p className="mt-4 text-sm text-slate-300">
               Whether you are planning a solo escape, honeymoon, family trip, or quick city break, the platform adapts your itinerary style, pace, and spend range.
             </p>
@@ -317,11 +317,11 @@ const LandingPage = () => {
 
       <section className="mx-auto mt-10 w-[94%] max-w-6xl">
         <div className="neon-panel flex flex-col items-center gap-4 p-6 text-center md:p-8">
-          <h3 className="font-['Space_Grotesk'] text-2xl font-bold text-slate-100 md:text-3xl">Ready to build your next adventure?</h3>
+          <h3 className="font-['Anton'] text-2xl font-bold text-slate-100 md:text-3xl">Ready to build your next adventure?</h3>
           <p className="max-w-2xl text-sm text-slate-300">Share your destination, budget, and travel style. The AI will generate the full itinerary in seconds.</p>
           <Link
             to={generateNowPath}
-            className="inline-flex items-center justify-center rounded-2xl border border-cyan-300/40 bg-cyan-300/15 px-7 py-3 font-['Space_Grotesk'] text-sm font-bold uppercase tracking-[0.12em] text-cyan-100 shadow-[0_0_24px_rgba(34,211,238,0.25)] transition hover:border-cyan-200/70 hover:bg-cyan-300/25 hover:text-white"
+            className="inline-flex items-center justify-center rounded-2xl border border-cyan-300/40 bg-cyan-300/15 px-7 py-3 font-['Anton'] text-sm font-bold uppercase tracking-[0.12em] text-cyan-100 shadow-[0_0_24px_rgba(34,211,238,0.25)] transition hover:border-cyan-200/70 hover:bg-cyan-300/25 hover:text-white"
           >
             Generate Now
           </Link>
@@ -332,7 +332,7 @@ const LandingPage = () => {
         <div className="neon-panel p-6">
           <div className="grid gap-6 md:grid-cols-3">
             <div>
-              <h3 className="font-['Space_Grotesk'] text-lg font-semibold text-slate-100">{env.appName}</h3>
+              <h3 className="font-['Anton'] text-lg font-semibold text-slate-100">{env.appName}</h3>
               <p className="mt-2 text-sm text-slate-300">
                 AI-powered travel planning with weather-aware itineraries, budget-first suggestions, and saved trips.
               </p>

@@ -59,7 +59,7 @@ const AdminSecurityPage = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mb-2 text-center"
           >
-            <h1 className="neon-heading font-['Space_Grotesk'] text-3xl font-bold">Admin Access</h1>
+            <h1 className="neon-heading font-['Anton'] text-3xl font-bold">Admin Access</h1>
           </motion.div>
 
           <motion.p

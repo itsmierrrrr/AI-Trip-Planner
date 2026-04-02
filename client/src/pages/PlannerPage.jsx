@@ -122,7 +122,7 @@ const PlannerPage = () => {
         animate={{ opacity: 1, y: 0 }}
         className="neon-panel p-6"
       >
-        <h1 className="font-['Space_Grotesk'] text-3xl font-bold text-slate-100">Planner Dashboard</h1>
+        <h1 className="font-['Anton'] text-3xl font-bold text-slate-100">Planner Dashboard</h1>
         <p className="mt-2 text-sm text-slate-400">Describe your ideal journey and let the travel AI orchestrate every detail.</p>
 
         <form onSubmit={onGenerate} className="mt-5 space-y-4">

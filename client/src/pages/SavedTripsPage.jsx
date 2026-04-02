@@ -53,7 +53,7 @@ const SavedTripsPage = () => {
     <section className="space-y-4">
       <div className="neon-panel p-6">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-          <h1 className="font-['Space_Grotesk'] text-3xl font-bold text-slate-100">Saved Trips</h1>
+          <h1 className="font-['Anton'] text-3xl font-bold text-slate-100">Saved Trips</h1>
           <p className="text-sm text-slate-400">{filteredTrips.length} trips</p>
         </div>
 
@@ -129,7 +129,7 @@ const SavedTripsPage = () => {
           >
             <div className="mb-4 flex items-start justify-between">
               <div>
-                <h3 className="font-['Space_Grotesk'] text-xl font-bold text-slate-100">Trip Details</h3>
+                <h3 className="font-['Anton'] text-xl font-bold text-slate-100">Trip Details</h3>
                 <p className="mt-1 text-sm text-slate-400">{selectedTrip.prompt}</p>
               </div>
               <button
