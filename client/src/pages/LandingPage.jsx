@@ -354,7 +354,7 @@ const LandingPage = () => {
           </div>
 
           <div className="mt-6 border-t border-slate-800/50 pt-4 text-center text-xs text-slate-400">
-            © {new Date().getFullYear()} {env.appName}. Crafted for smarter journeys. Founded by Sonu Sood.
+            © {new Date().getFullYear()} {env.appName}. Crafted for smarter journeys. Founded by Imran Hashmi.
           </div>
         </div>
       </footer>
