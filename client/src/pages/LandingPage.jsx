@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import {
   BedDouble,
+  ChevronLeft,
+  ChevronRight,
   CheckCircle2,
   CloudSun,
   Gem,
@@ -60,48 +62,56 @@ const animatedPlaces = [
     place: "Santorini",
     country: "Greece",
     vibe: "Sunset Cliffs",
+    description: "Whitewashed villages, blue domes, and golden-hour views over the caldera.",
     image: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=900&q=80",
   },
   {
     place: "Kyoto",
     country: "Japan",
     vibe: "Temples & Gardens",
+    description: "Walk through bamboo groves, quiet shrines, and timeless tea-house streets.",
     image: "https://images.unsplash.com/photo-1492571350019-22de08371fd3?auto=format&fit=crop&w=900&q=80",
   },
   {
     place: "Bali",
     country: "Indonesia",
     vibe: "Island Escape",
-    image: "https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?auto=format&fit=crop&w=900&q=80",
+    description: "Rice terraces, beach clubs, and jungle waterfalls for a perfect balance of calm and adventure.",
+    image: "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=900&q=80",
   },
   {
     place: "Interlaken",
     country: "Switzerland",
     vibe: "Alpine Views",
+    description: "Snowy peaks, lake cruises, and scenic train rides through dramatic valleys.",
     image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=900&q=80",
   },
   {
     place: "Istanbul",
     country: "Turkey",
     vibe: "Culture + Food",
+    description: "Grand bazaars, Bosphorus sunsets, and bold flavors at every corner.",
     image: "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=900&q=80",
   },
   {
     place: "Dubai",
     country: "UAE",
     vibe: "Skyline Luxury",
+    description: "Futuristic towers, desert safaris, and premium shopping in one city.",
     image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=900&q=80",
   },
   {
     place: "Goa",
     country: "India",
     vibe: "Beach Chill",
+    description: "Palm-lined beaches, sunset shacks, and laid-back coastal nightlife.",
     image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=900&q=80",
   },
 ];
 
 const LandingPage = () => {
   const [currentTime, setCurrentTime] = useState(() => new Date());
+  const [activePlaceIndex, setActivePlaceIndex] = useState(0);
   const { isAuthenticated } = useAuth();
   const generateNowPath = isAuthenticated ? "/planner" : "/auth";
 
@@ -112,6 +122,22 @@ const LandingPage = () => {
 
     return () => clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    const placeTimer = setInterval(() => {
+      setActivePlaceIndex((prev) => (prev + 1) % animatedPlaces.length);
+    }, 3000);
+
+    return () => clearInterval(placeTimer);
+  }, []);
+
+  const handlePrevPlace = () => {
+    setActivePlaceIndex((prev) => (prev - 1 + animatedPlaces.length) % animatedPlaces.length);
+  };
+
+  const handleNextPlace = () => {
+    setActivePlaceIndex((prev) => (prev + 1) % animatedPlaces.length);
+  };
 
   return (
     <div className="relative min-h-screen overflow-hidden pb-16">
@@ -161,32 +187,7 @@ const LandingPage = () => {
             {env.heroSubheading}
           </motion.p>
 
-          <div className="relative mx-auto mt-10 max-w-5xl overflow-hidden rounded-3xl border border-cyan-300/20 bg-slate-900/35 py-4">
-            <motion.div
-              className="flex w-max gap-3 px-3"
-              animate={{ x: [0, -980] }}
-              transition={{ duration: 24, ease: "linear", repeat: Infinity }}
-            >
-              {[...animatedPlaces, ...animatedPlaces].map((place, idx) => (
-                <article key={`${place.place}-${idx}`} className="neon-soft min-w-[230px] p-3 text-left">
-                  <div className="relative h-24 w-full overflow-hidden rounded-xl">
-                    <img
-                      src={place.image}
-                      alt={place.place}
-                      className="h-full w-full object-cover"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 to-transparent" />
-                  </div>
-                  <p className="text-sm font-semibold text-slate-100">{place.place}</p>
-                  <p className="mt-1 text-xs text-slate-300">{place.country}</p>
-                  <p className="mt-2 text-xs uppercase tracking-[0.12em] text-cyan-300">{place.vibe}</p>
-                </article>
-              ))}
-            </motion.div>
-          </div>
-
-          <p className="mt-4 font-['Anton'] text-lg font-semibold uppercase tracking-[0.14em] text-cyan-200">
+          <p className="mt-8 font-['Anton'] text-lg font-semibold uppercase tracking-[0.14em] text-cyan-200">
             Generate your trip now
           </p>
 
@@ -200,6 +201,70 @@ const LandingPage = () => {
           </div>
 
           <div className="mt-6 text-sm text-slate-400">Trusted by travelers from 110+ countries and 6 imaginary planets.</div>
+
+          <div className="relative mx-auto mt-10 max-w-[88rem] overflow-hidden rounded-3xl border border-cyan-300/20 bg-slate-900/35 p-7 md:p-8">
+            <div className="overflow-hidden">
+              <motion.div
+                className="flex"
+                animate={{ x: `-${activePlaceIndex * 100}%` }}
+                transition={{ duration: 0.55, ease: "easeInOut" }}
+              >
+                {animatedPlaces.map((place) => (
+                  <article key={place.place} className="w-full min-w-full px-2 md:px-3">
+                    <div className="neon-soft p-6 md:p-7 text-left">
+                      <div className="relative h-64 w-full overflow-hidden rounded-xl md:h-[26rem]">
+                        <img
+                          src={place.image}
+                          alt={place.place}
+                          className="h-full w-full object-cover"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/55 via-transparent to-transparent" />
+                      </div>
+                      <p className="mt-3 text-lg font-semibold text-slate-100 md:text-xl">{place.place}</p>
+                      <p className="mt-1 text-sm text-slate-300">{place.country}</p>
+                      <p className="mt-2 text-xs uppercase tracking-[0.12em] text-cyan-300">{place.vibe}</p>
+                      <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-200/90">{place.description}</p>
+                    </div>
+                  </article>
+                ))}
+              </motion.div>
+            </div>
+
+            <div className="mt-4 flex items-center justify-between gap-4">
+              <button
+                type="button"
+                onClick={handlePrevPlace}
+                className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-cyan-300/40 bg-cyan-300/10 text-cyan-100 transition hover:bg-cyan-300/20"
+                aria-label="Previous place"
+              >
+                <ChevronLeft size={18} />
+              </button>
+
+              <div className="flex items-center gap-2">
+                {animatedPlaces.map((place, idx) => (
+                  <button
+                    key={place.place}
+                    type="button"
+                    onClick={() => setActivePlaceIndex(idx)}
+                    className={`h-2.5 rounded-full transition-all ${
+                      idx === activePlaceIndex ? "w-8 bg-cyan-200" : "w-2.5 bg-slate-500/70 hover:bg-slate-400"
+                    }`}
+                    aria-label={`Go to ${place.place}`}
+                  />
+                ))}
+              </div>
+
+              <button
+                type="button"
+                onClick={handleNextPlace}
+                className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-cyan-300/40 bg-cyan-300/10 text-cyan-100 transition hover:bg-cyan-300/20"
+                aria-label="Next place"
+              >
+                <ChevronRight size={18} />
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -316,7 +381,7 @@ const LandingPage = () => {
       </section>
 
       <section className="mx-auto mt-10 w-[94%] max-w-6xl">
-        <div className="neon-panel flex flex-col items-center gap-4 p-6 text-center md:p-8">
+        <div className="flex flex-col items-center gap-4 px-2 text-center">
           <h3 className="font-['Anton'] text-2xl font-bold text-slate-100 md:text-3xl">Ready to build your next adventure?</h3>
           <p className="max-w-2xl text-sm text-slate-300">Share your destination, budget, and travel style. The AI will generate the full itinerary in seconds.</p>
           <Link

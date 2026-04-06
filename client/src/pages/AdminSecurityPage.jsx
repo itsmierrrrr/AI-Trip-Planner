@@ -141,7 +141,7 @@ const AdminSecurityPage = () => {
             transition={{ duration: 0.5, delay: 0.6 }}
             className="mt-6 text-center text-xs text-slate-500"
           >
-            Protected by Durex
+            Protected by Odomos
           </motion.p>
           </div>
         </motion.div>
