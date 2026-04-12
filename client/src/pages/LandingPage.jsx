@@ -11,6 +11,7 @@ import {
   Sparkles,
   Wallet,
 } from "lucide-react";
+import { FaDiscord, FaEnvelope, FaFacebookF, FaInstagram, FaLinkedinIn, FaPinterestP } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import env from "../config/env";
@@ -55,6 +56,15 @@ const steps = [
     title: "Save, Compare, and Reuse",
     body: "Store your generated trips, revisit them anytime, and refine your next adventure faster.",
   },
+];
+
+const socialLinks = [
+  { label: "Facebook", href: "https://facebook.com", icon: FaFacebookF },
+  { label: "Instagram", href: "https://instagram.com", icon: FaInstagram },
+  { label: "LinkedIn", href: "https://linkedin.com", icon: FaLinkedinIn },
+  { label: "Email", href: "mailto:support@lessgoai.com", icon: FaEnvelope },
+  { label: "Pinterest", href: "https://pinterest.com", icon: FaPinterestP },
+  { label: "Discord", href: "https://discord.com", icon: FaDiscord },
 ];
 
 const animatedPlaces = [
@@ -415,6 +425,25 @@ const LandingPage = () => {
             <div>
               <p className="text-sm font-semibold text-slate-100">Support</p>
               <p className="mt-2 text-sm text-slate-300">Need help planning? Use the planner prompt to generate a rupee-based travel plan instantly.</p>
+            </div>
+
+            <div className="md:col-span-3">
+              <p className="text-sm font-semibold text-slate-100">Follow Us</p>
+              <div className="mt-3 flex flex-wrap items-center justify-center gap-2 md:justify-start">
+                {socialLinks.map((item) => (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    aria-label={item.label}
+                    title={item.label}
+                    target={item.href.startsWith("mailto:") ? undefined : "_blank"}
+                    rel={item.href.startsWith("mailto:") ? undefined : "noreferrer"}
+                    className="neon-input inline-flex h-10 w-10 items-center justify-center rounded-xl text-slate-300 transition hover:border-cyan-300/55 hover:text-cyan-300"
+                  >
+                    <item.icon size={13} aria-hidden="true" />
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
 
