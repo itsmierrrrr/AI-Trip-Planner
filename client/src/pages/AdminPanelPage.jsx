@@ -135,19 +135,19 @@ const AdminPanelPage = () => {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+      <div className="flex min-h-screen items-center justify-center bg-[linear-gradient(180deg,#e8e1e1_0%,#ede6e6_42%,#f7f1f1_100%)]">
         <div className="flex flex-col items-center gap-4">
-          <div className="h-12 w-12 animate-spin rounded-full border-4 border-slate-700 border-t-cyan-400" />
-          <p className="text-slate-400">Loading admin panel...</p>
+          <div className="h-12 w-12 animate-spin rounded-full border-4 border-[#b8afaf] border-t-[#156874]" />
+          <p className="text-[#5f8b95]">Loading admin panel...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 pb-16">
-      <span className="floating-blob left-[-90px] top-[100px] h-72 w-72 bg-cyan-400/20" />
-      <span className="floating-blob right-[-90px] top-[220px] h-72 w-72 bg-violet-500/25" style={{ animationDelay: "1.2s" }} />
+    <div className="relative min-h-screen bg-[linear-gradient(180deg,#e8e1e1_0%,#ede6e6_42%,#f7f1f1_100%)] pb-16">
+      <span className="floating-blob left-[-90px] top-[100px] h-72 w-72 bg-[#156874]/18" />
+      <span className="floating-blob right-[-90px] top-[220px] h-72 w-72 bg-[#0f535d]/14" style={{ animationDelay: "1.2s" }} />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 py-8">
         {/* Header */}
@@ -157,8 +157,8 @@ const AdminPanelPage = () => {
           className="mb-8"
         >
           <div>
-            <h1 className="font-['Anton'] text-4xl font-bold text-slate-100">Admin Command Deck</h1>
-            <p className="mt-2 text-slate-400">Manage all users and their trip data</p>
+            <h1 className="font-['Anton'] text-4xl font-bold text-[#174b53]">Admin Command Deck</h1>
+            <p className="mt-2 text-[#5f8b95]">Manage all users and their trip data</p>
           </div>
         </motion.div>
 
@@ -183,8 +183,8 @@ const AdminPanelPage = () => {
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-slate-400">{stat.label}</p>
-                  <p className="mt-2 text-3xl font-bold text-slate-100">{stat.value}</p>
+                  <p className="text-sm text-[#5f8b95]">{stat.label}</p>
+                  <p className="mt-2 text-3xl font-bold text-[#174b53]">{stat.value}</p>
                 </div>
                 <span className="text-4xl">{stat.icon}</span>
               </div>
@@ -198,7 +198,7 @@ const AdminPanelPage = () => {
           transition={{ delay: 0.15 }}
           className="mb-6 flex flex-wrap items-center justify-between gap-3"
         >
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-[#7a9ca4]">
             {autoRefresh ? "Live updates every 15s" : "Auto-refresh paused"}
             {lastUpdated ? ` • Last synced ${lastUpdated.toLocaleTimeString()}` : ""}
           </p>
@@ -208,8 +208,8 @@ const AdminPanelPage = () => {
             onClick={() => setAutoRefresh((prev) => !prev)}
             className={`rounded-xl border px-3 py-1.5 text-xs font-medium uppercase tracking-[0.08em] transition ${
               autoRefresh
-                ? "border-cyan-300/35 bg-cyan-300/15 text-cyan-200 hover:bg-cyan-300/20"
-                : "border-slate-600 bg-slate-800/60 text-slate-300 hover:bg-slate-700/60"
+                ? "border-[#156874]/35 bg-[#156874]/15 text-[#0f535d] hover:bg-[#156874]/20"
+                : "border-[#156874]/30 bg-[#156874]/12 text-[#3f737d] hover:bg-[#b8afaf]/60"
             }`}
           >
             Realtime: {autoRefresh ? "On" : "Off"}
@@ -224,27 +224,27 @@ const AdminPanelPage = () => {
             transition={{ delay: 0.18 }}
             className="neon-panel p-5 xl:col-span-1"
           >
-            <h2 className="inline-flex items-center gap-2 text-lg font-semibold text-slate-100">
-              <Radar size={18} className="text-cyan-200" /> Top Destinations
+            <h2 className="inline-flex items-center gap-2 text-lg font-semibold text-[#174b53]">
+              <Radar size={18} className="text-[#0f535d]" /> Top Destinations
             </h2>
             <div className="mt-4 space-y-3">
               {destinationCounts.length ? (
                 destinationCounts.map(([destination, count]) => (
                   <div key={destination}>
-                    <div className="mb-1 flex items-center justify-between text-sm text-slate-300">
+                    <div className="mb-1 flex items-center justify-between text-sm text-[#3f737d]">
                       <span>{destination}</span>
                       <span>{count}</span>
                     </div>
-                    <div className="h-1.5 rounded-full bg-slate-800">
+                    <div className="h-1.5 rounded-full bg-[#cec6c6]">
                       <div
-                        className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-violet-400"
+                        className="h-full rounded-full bg-gradient-to-r from-[#0f535d] to-[#156874]"
                         style={{ width: `${Math.max(12, count * 18)}%` }}
                       />
                     </div>
                   </div>
                 ))
               ) : (
-                <p className="text-sm text-slate-400">No destination data yet.</p>
+                <p className="text-sm text-[#5f8b95]">No destination data yet.</p>
               )}
             </div>
           </motion.div>
@@ -255,17 +255,17 @@ const AdminPanelPage = () => {
             transition={{ delay: 0.2 }}
             className="neon-panel p-5 xl:col-span-2"
           >
-            <h2 className="inline-flex items-center gap-2 text-lg font-semibold text-slate-100">
-              <Users size={18} className="text-cyan-200" /> Monthly Registrations
+            <h2 className="inline-flex items-center gap-2 text-lg font-semibold text-[#174b53]">
+              <Users size={18} className="text-[#0f535d]" /> Monthly Registrations
             </h2>
             <div className="mt-4 grid grid-cols-12 items-end gap-2">
               {monthlyUsers.map((count, month) => (
                 <div key={month} className="flex flex-col items-center gap-2">
                   <div
-                    className="w-full rounded-t-md bg-gradient-to-t from-violet-500/70 to-cyan-400/80"
+                    className="w-full rounded-t-md bg-gradient-to-t from-[#2a7f8b]/70 to-[#0f535d]/80"
                     style={{ height: `${Math.max(10, count * 14)}px` }}
                   />
-                  <span className="text-[10px] text-slate-400">{monthLabels[month]}</span>
+                  <span className="text-[10px] text-[#5f8b95]">{monthLabels[month]}</span>
                 </div>
               ))}
             </div>
@@ -278,17 +278,17 @@ const AdminPanelPage = () => {
           transition={{ delay: 0.22 }}
           className="mb-8 neon-panel p-5"
         >
-          <h2 className="inline-flex items-center gap-2 text-lg font-semibold text-slate-100">
-            <BarChart3 size={18} className="text-cyan-200" /> Trips Created Per Month
+          <h2 className="inline-flex items-center gap-2 text-lg font-semibold text-[#174b53]">
+            <BarChart3 size={18} className="text-[#0f535d]" /> Trips Created Per Month
           </h2>
           <div className="mt-4 grid grid-cols-12 items-end gap-2">
             {monthlyTrips.map((count, month) => (
               <div key={month} className="flex flex-col items-center gap-2">
                 <div
-                  className="w-full rounded-t-md bg-gradient-to-t from-cyan-400/70 to-blue-400/80"
+                  className="w-full rounded-t-md bg-gradient-to-t from-[#0f535d]/70 to-[#2a7f8b]/80"
                   style={{ height: `${Math.max(10, count * 14)}px` }}
                 />
-                <span className="text-[10px] text-slate-400">{monthLabels[month]}</span>
+                <span className="text-[10px] text-[#5f8b95]">{monthLabels[month]}</span>
               </div>
             ))}
           </div>
@@ -298,7 +298,7 @@ const AdminPanelPage = () => {
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-6 rounded-lg border border-rose-500/35 bg-rose-500/10 p-4 text-sm text-rose-300"
+            className="mb-6 rounded-lg border border-[#156874]/35 bg-[#156874]/12 p-4 text-sm text-[#156874]"
           >
             <AlertCircle size={18} className="inline mr-2" />
             {error}
@@ -313,11 +313,11 @@ const AdminPanelPage = () => {
           className="neon-panel p-6"
         >
           <div className="mb-6 flex items-center justify-between">
-            <h2 className="flex items-center gap-2 font-['Anton'] text-2xl font-bold text-slate-100">
-              <Users size={24} className="text-cyan-300" />
+            <h2 className="flex items-center gap-2 font-['Anton'] text-2xl font-bold text-[#174b53]">
+              <Users size={24} className="text-[#156874]" />
               Registered Users & Their Trips
             </h2>
-            <div className="text-sm text-slate-400">{filteredUsers.length} users</div>
+            <div className="text-sm text-[#5f8b95]">{filteredUsers.length} users</div>
           </div>
 
           {/* Search Bar */}
@@ -334,7 +334,7 @@ const AdminPanelPage = () => {
           {/* Users List */}
           <div className="space-y-3">
             {filteredUsers.length === 0 ? (
-              <div className="py-12 text-center text-slate-400">
+              <div className="py-12 text-center text-[#5f8b95]">
                 <p>No users found matching your search</p>
               </div>
             ) : (
@@ -344,25 +344,25 @@ const AdminPanelPage = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.03 }}
-                  className="rounded-2xl border border-cyan-300/20 bg-slate-900/40 backdrop-blur-lg transition"
+                  className="rounded-2xl border border-[#156874]/20 bg-[#f3eded]/85 backdrop-blur-lg transition"
                 >
                   {/* User Header */}
                   <button
                     onClick={() => toggleUserExpand(user._id)}
-                    className="w-full px-4 py-3 text-left hover:bg-slate-800/20 transition rounded-2xl"
+                    className="w-full px-4 py-3 text-left hover:bg-[#cec6c6]/20 transition rounded-2xl"
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex flex-1 items-center gap-4">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-300/20 text-cyan-300 font-semibold">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#156874]/20 text-[#156874] font-semibold">
                           {user.name.charAt(0).toUpperCase()}
                         </div>
                         <div className="flex-1">
-                          <h3 className="font-medium text-slate-100">{user.name}</h3>
-                          <p className="text-xs text-slate-400">{user.email}</p>
+                          <h3 className="font-medium text-[#174b53]">{user.name}</h3>
+                          <p className="text-xs text-[#5f8b95]">{user.email}</p>
                         </div>
                       </div>
-                      <div className="flex items-center gap-3 text-slate-400">
-                        <span className="rounded-full bg-cyan-500/20 px-3 py-1 text-xs text-cyan-300 font-medium">
+                      <div className="flex items-center gap-3 text-[#5f8b95]">
+                        <span className="rounded-full bg-[#156874]/18 px-3 py-1 text-xs text-[#156874] font-medium">
                           {user.tripCount} trips
                         </span>
                         <button
@@ -371,7 +371,7 @@ const AdminPanelPage = () => {
                             onDeleteUser(user._id, user.role);
                           }}
                           disabled={user.role === "admin"}
-                          className="rounded-lg border border-rose-300/35 bg-rose-300/10 p-2 text-rose-300 transition hover:bg-rose-300/20 disabled:cursor-not-allowed disabled:opacity-40"
+                          className="rounded-lg border border-[#156874]/35 bg-[#156874]/10 p-2 text-[#156874] transition hover:bg-[#156874]/20 disabled:cursor-not-allowed disabled:opacity-40"
                           title={user.role === "admin" ? "Admin users cannot be deleted" : "Delete user"}
                         >
                           <Trash2 size={15} />
@@ -393,7 +393,7 @@ const AdminPanelPage = () => {
                       animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.2 }}
-                      className="border-t border-slate-800 p-4 space-y-2"
+                      className="border-t border-[#156874]/18 p-4 space-y-2"
                     >
                       {user.trips.map((trip, tripIndex) => (
                         <motion.div
@@ -401,15 +401,15 @@ const AdminPanelPage = () => {
                           initial={{ opacity: 0, x: -10 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: tripIndex * 0.05 }}
-                          className="rounded-xl bg-slate-800/30 p-3 border border-slate-700/50 hover:border-cyan-400/30 transition cursor-pointer group"
+                          className="rounded-xl bg-[#156874]/10 p-3 border border-[#156874]/22 hover:border-[#156874]/35 transition cursor-pointer group"
                           onClick={() => setSelectedTrip(trip)}
                         >
                           <div className="flex items-start justify-between gap-3">
                             <div className="flex-1 text-sm">
-                              <p className="text-slate-300 font-medium truncate">
+                              <p className="text-[#3f737d] font-medium truncate">
                                 {trip.prompt || "No description"}
                               </p>
-                              <p className="text-xs text-slate-500 mt-1">
+                              <p className="text-xs text-[#7a9ca4] mt-1">
                                 {new Date(trip.createdAt).toLocaleDateString()}
                               </p>
                             </div>
@@ -418,7 +418,7 @@ const AdminPanelPage = () => {
                                 e.stopPropagation();
                                 setSelectedTrip(trip);
                               }}
-                              className="rounded-lg border border-cyan-300/20 bg-cyan-300/10 p-2 text-cyan-300 opacity-0 transition group-hover:opacity-100"
+                              className="rounded-lg border border-[#156874]/20 bg-[#156874]/10 p-2 text-[#156874] opacity-0 transition group-hover:opacity-100"
                             >
                               <Eye size={16} />
                             </button>
@@ -433,7 +433,7 @@ const AdminPanelPage = () => {
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
-                      className="border-t border-slate-800 p-4 text-center text-sm text-slate-500"
+                      className="border-t border-[#156874]/18 p-4 text-center text-sm text-[#7a9ca4]"
                     >
                       No trips created yet
                     </motion.div>
@@ -451,7 +451,7 @@ const AdminPanelPage = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedTrip(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-[#f7f1f1]/38 p-4 backdrop-blur-sm"
           >
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
@@ -462,12 +462,12 @@ const AdminPanelPage = () => {
             >
               <div className="mb-4 flex items-start justify-between">
                 <div>
-                  <h3 className="font-['Anton'] text-xl font-bold text-slate-100">Trip Details</h3>
-                  <p className="mt-1 text-sm text-slate-400">{selectedTrip.prompt}</p>
+                  <h3 className="font-['Anton'] text-xl font-bold text-[#174b53]">Trip Details</h3>
+                  <p className="mt-1 text-sm text-[#5f8b95]">{selectedTrip.prompt}</p>
                 </div>
                 <button
                   onClick={() => setSelectedTrip(null)}
-                  className="rounded-lg border border-slate-700/50 bg-slate-800/50 p-2 text-slate-400 transition hover:bg-slate-800"
+                  className="rounded-lg border border-[#156874]/22 bg-[#156874]/12 p-2 text-[#5f8b95] transition hover:bg-[#cec6c6]"
                 >
                   <X size={18} />
                 </button>
@@ -484,8 +484,8 @@ const AdminPanelPage = () => {
                       { label: "Best Time", value: selectedTrip.generatedTrip.overview.bestTime },
                     ].map(({ label, value }) => (
                       <div key={label} className="neon-soft rounded-xl p-3">
-                        <p className="text-xs text-slate-400">{label}</p>
-                        <p className="mt-1 font-medium text-slate-100">{value || "—"}</p>
+                        <p className="text-xs text-[#5f8b95]">{label}</p>
+                        <p className="mt-1 font-medium text-[#174b53]">{value || "—"}</p>
                       </div>
                     ))}
                   </div>
@@ -495,13 +495,13 @@ const AdminPanelPage = () => {
               {/* Itinerary */}
               {selectedTrip.generatedTrip?.itinerary && selectedTrip.generatedTrip.itinerary.length > 0 && (
                 <div className="mb-6">
-                  <h4 className="mb-3 font-semibold text-slate-100">Itinerary</h4>
+                  <h4 className="mb-3 font-semibold text-[#174b53]">Itinerary</h4>
                   <div className="space-y-2">
                     {selectedTrip.generatedTrip.itinerary.map((day, idx) => (
                       <div key={idx} className="neon-soft rounded-lg p-3 text-sm">
-                        <p className="font-medium text-cyan-300">Day {day.day}: {day.title}</p>
+                        <p className="font-medium text-[#156874]">Day {day.day}: {day.title}</p>
                         {day.activities && (
-                          <ul className="mt-2 list-inside list-disc space-y-1 pl-2 text-slate-300">
+                          <ul className="mt-2 list-inside list-disc space-y-1 pl-2 text-[#3f737d]">
                             {day.activities.map((activity, aIdx) => (
                               <li key={aIdx} className="text-xs">{activity}</li>
                             ))}
@@ -514,7 +514,7 @@ const AdminPanelPage = () => {
               )}
 
               {/* Created Date */}
-              <div className="text-xs text-slate-500 border-t border-slate-800 pt-4">
+              <div className="text-xs text-[#7a9ca4] border-t border-[#156874]/18 pt-4">
                 Created: {new Date(selectedTrip.createdAt).toLocaleString()}
               </div>
             </motion.div>

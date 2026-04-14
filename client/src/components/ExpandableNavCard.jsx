@@ -40,10 +40,10 @@ const ExpandableNavCard = () => {
             >
               <button
                 onClick={() => setIsOpen(false)}
-                className="mb-3 flex w-full items-center justify-between rounded-lg bg-slate-800/50 p-2 transition hover:bg-slate-800"
+                className="mb-3 flex w-full items-center justify-between rounded-lg bg-[#e8e1e1]/56 p-2 transition hover:bg-[#e8e1e1]"
               >
-                <span className="text-xs font-semibold text-slate-300 uppercase tracking-wider">Menu</span>
-                <X size={16} className="text-slate-400" />
+                <span className="text-xs font-semibold text-[#3f737d] uppercase tracking-wider">Menu</span>
+                <X size={16} className="text-[#5f8b95]" />
               </button>
 
               <nav className="space-y-1">
@@ -55,8 +55,8 @@ const ExpandableNavCard = () => {
                     className={({ isActive }) =>
                       `flex items-center gap-3 rounded-lg px-3 py-2 text-xs font-medium transition ${
                         isActive
-                          ? "bg-gradient-to-r from-cyan-400/20 to-violet-400/20 text-cyan-300 border border-cyan-300/30"
-                          : "text-slate-300 hover:text-cyan-300 hover:bg-slate-800/30"
+                          ? "bg-gradient-to-r from-[#2a7f8b]/20 to-[#2a7f8b]/20 text-[#156874] border border-[#156874]/30"
+                          : "text-[#3f737d] hover:text-[#156874] hover:bg-[#e8e1e1]/38"
                       }`
                     }
                   >
@@ -71,7 +71,7 @@ const ExpandableNavCard = () => {
               onClick={() => setIsOpen(true)}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-r from-cyan-400 to-violet-500 text-white transition hover:shadow-[0_0_24px_rgba(34,211,238,0.4)]"
+              className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-r from-[#2a7f8b] to-[#0f535d] text-[#174b53] transition hover:shadow-[0_0_24px_rgba(21,104,116,0.4)]"
             >
               <PlusCircle size={24} />
             </motion.button>

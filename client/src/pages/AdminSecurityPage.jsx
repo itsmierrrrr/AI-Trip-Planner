@@ -28,9 +28,9 @@ const AdminSecurityPage = () => {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 pb-16">
-      <span className="floating-blob left-[-90px] top-[100px] h-72 w-72 bg-cyan-400/20" />
-      <span className="floating-blob right-[-90px] top-[220px] h-72 w-72 bg-violet-500/25" style={{ animationDelay: "1.2s" }} />
+    <div className="relative min-h-screen overflow-hidden bg-[linear-gradient(180deg,#e8e1e1_0%,#ede6e6_42%,#f7f1f1_100%)] pb-16">
+      <span className="floating-blob left-[-90px] top-[100px] h-72 w-72 bg-[#156874]/18" />
+      <span className="floating-blob right-[-90px] top-[220px] h-72 w-72 bg-[#0f535d]/14" style={{ animationDelay: "1.2s" }} />
 
       <div className="relative z-10 flex min-h-screen items-center justify-center px-4">
         <motion.div
@@ -39,7 +39,7 @@ const AdminSecurityPage = () => {
           transition={{ duration: 0.5 }}
           className="w-full max-w-md"
         >
-          <div className="neon-panel rounded-[2rem] border border-cyan-300/25 p-2 shadow-[0_0_50px_rgba(34,211,238,0.12)]">
+          <div className="neon-panel rounded-[2rem] border border-[#156874]/25 p-2 shadow-[0_0_50px_rgba(21,104,116,0.12)]">
           {/* Security Icon */}
           <motion.div
             initial={{ y: -20, opacity: 0 }}
@@ -47,8 +47,8 @@ const AdminSecurityPage = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="mb-8 flex justify-center"
           >
-            <div className="rounded-full border border-cyan-300/45 bg-gradient-to-br from-cyan-300/25 to-violet-400/20 p-4 shadow-[0_0_36px_rgba(34,211,238,0.35)]">
-              <Lock size={40} className="text-cyan-300" />
+            <div className="rounded-full border border-[#156874]/45 bg-gradient-to-br from-[#0f535d]/20 to-[#156874]/18 p-4 shadow-[0_0_36px_rgba(21,104,116,0.35)]">
+              <Lock size={40} className="text-[#156874]" />
             </div>
           </motion.div>
 
@@ -66,7 +66,7 @@ const AdminSecurityPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="mb-8 text-center text-slate-400"
+            className="mb-8 text-center text-[#5f8b95]"
           >
             Enter the security code to access the admin panel
           </motion.p>
@@ -77,11 +77,11 @@ const AdminSecurityPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
             onSubmit={handleVerify}
-            className="space-y-4 rounded-3xl border border-cyan-300/20 bg-slate-900/55 p-6 backdrop-blur-xl"
+            className="space-y-4 rounded-3xl border border-[#156874]/20 bg-[#f3eded]/88 p-6 backdrop-blur-xl"
           >
             {/* Code Input */}
             <div>
-              <label className="mb-2 block text-sm font-medium tracking-[0.06em] text-slate-300">-------------------Security code------------------</label>
+              <label className="mb-2 block text-sm font-medium tracking-[0.06em] text-[#3f737d]">-------------------Security code------------------</label>
               <div className="relative mx-auto max-w-[240px]">
                 
                 <input
@@ -105,7 +105,7 @@ const AdminSecurityPage = () => {
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="rounded-lg border border-rose-500/35 bg-rose-500/10 p-3 text-sm text-rose-300"
+                className="rounded-lg border border-[#156874]/35 bg-[#156874]/12 p-3 text-sm text-[#156874]"
               >
                 {error}
               </motion.div>
@@ -119,7 +119,7 @@ const AdminSecurityPage = () => {
             >
               {loading ? (
                 <span className="inline-flex items-center gap-2">
-                  <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-slate-950 border-t-slate-100" />
+                  <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-[#b8afaf] border-t-[#ede6e6]" />
                   Verifying...
                 </span>
               ) : (
@@ -128,8 +128,8 @@ const AdminSecurityPage = () => {
             </button>
 
             {/* Info Box */}
-            <div className="rounded-2xl border border-cyan-300/25 bg-gradient-to-r from-cyan-300/10 to-violet-400/10 p-3 text-xs text-slate-300">
-              <p className="mb-1 font-medium tracking-[0.08em] text-cyan-200">SECURE ACCESS ONLY</p>
+            <div className="rounded-2xl border border-[#156874]/25 bg-gradient-to-r from-[#0f535d]/10 to-[#156874]/10 p-3 text-xs text-[#3f737d]">
+              <p className="mb-1 font-medium tracking-[0.08em] text-[#0f535d]">SECURE ACCESS ONLY</p>
               <p>Only OGs Allowed</p>
             </div>
           </motion.form>
@@ -139,7 +139,7 @@ const AdminSecurityPage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="mt-6 text-center text-xs text-slate-500"
+            className="mt-6 text-center text-xs text-[#7a9ca4]"
           >
             Protected by Odomos
           </motion.p>

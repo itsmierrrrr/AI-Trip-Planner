@@ -4,19 +4,19 @@ import { Bell, MoonStar, ShieldCheck, Sparkles } from "lucide-react";
 const SettingCard = ({ icon: Icon, title, description, enabled = true }) => (
   <article className="neon-soft flex items-start justify-between p-4">
     <div className="flex items-start gap-3">
-      <span className="rounded-xl border border-cyan-300/30 bg-cyan-300/10 p-2 text-cyan-200">
+      <span className="rounded-xl border border-[#156874]/30 bg-[#156874]/10 p-2 text-[#0f535d]">
         <Icon size={17} />
       </span>
       <div>
-        <h3 className="font-semibold text-slate-100">{title}</h3>
-        <p className="mt-1 text-sm text-slate-400">{description}</p>
+        <h3 className="font-semibold text-[#174b53]">{title}</h3>
+        <p className="mt-1 text-sm text-[#5f8b95]">{description}</p>
       </div>
     </div>
     <button
       className={`h-6 w-11 rounded-full border transition ${
         enabled
-          ? "border-cyan-300/40 bg-cyan-300/30"
-          : "border-slate-600 bg-slate-800"
+          ? "border-[#156874]/40 bg-[#156874]/30"
+          : "border-[#156874]/30 bg-[#cec6c6]"
       }`}
     >
       <span className={`mt-1 block h-4 w-4 rounded-full bg-white transition ${enabled ? "ml-6" : "ml-1"}`} />
@@ -31,8 +31,8 @@ const SettingsPage = () => {
       animate={{ opacity: 1, y: 0 }}
       className="neon-panel p-6"
     >
-      <h1 className="text-3xl font-bold text-slate-100">Settings</h1>
-      <p className="mt-2 text-sm text-slate-400">Tune your futuristic planner experience.</p>
+      <h1 className="text-3xl font-bold text-[#174b53]">Settings</h1>
+      <p className="mt-2 text-sm text-[#5f8b95]">Tune your futuristic planner experience.</p>
 
       <div className="mt-6 space-y-3">
         <SettingCard
