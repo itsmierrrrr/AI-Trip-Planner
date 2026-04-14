@@ -427,9 +427,9 @@ const LandingPage = () => {
               <p className="mt-2 text-sm text-[#3f737d]">Need help planning? Use the planner prompt to generate a rupee-based travel plan instantly.</p>
             </div>
 
-            <div className="md:col-span-3">
+            <div className="md:col-span-3 text-center">
               <p className="text-sm font-semibold text-[#174b53]">Follow Us</p>
-              <div className="mt-3 flex flex-wrap items-center justify-center gap-2 md:justify-start">
+              <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
                 {socialLinks.map((item) => (
                   <a
                     key={item.label}
