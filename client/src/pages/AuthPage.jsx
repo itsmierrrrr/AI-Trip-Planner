@@ -71,24 +71,24 @@ const AuthPage = () => {
   };
 
   const inputClass =
-    "neon-input w-full px-4 py-3 text-sm outline-none transition focus:border-cyan-300/70 focus:shadow-[0_0_0_1px_rgba(34,211,238,0.35),0_0_24px_rgba(34,211,238,0.25)]";
+    "neon-input w-full px-4 py-3 text-sm outline-none transition focus:border-[#004643]/70 focus:shadow-[0_0_0_1px_rgba(0,70,67,0.28),0_0_24px_rgba(0,70,67,0.16)]";
 
   return (
     <div className="relative min-h-screen overflow-hidden px-4 py-8">
-      <span className="floating-blob left-[-140px] top-[15%] h-96 w-96 bg-cyan-500/20" />
-      <span className="floating-blob right-[-120px] top-[55%] h-96 w-96 bg-violet-500/20" style={{ animationDelay: "1.2s" }} />
+      <span className="floating-blob left-[-140px] top-[15%] h-96 w-96 bg-[#004643]/16" />
+      <span className="floating-blob right-[-120px] top-[55%] h-96 w-96 bg-[#0f5a56]/14" style={{ animationDelay: "1.2s" }} />
 
-      <div className="mx-auto grid min-h-[92vh] w-full max-w-7xl overflow-hidden rounded-[2rem] border border-cyan-300/20 bg-slate-950/60 md:grid-cols-2">
+      <div className="mx-auto grid min-h-[92vh] w-full max-w-7xl overflow-hidden rounded-[2rem] border border-[#004643]/20 bg-[#f0ede5]/75 md:grid-cols-2">
         <section className="relative hidden overflow-hidden p-10 md:block">
           <div className="grid-backdrop absolute inset-0 opacity-40" />
           <div className="relative z-10">
-            <p className="inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/10 px-4 py-1 text-xs uppercase tracking-[0.2em] text-cyan-200">
+            <p className="inline-flex items-center gap-2 rounded-full border border-[#004643]/25 bg-[#004643]/10 px-4 py-1 text-xs uppercase tracking-[0.2em] text-[#0f5a56]">
               <Orbit size={14} /> Access Portal
             </p>
             <h2 className="neon-heading mt-5 font-['Anton'] text-5xl font-bold leading-tight">
               Sync Your Journey with the AI Grid
             </h2>
-            <p className="mt-5 max-w-md text-sm text-slate-300">
+            <p className="mt-5 max-w-md text-sm text-[#456a67]">
               Login to unlock predictive itineraries, futuristic stay intelligence, and a personal navigation brain for your next escape.
             </p>
 
@@ -98,8 +98,8 @@ const AuthPage = () => {
                 "Adaptive budget calculations",
                 "Hidden gems map intelligence",
               ].map((item) => (
-                <div key={item} className="neon-soft flex items-center gap-3 px-4 py-3 text-sm text-slate-200">
-                  <Globe size={15} className="text-cyan-200" />
+                <div key={item} className="neon-soft flex items-center gap-3 px-4 py-3 text-sm text-[#2f5f5c]">
+                  <Globe size={15} className="text-[#0f5a56]" />
                   {item}
                 </div>
               ))}
@@ -113,7 +113,7 @@ const AuthPage = () => {
             animate={{ opacity: 1, y: 0 }}
             className="neon-panel w-full max-w-md p-7"
           >
-            <div className="mb-6 flex rounded-2xl border border-cyan-300/20 bg-slate-900/70 p-1 backdrop-blur-md">
+            <div className="mb-6 flex rounded-2xl border border-[#004643]/20 bg-[#ece6dc]/90 p-1 backdrop-blur-md">
               {["login", "signup"].map((tab) => (
                 <button
                   key={tab}
@@ -123,8 +123,8 @@ const AuthPage = () => {
                   }}
                   className={`w-1/2 rounded-xl px-3 py-2 text-sm font-medium capitalize transition ${
                     mode === tab
-                      ? "bg-gradient-to-r from-cyan-300/30 to-violet-400/30 text-cyan-100"
-                      : "text-slate-400"
+                      ? "bg-[#004643]/18 text-[#004643]"
+                      : "text-[#6b8886]"
                   }`}
                 >
                   {tab}
@@ -179,7 +179,7 @@ const AuthPage = () => {
               </button>
             </form>
 
-            <div className="my-5 h-px bg-slate-700/80" />
+            <div className="my-5 h-px bg-[#004643]/20" />
 
             <motion.div
               className="flex w-full items-center justify-center"
@@ -192,7 +192,7 @@ const AuthPage = () => {
                 onSuccess={onGoogleSuccess} 
                 onError={() => setError("Google login failed")}
                 text="signin_with"
-                theme="filled_black"
+                theme="outline"
                 shape="rectangular"
                 size="large"
                 logo_alignment="left"

@@ -24,17 +24,17 @@ const Navbar = () => {
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="fixed inset-x-0 top-0 z-50 border-b border-cyan-300/20 bg-slate-950/35 backdrop-blur-xl"
+      className="fixed inset-x-0 top-0 z-50 border-b border-[#004643]/20 bg-[#f0ede5]/75 backdrop-blur-xl"
     >
       <div className="mx-auto flex w-[94%] max-w-7xl items-center justify-between gap-4 py-3">
-      <Link to="/" className="group flex items-center gap-2 text-slate-100 transition">
+      <Link to="/" className="group flex items-center gap-2 text-[#0f3836] transition">
         <motion.span
           whileHover={{ scale: 1.1, rotate: 12 }}
-          className="rounded-xl border border-cyan-300/35 bg-cyan-300/10 p-2 text-cyan-200 shadow-[0_0_18px_rgba(34,211,238,0.35)] transition group-hover:border-cyan-300/50 group-hover:shadow-[0_0_28px_rgba(34,211,238,0.45)]"
+          className="rounded-xl border border-[#004643]/35 bg-[#004643]/10 p-2 text-[#004643] shadow-[0_0_18px_rgba(0,70,67,0.22)] transition group-hover:border-[#004643]/50 group-hover:shadow-[0_0_28px_rgba(0,70,67,0.28)]"
         >
           <Compass size={18} />
         </motion.span>
-        <span className="font-['Anton'] text-lg font-semibold tracking-tight transition group-hover:text-cyan-200">{env.appName}</span>
+        <span className="font-['Anton'] text-lg font-semibold tracking-tight transition group-hover:text-[#0f5a56]">{env.appName}</span>
       </Link>
 
       <div className="hidden items-center gap-2 lg:flex">
@@ -45,8 +45,8 @@ const Navbar = () => {
             className={({ isActive }) =>
               `rounded-xl px-3 py-2 text-sm transition ${
                 isActive
-                  ? "border border-cyan-300/30 bg-cyan-300/15 text-cyan-200"
-                  : "text-slate-300 hover:bg-cyan-300/10 hover:text-slate-100"
+                  ? "border border-[#004643]/30 bg-[#004643]/15 text-[#004643]"
+                  : "text-[#2f5f5c] hover:bg-[#004643]/10 hover:text-[#0f3836]"
               }`
             }
           >
@@ -59,7 +59,7 @@ const Navbar = () => {
         {isAuthenticated ? (
           <button
             type="button"
-            className="neon-input inline-flex h-10 w-10 items-center justify-center rounded-full text-slate-300 transition hover:text-cyan-200"
+            className="neon-input inline-flex h-10 w-10 items-center justify-center rounded-full text-[#2f5f5c] transition hover:text-[#004643]"
             aria-label="Notifications"
           >
             <Bell size={15} />
@@ -68,7 +68,7 @@ const Navbar = () => {
 
         {isAuthenticated && (
           <Link to="/profile" className="neon-input inline-flex h-10 w-10 items-center justify-center rounded-full">
-            {user?.name ? user.name.charAt(0).toUpperCase() : <UserRound size={16} className="text-slate-300" />}
+            {user?.name ? user.name.charAt(0).toUpperCase() : <UserRound size={16} className="text-[#2f5f5c]" />}
           </Link>
         )}
 

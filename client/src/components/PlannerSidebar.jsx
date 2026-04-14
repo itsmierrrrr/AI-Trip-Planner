@@ -19,7 +19,7 @@ const PlannerSidebar = () => {
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="neon-input mb-3 inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm text-slate-200 md:hidden"
+        className="neon-input mb-3 inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm text-[#2f5f5c] md:hidden"
         aria-label="Toggle sidebar"
       >
         {open ? <X size={15} /> : <Menu size={15} />} Menu
@@ -30,7 +30,7 @@ const PlannerSidebar = () => {
         initial={{ opacity: 0, x: -12 }}
         animate={{ opacity: 1, x: 0 }}
       >
-        <p className="mb-4 px-2 text-xs uppercase tracking-[0.22em] text-slate-400">Navigation</p>
+        <p className="mb-4 px-2 text-xs uppercase tracking-[0.22em] text-[#5d7d7a]">Navigation</p>
         <nav className="space-y-1">
           {links.map(({ label, to, icon: Icon }) => (
             <NavLink
@@ -40,8 +40,8 @@ const PlannerSidebar = () => {
               className={({ isActive }) =>
                 `flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium transition ${
                   isActive
-                    ? "border border-cyan-300/30 bg-cyan-300/15 text-cyan-200 shadow-[0_0_18px_rgba(34,211,238,0.28)]"
-                    : "text-slate-300 hover:bg-slate-800/70 hover:text-slate-100"
+                    ? "border border-[#004643]/30 bg-[#004643]/15 text-[#004643] shadow-[0_0_18px_rgba(0,70,67,0.2)]"
+                    : "text-[#456a67] hover:bg-[#004643]/10 hover:text-[#0f3836]"
                 }`
               }
             >

@@ -111,7 +111,7 @@ const PlannerPage = () => {
   }, [location.search, navigate]);
 
   const fieldClass =
-    "neon-input w-full px-3 py-2.5 text-sm outline-none transition focus:border-cyan-300/70 focus:shadow-[0_0_22px_rgba(34,211,238,0.22)]";
+    "neon-input w-full px-3 py-2.5 text-sm outline-none transition focus:border-[#004643]/70 focus:shadow-[0_0_22px_rgba(0,70,67,0.18)]";
 
   return (
     <div className="relative">
@@ -122,8 +122,8 @@ const PlannerPage = () => {
         animate={{ opacity: 1, y: 0 }}
         className="neon-panel p-6"
       >
-        <h1 className="font-['Anton'] text-3xl font-bold text-slate-100">Planner Dashboard</h1>
-        <p className="mt-2 text-sm text-slate-400">Describe your ideal journey and let the travel AI orchestrate every detail.</p>
+        <h1 className="font-['Anton'] text-3xl font-bold text-[#0f3836]">Planner Dashboard</h1>
+        <p className="mt-2 text-sm text-[#456a67]">Describe your ideal journey and let the travel AI orchestrate every detail.</p>
 
         <form onSubmit={onGenerate} className="mt-5 space-y-4">
           <textarea
@@ -131,28 +131,28 @@ const PlannerPage = () => {
             value={form.prompt}
             onChange={(e) => onChange("prompt", e.target.value)}
             placeholder="Describe Your Trip..."
-            className="neon-input w-full rounded-3xl px-4 py-3 text-sm outline-none transition focus:border-cyan-300/70 focus:shadow-[0_0_24px_rgba(34,211,238,0.25)]"
+            className="neon-input w-full rounded-3xl px-4 py-3 text-sm outline-none transition focus:border-[#004643]/70 focus:shadow-[0_0_24px_rgba(0,70,67,0.18)]"
           />
 
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             <div>
-              <label className="text-xs font-medium text-slate-300">Destination <span className="text-rose-400">*</span></label>
+              <label className="text-xs font-medium text-[#456a67]">Destination <span className="text-rose-500">*</span></label>
               <input className={fieldClass} placeholder="e.g., Tokyo, Bali, Dubai" value={form.destination} onChange={(e) => onChange("destination", e.target.value)} required />
             </div>
             <div>
-              <label className="text-xs font-medium text-slate-300">Budget <span className="text-rose-400">*</span></label>
+              <label className="text-xs font-medium text-[#456a67]">Budget <span className="text-rose-500">*</span></label>
               <input className={fieldClass} placeholder="e.g., ₹50,000 or $500" value={form.budget} onChange={(e) => onChange("budget", e.target.value)} required />
             </div>
             <div>
-              <label className="text-xs font-medium text-slate-300">Days <span className="text-rose-400">*</span></label>
+              <label className="text-xs font-medium text-[#456a67]">Days <span className="text-rose-500">*</span></label>
               <input className={fieldClass} placeholder="e.g., 7" value={form.days} onChange={(e) => onChange("days", e.target.value)} required />
             </div>
             <div>
-              <label className="text-xs font-medium text-slate-300">Travelers <span className="text-rose-400">*</span></label>
+              <label className="text-xs font-medium text-[#456a67]">Travelers <span className="text-rose-500">*</span></label>
               <input className={fieldClass} placeholder="e.g., 2-3 people" value={form.travelers} onChange={(e) => onChange("travelers", e.target.value)} required />
             </div>
             <div>
-              <label className="text-xs font-medium text-slate-300">Travel style <span className="text-rose-400">*</span></label>
+              <label className="text-xs font-medium text-[#456a67]">Travel style <span className="text-rose-500">*</span></label>
               <input className={fieldClass} placeholder="e.g., Adventure, Luxury, Peaceful" value={form.travelStyle} onChange={(e) => onChange("travelStyle", e.target.value)} required />
             </div>
           </div>
@@ -167,7 +167,7 @@ const PlannerPage = () => {
               {loading ? "Generating..." : "Generate Trip"}
             </button>
             {generatedTrip && autoSaved ? (
-              <span className="neon-input inline-flex items-center px-4 py-2 text-sm font-medium text-emerald-300">
+              <span className="neon-input inline-flex items-center px-4 py-2 text-sm font-medium text-[#0f5a56]">
                 Auto-saved to Saved Trips
               </span>
             ) : null}

@@ -26,12 +26,12 @@ const GeneratingOverlay = ({ open }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/85 backdrop-blur-xl"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#ece6dc]/85 backdrop-blur-xl"
         >
           <div className="neon-panel w-[92%] max-w-md p-8 text-center">
             <div className="mx-auto ring-loader" />
-            <h3 className="mt-6 text-lg font-semibold text-slate-100">Generating Your Quantum Itinerary</h3>
-            <p className="mt-2 text-sm text-cyan-200">{text}</p>
+            <h3 className="mt-6 text-lg font-semibold text-[#0f3836]">Generating Your Quantum Itinerary</h3>
+            <p className="mt-2 text-sm text-[#0f5a56]">{text}</p>
           </div>
         </motion.div>
       ) : null}
