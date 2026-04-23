@@ -36,15 +36,15 @@ const upcomingTripsData = [
   },
 ];
 
-const LoadingSkeleton = ({ className }) => <div className={`animate-pulse rounded-2xl bg-[#156874]/12 ${className}`} />;
+const LoadingSkeleton = ({ className }) => <div className={`animate-pulse rounded-2xl bg-[#5b88b2]/12 ${className}`} />;
 
 const TripStatusBadge = ({ status }) => {
   const palette =
     status === "Booked"
-      ? "border-[#2a7f8b]/35 bg-[#2a7f8b]/15 text-[#174b53]"
+      ? "border-[#5b88b2]/35 bg-[#5b88b2]/15 text-[#fbf9e4]"
       : status === "Completed"
-        ? "border-[#0f535d]/35 bg-[#0f535d]/15 text-[#0f535d]"
-        : "border-[#2a7f8b]/35 bg-[#2a7f8b]/15 text-[#174b53]";
+        ? "border-[#5b88b2]/35 bg-[#122c4f]/30 text-[#fbf9e4]"
+        : "border-[#5b88b2]/35 bg-[#5b88b2]/15 text-[#fbf9e4]";
 
   return <span className={`rounded-full border px-2.5 py-1 text-[11px] font-medium ${palette}`}>{status}</span>;
 };
@@ -65,16 +65,16 @@ const TripCard = ({ trip, onOpen }) => (
   >
     <div className="relative h-36">
       <img src={trip.image} alt={`${trip.destination} preview`} className="h-full w-full object-cover" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#f3eded]/70 via-[#f7f1f1]/30 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#122c4f]/70 via-[#122c4f]/30 to-transparent" />
       <div className="absolute left-3 right-3 top-3 flex items-center justify-between">
         <TripStatusBadge status={trip.status} />
-        <span className="rounded-full border border-[#ede6e6]/45 bg-[#156874]/45 px-2 py-1 text-[10px] font-medium text-[#ede6e6]">
+        <span className="rounded-full border border-[#5b88b2]/45 bg-[#5b88b2]/45 px-2 py-1 text-[10px] font-medium text-[#fbf9e4]">
           {trip.budget}
         </span>
       </div>
       <div className="absolute bottom-3 left-3 right-3">
-        <h3 className="font-['Anton'] text-lg font-semibold text-[#174b53]">{trip.destination}</h3>
-        <p className="text-xs text-[#2d6068]">{trip.dates}</p>
+        <h3 className="font-['Anton'] text-lg font-semibold text-[#fbf9e4]">{trip.destination}</h3>
+        <p className="text-xs text-[#fbf9e4]">{trip.dates}</p>
       </div>
     </div>
   </motion.article>
@@ -129,7 +129,7 @@ const UserDashboardPage = () => {
   return (
     <div className="space-y-6">
       <section>
-        <h2 className="mb-4 font-['Anton'] text-2xl font-semibold text-[#174b53]">Upcoming Trips</h2>
+        <h2 className="mb-4 font-['Anton'] text-2xl font-semibold text-[#fbf9e4]">Upcoming Trips</h2>
 
         {loading ? (
           <div className="flex gap-3 overflow-hidden">
@@ -139,7 +139,7 @@ const UserDashboardPage = () => {
           </div>
         ) : upcomingTripsData.length === 0 ? (
           <div className="neon-soft p-8 text-center">
-            <p className="text-sm text-[#3f737d]">No upcoming trips available.</p>
+            <p className="text-sm text-[#fbf9e4]">No upcoming trips available.</p>
           </div>
         ) : (
           <div className="flex gap-3 overflow-x-auto pb-2 [scrollbar-width:thin] [scrollbar-color:rgba(21,104,116,0.4)_transparent]">
@@ -151,7 +151,7 @@ const UserDashboardPage = () => {
       </section>
 
       <section>
-        <h2 className="mb-4 font-['Anton'] text-2xl font-semibold text-[#174b53]">Previous Trips</h2>
+        <h2 className="mb-4 font-['Anton'] text-2xl font-semibold text-[#fbf9e4]">Previous Trips</h2>
 
         {previousTripsLoading ? (
           <div className="flex gap-3 overflow-hidden">
@@ -161,7 +161,7 @@ const UserDashboardPage = () => {
           </div>
         ) : previousTrips.length === 0 ? (
           <div className="neon-soft p-8 text-center">
-            <p className="text-sm text-[#3f737d]">No previous trips found from your saved history.</p>
+            <p className="text-sm text-[#fbf9e4]">No previous trips found from your saved history.</p>
           </div>
         ) : (
           <div className="flex gap-3 overflow-x-auto pb-2 [scrollbar-width:thin] [scrollbar-color:rgba(21,104,116,0.4)_transparent]">
@@ -173,7 +173,7 @@ const UserDashboardPage = () => {
       </section>
 
       <section className="neon-panel p-5" id="travel-checklist">
-        <h2 className="mb-4 font-['Anton'] text-2xl font-semibold text-[#174b53]">Travel Checklist</h2>
+        <h2 className="mb-4 font-['Anton'] text-2xl font-semibold text-[#fbf9e4]">Travel Checklist</h2>
         <div className="space-y-2">
           {[
             { key: "passport", label: "Passport", icon: IdCard },
@@ -188,15 +188,15 @@ const UserDashboardPage = () => {
               onClick={() => toggleChecklist(item.key)}
               className="neon-soft flex w-full items-center justify-between px-3 py-2 text-left"
             >
-              <span className="inline-flex items-center gap-2 text-sm text-[#2d6068]">
-                <item.icon size={15} className="text-[#0f535d]" />
+              <span className="inline-flex items-center gap-2 text-sm text-[#fbf9e4]">
+                <item.icon size={15} className="text-[#5b88b2]" />
                 {item.label}
               </span>
               <span
                 className={`inline-flex h-5 w-5 items-center justify-center rounded-md border ${
                   checklist[item.key]
-                    ? "border-[#2a7f8b]/40 bg-[#2a7f8b]/20 text-[#174b53]"
-                    : "border-[#156874]/30 bg-[#156874]/12 text-[#7a9ca4]"
+                    ? "border-[#5b88b2]/40 bg-[#5b88b2]/20 text-[#fbf9e4]"
+                    : "border-[#5b88b2]/30 bg-[#5b88b2]/12 text-[#fbf9e4]"
                 }`}
                 aria-hidden="true"
               >

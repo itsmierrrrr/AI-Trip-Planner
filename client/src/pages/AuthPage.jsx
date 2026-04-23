@@ -71,24 +71,24 @@ const AuthPage = () => {
   };
 
   const inputClass =
-    "neon-input w-full px-4 py-3 text-sm outline-none transition focus:border-[#156874]/70 focus:shadow-[0_0_0_1px_rgba(21,104,116,0.28),0_0_24px_rgba(21,104,116,0.16)]";
+    "neon-input w-full px-4 py-3 text-sm outline-none transition focus:border-[#5b88b2]/70 focus:shadow-[0_0_0_1px_rgba(91,136,178,0.28),0_0_24px_rgba(18,44,79,0.16)]";
 
   return (
     <div className="relative min-h-screen overflow-hidden px-4 py-8">
-      <span className="floating-blob left-[-140px] top-[15%] h-96 w-96 bg-[#156874]/16" />
-      <span className="floating-blob right-[-120px] top-[55%] h-96 w-96 bg-[#0f535d]/14" style={{ animationDelay: "1.2s" }} />
+      <span className="floating-blob left-[-140px] top-[15%] h-96 w-96 bg-[#5b88b2]/16" />
+      <span className="floating-blob right-[-120px] top-[55%] h-96 w-96 bg-[#122c4f]/18" style={{ animationDelay: "1.2s" }} />
 
-      <div className="mx-auto grid min-h-[92vh] w-full max-w-7xl overflow-hidden rounded-[2rem] border border-[#156874]/20 bg-[#ede6e6]/75 md:grid-cols-2">
+      <div className="mx-auto grid min-h-[92vh] w-full max-w-7xl overflow-hidden rounded-[2rem] border border-[#5b88b2]/20 bg-[#000000]/76 md:grid-cols-2">
         <section className="relative hidden overflow-hidden p-10 md:block">
           <div className="grid-backdrop absolute inset-0 opacity-40" />
           <div className="relative z-10">
-            <p className="inline-flex items-center gap-2 rounded-full border border-[#156874]/25 bg-[#156874]/10 px-4 py-1 text-xs uppercase tracking-[0.2em] text-[#0f535d]">
+            <p className="inline-flex items-center gap-2 rounded-full border border-[#5b88b2]/25 bg-[#122c4f]/45 px-4 py-1 text-xs uppercase tracking-[0.2em] text-[#5b88b2]">
               <Orbit size={14} /> Access Portal
             </p>
             <h2 className="neon-heading mt-5 font-['Anton'] text-5xl font-bold leading-tight">
               Sync Your Journey with the AI Grid
             </h2>
-            <p className="mt-5 max-w-md text-sm text-[#3f737d]">
+            <p className="mt-5 max-w-md text-sm text-[#fbf9e4]/72">
               Login to unlock predictive itineraries, futuristic stay intelligence, and a personal navigation brain for your next escape.
             </p>
 
@@ -98,8 +98,8 @@ const AuthPage = () => {
                 "Adaptive budget calculations",
                 "Hidden gems map intelligence",
               ].map((item) => (
-                <div key={item} className="neon-soft flex items-center gap-3 px-4 py-3 text-sm text-[#2d6068]">
-                  <Globe size={15} className="text-[#0f535d]" />
+                <div key={item} className="neon-soft flex items-center gap-3 px-4 py-3 text-sm text-[#fbf9e4]/72">
+                  <Globe size={15} className="text-[#5b88b2]" />
                   {item}
                 </div>
               ))}
@@ -113,7 +113,7 @@ const AuthPage = () => {
             animate={{ opacity: 1, y: 0 }}
             className="neon-panel w-full max-w-md p-7"
           >
-            <div className="mb-6 flex rounded-2xl border border-[#156874]/20 bg-[#f3eded]/90 p-1 backdrop-blur-md">
+            <div className="mb-6 flex rounded-2xl border border-[#5b88b2]/20 bg-[#122c4f]/45 p-1 backdrop-blur-md">
               {["login", "signup"].map((tab) => (
                 <button
                   key={tab}
@@ -123,8 +123,8 @@ const AuthPage = () => {
                   }}
                   className={`w-1/2 rounded-xl px-3 py-2 text-sm font-medium capitalize transition ${
                     mode === tab
-                      ? "bg-[#156874]/18 text-[#156874]"
-                      : "text-[#7a9ca4]"
+                      ? "bg-[#122c4f] text-[#fbf9e4]"
+                      : "text-[#fbf9e4]/68"
                   }`}
                 >
                   {tab}
@@ -172,14 +172,14 @@ const AuthPage = () => {
                 />
               </label>
 
-              {error && <p className="text-sm text-[#156874]">{error}</p>}
+              {error && <p className="text-sm text-[#5b88b2]">{error}</p>}
 
               <button type="submit" disabled={loading} className="neon-btn w-full disabled:opacity-60">
                 {loading ? "Please wait..." : mode === "signup" ? "Create account" : "Login"}
               </button>
             </form>
 
-            <div className="my-5 h-px bg-[#156874]/20" />
+            <div className="my-5 h-px bg-[#5b88b2]/20" />
 
             <motion.div
               className="flex w-full items-center justify-center"

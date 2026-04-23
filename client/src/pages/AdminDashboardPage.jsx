@@ -82,8 +82,8 @@ const AdminDashboardPage = () => {
 
   return (
     <section className="space-y-5">
-      <h1 className="font-['Anton'] text-3xl font-bold text-[#174b53]">Admin Command Deck</h1>
-      {error ? <p className="text-sm text-[#156874]">{error}</p> : null}
+      <h1 className="font-['Anton'] text-3xl font-bold text-[#fbf9e4]">Admin Command Deck</h1>
+      {error ? <p className="text-sm text-[#5b88b2]">{error}</p> : null}
 
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
         {[
@@ -93,37 +93,37 @@ const AdminDashboardPage = () => {
           ["Active Users", activeUsers],
         ].map(([label, value]) => (
           <article key={label} className="neon-panel p-5">
-            <p className="text-sm text-[#5f8b95]">{label}</p>
-            <p className="mt-2 text-2xl font-semibold text-[#174b53]">{value}</p>
+            <p className="text-sm text-[#fbf9e4]">{label}</p>
+            <p className="mt-2 text-2xl font-semibold text-[#fbf9e4]">{value}</p>
           </article>
         ))}
       </div>
 
       <div className="grid gap-4 xl:grid-cols-3">
         <div className="neon-panel p-5 xl:col-span-1">
-          <h2 className="inline-flex items-center gap-2 text-lg font-semibold text-[#174b53]"><Radar size={18} className="text-[#0f535d]" /> Most Searched Destinations</h2>
+          <h2 className="inline-flex items-center gap-2 text-lg font-semibold text-[#fbf9e4]"><Radar size={18} className="text-[#5b88b2]" /> Most Searched Destinations</h2>
           <div className="mt-4 space-y-3">
             {topDestinations.length ? topDestinations.map(([destination, count]) => (
               <div key={destination}>
-                <div className="mb-1 flex items-center justify-between text-sm text-[#3f737d]">
+                <div className="mb-1 flex items-center justify-between text-sm text-[#fbf9e4]">
                   <span>{destination}</span>
                   <span>{count}</span>
                 </div>
-                <div className="h-1.5 rounded-full bg-[#cec6c6]">
-                  <div className="h-full rounded-full bg-gradient-to-r from-[#0f535d] to-[#156874]" style={{ width: `${Math.max(12, count * 18)}%` }} />
+                <div className="h-1.5 rounded-full bg-[#122c4f]">
+                  <div className="h-full rounded-full bg-gradient-to-r from-[#122c4f] to-[#5b88b2]" style={{ width: `${Math.max(12, count * 18)}%` }} />
                 </div>
               </div>
-            )) : <p className="text-sm text-[#5f8b95]">No data yet.</p>}
+            )) : <p className="text-sm text-[#fbf9e4]">No data yet.</p>}
           </div>
         </div>
 
         <div className="neon-panel p-5 xl:col-span-2">
-          <h2 className="inline-flex items-center gap-2 text-lg font-semibold text-[#174b53]"><Users size={18} className="text-[#0f535d]" /> Monthly Registrations</h2>
+          <h2 className="inline-flex items-center gap-2 text-lg font-semibold text-[#fbf9e4]"><Users size={18} className="text-[#5b88b2]" /> Monthly Registrations</h2>
           <div className="mt-4 grid grid-cols-12 items-end gap-2">
             {monthlyUsers.map((count, month) => (
               <div key={month} className="flex flex-col items-center gap-2">
-                <div className="w-full rounded-t-md bg-gradient-to-t from-[#2a7f8b]/70 to-[#0f535d]/80" style={{ height: `${Math.max(10, count * 14)}px` }} />
-                <span className="text-[10px] text-[#5f8b95]">{monthLabels[month]}</span>
+                <div className="w-full rounded-t-md bg-gradient-to-t from-[#5b88b2]/70 to-[#122c4f]/80" style={{ height: `${Math.max(10, count * 14)}px` }} />
+                <span className="text-[10px] text-[#fbf9e4]">{monthLabels[month]}</span>
               </div>
             ))}
           </div>
@@ -131,22 +131,22 @@ const AdminDashboardPage = () => {
       </div>
 
       <div className="neon-panel p-5">
-        <h2 className="inline-flex items-center gap-2 text-lg font-semibold text-[#174b53]"><BarChart3 size={18} className="text-[#0f535d]" /> Trips Created</h2>
+        <h2 className="inline-flex items-center gap-2 text-lg font-semibold text-[#fbf9e4]"><BarChart3 size={18} className="text-[#5b88b2]" /> Trips Created</h2>
         <div className="mt-4 grid grid-cols-12 items-end gap-2">
           {monthlyTrips.map((count, month) => (
             <div key={month} className="flex flex-col items-center gap-2">
-              <div className="w-full rounded-t-md bg-gradient-to-t from-[#0f535d]/70 to-[#2a7f8b]/80" style={{ height: `${Math.max(10, count * 14)}px` }} />
-              <span className="text-[10px] text-[#5f8b95]">{monthLabels[month]}</span>
+              <div className="w-full rounded-t-md bg-gradient-to-t from-[#122c4f]/70 to-[#5b88b2]/80" style={{ height: `${Math.max(10, count * 14)}px` }} />
+              <span className="text-[10px] text-[#fbf9e4]">{monthLabels[month]}</span>
             </div>
           ))}
         </div>
       </div>
 
       <div className="neon-panel p-5">
-        <h2 className="text-lg font-semibold text-[#174b53]">Users</h2>
+        <h2 className="text-lg font-semibold text-[#fbf9e4]">Users</h2>
         <div className="mt-3 overflow-x-auto">
           <table className="min-w-full text-left text-sm">
-            <thead className="text-[#5f8b95]">
+            <thead className="text-[#fbf9e4]">
               <tr>
                 <th className="py-2">Name</th>
                 <th className="py-2">Email</th>
@@ -156,7 +156,7 @@ const AdminDashboardPage = () => {
             </thead>
             <tbody>
               {users.map((user) => (
-                <tr key={user._id} className="border-t border-[#156874]/18 text-[#2d6068] transition hover:bg-[#156874]/8">
+                <tr key={user._id} className="border-t border-[#5b88b2]/18 text-[#fbf9e4] transition hover:bg-[#5b88b2]/8">
                   <td className="py-2">{user.name}</td>
                   <td className="py-2">{user.email}</td>
                   <td className="py-2 capitalize">{user.role}</td>
@@ -164,7 +164,7 @@ const AdminDashboardPage = () => {
                     <button
                       onClick={() => onDeleteUser(user._id)}
                       disabled={user.role === "admin"}
-                      className="rounded-xl border border-[#156874]/35 bg-[#156874]/10 px-3 py-1 text-[#156874] transition hover:bg-[#156874]/20 disabled:cursor-not-allowed disabled:opacity-50"
+                      className="rounded-xl border border-[#5b88b2]/35 bg-[#5b88b2]/10 px-3 py-1 text-[#5b88b2] transition hover:bg-[#5b88b2]/20 disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       Delete
                     </button>
@@ -177,10 +177,10 @@ const AdminDashboardPage = () => {
       </div>
 
       <div className="neon-panel p-5">
-        <h2 className="text-lg font-semibold text-[#174b53]">Saved Trips</h2>
+        <h2 className="text-lg font-semibold text-[#fbf9e4]">Saved Trips</h2>
         <div className="mt-3 overflow-x-auto">
           <table className="min-w-full text-left text-sm">
-            <thead className="text-[#5f8b95]">
+            <thead className="text-[#fbf9e4]">
               <tr>
                 <th className="py-2">Destination</th>
                 <th className="py-2">Prompt</th>
@@ -190,14 +190,14 @@ const AdminDashboardPage = () => {
             </thead>
             <tbody>
               {trips.map((trip) => (
-                <tr key={trip._id} className="border-t border-[#156874]/18 text-[#2d6068] transition hover:bg-[#156874]/8">
+                <tr key={trip._id} className="border-t border-[#5b88b2]/18 text-[#fbf9e4] transition hover:bg-[#5b88b2]/8">
                   <td className="py-2">{trip.generatedTrip?.overview?.destination || "Custom"}</td>
-                  <td className="max-w-md py-2 pr-3 text-xs text-[#3f737d]">{trip.prompt}</td>
+                  <td className="max-w-md py-2 pr-3 text-xs text-[#fbf9e4]">{trip.prompt}</td>
                   <td className="py-2">{trip.userId?.email || "Unknown"}</td>
                   <td className="py-2">
                     <button
                       onClick={() => onDeleteTrip(trip._id)}
-                      className="rounded-xl border border-[#156874]/35 bg-[#156874]/10 px-3 py-1 text-[#156874] transition hover:bg-[#156874]/20"
+                      className="rounded-xl border border-[#5b88b2]/35 bg-[#5b88b2]/10 px-3 py-1 text-[#5b88b2] transition hover:bg-[#5b88b2]/20"
                     >
                       Delete
                     </button>

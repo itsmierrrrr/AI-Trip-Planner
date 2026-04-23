@@ -53,24 +53,24 @@ const SavedTripsPage = () => {
     <section className="space-y-4">
       <div className="neon-panel p-6">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-          <h1 className="font-['Anton'] text-3xl font-bold text-[#174b53]">Saved Trips</h1>
-          <p className="text-sm text-[#5f8b95]">{filteredTrips.length} trips</p>
+          <h1 className="font-['Anton'] text-3xl font-bold text-[#fbf9e4]">Saved Trips</h1>
+          <p className="text-sm text-[#fbf9e4]">{filteredTrips.length} trips</p>
         </div>
 
         <div className="flex flex-col gap-3 md:flex-row">
           <div className="neon-input flex flex-1 items-center gap-2 px-3 py-2">
-            <Search size={16} className="text-[#0f535d]" />
+            <Search size={16} className="text-[#5b88b2]" />
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search your saved adventures"
-              className="w-full bg-transparent text-sm text-[#174b53] outline-none"
+              className="w-full bg-transparent text-sm text-[#fbf9e4] outline-none"
             />
           </div>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="neon-input px-3 py-2 text-sm text-[#174b53] outline-none"
+            className="neon-input px-3 py-2 text-sm text-[#fbf9e4] outline-none"
           >
             <option value="newest">Newest First</option>
             <option value="oldest">Oldest First</option>
@@ -78,8 +78,8 @@ const SavedTripsPage = () => {
         </div>
       </div>
 
-      {loading ? <p className="text-sm text-[#5f8b95]">Loading trips...</p> : null}
-      {error ? <p className="mb-3 text-sm text-[#156874]">{error}</p> : null}
+      {loading ? <p className="text-sm text-[#fbf9e4]">Loading trips...</p> : null}
+      {error ? <p className="mb-3 text-sm text-[#5b88b2]">{error}</p> : null}
 
       <div className="grid gap-3 md:grid-cols-2">
         {filteredTrips.map((trip) => (
@@ -91,24 +91,24 @@ const SavedTripsPage = () => {
                 className="h-full w-full object-cover"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-[#f7f1f1]/28" />
+              <div className="absolute inset-0 bg-[#122c4f]/28" />
               <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
-                <h3 className="text-lg font-semibold text-[#174b53]">{trip.generatedTrip?.overview?.destination || "Custom Trip"}</h3>
-                <p className="text-xs text-[#2d6068]">{new Date(trip.createdAt).toLocaleDateString()}</p>
+                <h3 className="text-lg font-semibold text-[#fbf9e4]">{trip.generatedTrip?.overview?.destination || "Custom Trip"}</h3>
+                <p className="text-xs text-[#fbf9e4]">{new Date(trip.createdAt).toLocaleDateString()}</p>
               </div>
             </div>
             <div className="p-4">
-              <p className="text-sm text-[#3f737d]">{trip.prompt}</p>
+              <p className="text-sm text-[#fbf9e4]">{trip.prompt}</p>
               <div className="mt-3 flex items-center gap-2">
                 <button
                   onClick={() => setSelectedTrip(trip)}
-                  className="neon-input rounded-xl px-3 py-1.5 text-sm text-[#2d6068] transition hover:border-[#156874]/55"
+                  className="neon-input rounded-xl px-3 py-1.5 text-sm text-[#fbf9e4] transition hover:border-[#5b88b2]/55"
                 >
                   View Trip
                 </button>
                 <button
                   onClick={() => onDelete(trip._id)}
-                  className="rounded-xl border border-[#156874]/35 bg-[#156874]/10 px-3 py-1.5 text-sm text-[#156874] transition hover:bg-[#156874]/20"
+                  className="rounded-xl border border-[#5b88b2]/35 bg-[#5b88b2]/10 px-3 py-1.5 text-sm text-[#5b88b2] transition hover:bg-[#5b88b2]/20"
                 >
                   Delete
                 </button>
@@ -120,7 +120,7 @@ const SavedTripsPage = () => {
 
       {selectedTrip && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-[#f7f1f1]/38 p-4 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#122c4f]/38 p-4 backdrop-blur-sm"
           onClick={() => setSelectedTrip(null)}
         >
           <div
@@ -129,12 +129,12 @@ const SavedTripsPage = () => {
           >
             <div className="mb-4 flex items-start justify-between">
               <div>
-                <h3 className="font-['Anton'] text-xl font-bold text-[#174b53]">Trip Details</h3>
-                <p className="mt-1 text-sm text-[#5f8b95]">{selectedTrip.prompt}</p>
+                <h3 className="font-['Anton'] text-xl font-bold text-[#fbf9e4]">Trip Details</h3>
+                <p className="mt-1 text-sm text-[#fbf9e4]">{selectedTrip.prompt}</p>
               </div>
               <button
                 onClick={() => setSelectedTrip(null)}
-                className="neon-input p-2 text-[#3f737d]"
+                className="neon-input p-2 text-[#fbf9e4]"
               >
                 <X size={16} />
               </button>

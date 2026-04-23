@@ -111,7 +111,7 @@ const PlannerPage = () => {
   }, [location.search, navigate]);
 
   const fieldClass =
-    "neon-input w-full px-3 py-2.5 text-sm outline-none transition focus:border-[#156874]/70 focus:shadow-[0_0_22px_rgba(21,104,116,0.18)]";
+    "neon-input w-full px-3 py-2.5 text-sm outline-none transition focus:border-[#5b88b2]/70 focus:shadow-[0_0_22px_rgba(21,104,116,0.18)]";
 
   return (
     <div className="relative">
@@ -122,8 +122,8 @@ const PlannerPage = () => {
         animate={{ opacity: 1, y: 0 }}
         className="neon-panel p-6"
       >
-        <h1 className="font-['Anton'] text-3xl font-bold text-[#174b53]">Planner Dashboard</h1>
-        <p className="mt-2 text-sm text-[#3f737d]">Describe your ideal journey and let the travel AI orchestrate every detail.</p>
+        <h1 className="font-['Anton'] text-3xl font-bold text-[#fbf9e4]">Planner Dashboard</h1>
+        <p className="mt-2 text-sm text-[#fbf9e4]">Describe your ideal journey and let the travel AI orchestrate every detail.</p>
 
         <form onSubmit={onGenerate} className="mt-5 space-y-4">
           <textarea
@@ -131,28 +131,28 @@ const PlannerPage = () => {
             value={form.prompt}
             onChange={(e) => onChange("prompt", e.target.value)}
             placeholder="Describe Your Trip..."
-            className="neon-input w-full rounded-3xl px-4 py-3 text-sm outline-none transition focus:border-[#156874]/70 focus:shadow-[0_0_24px_rgba(21,104,116,0.18)]"
+            className="neon-input w-full rounded-3xl px-4 py-3 text-sm outline-none transition focus:border-[#5b88b2]/70 focus:shadow-[0_0_24px_rgba(21,104,116,0.18)]"
           />
 
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             <div>
-              <label className="text-xs font-medium text-[#3f737d]">Destination <span className="text-[#0f535d]">*</span></label>
+              <label className="text-xs font-medium text-[#fbf9e4]">Destination <span className="text-[#5b88b2]">*</span></label>
               <input className={fieldClass} placeholder="e.g., Tokyo, Bali, Dubai" value={form.destination} onChange={(e) => onChange("destination", e.target.value)} required />
             </div>
             <div>
-              <label className="text-xs font-medium text-[#3f737d]">Budget <span className="text-[#0f535d]">*</span></label>
+              <label className="text-xs font-medium text-[#fbf9e4]">Budget <span className="text-[#5b88b2]">*</span></label>
               <input className={fieldClass} placeholder="e.g., ₹50,000 or $500" value={form.budget} onChange={(e) => onChange("budget", e.target.value)} required />
             </div>
             <div>
-              <label className="text-xs font-medium text-[#3f737d]">Days <span className="text-[#0f535d]">*</span></label>
+              <label className="text-xs font-medium text-[#fbf9e4]">Days <span className="text-[#5b88b2]">*</span></label>
               <input className={fieldClass} placeholder="e.g., 7" value={form.days} onChange={(e) => onChange("days", e.target.value)} required />
             </div>
             <div>
-              <label className="text-xs font-medium text-[#3f737d]">Travelers <span className="text-[#0f535d]">*</span></label>
+              <label className="text-xs font-medium text-[#fbf9e4]">Travelers <span className="text-[#5b88b2]">*</span></label>
               <input className={fieldClass} placeholder="e.g., 2-3 people" value={form.travelers} onChange={(e) => onChange("travelers", e.target.value)} required />
             </div>
             <div>
-              <label className="text-xs font-medium text-[#3f737d]">Travel style <span className="text-[#0f535d]">*</span></label>
+              <label className="text-xs font-medium text-[#fbf9e4]">Travel style <span className="text-[#5b88b2]">*</span></label>
               <input className={fieldClass} placeholder="e.g., Adventure, Luxury, Peaceful" value={form.travelStyle} onChange={(e) => onChange("travelStyle", e.target.value)} required />
             </div>
           </div>
@@ -167,15 +167,15 @@ const PlannerPage = () => {
               {loading ? "Generating..." : "Generate Trip"}
             </button>
             {generatedTrip && autoSaved ? (
-              <span className="neon-input inline-flex items-center px-4 py-2 text-sm font-medium text-[#0f535d]">
+              <span className="neon-input inline-flex items-center px-4 py-2 text-sm font-medium text-[#fbf9e4]">
                 Auto-saved to Saved Trips
               </span>
             ) : null}
           </div>
         </form>
 
-        {error && <p className="mt-3 text-sm text-[#156874]">{error}</p>}
-        {message && <p className="mt-3 text-sm text-[#2a7f8b]">{message}</p>}
+        {error && <p className="mt-3 text-sm text-[#5b88b2]">{error}</p>}
+        {message && <p className="mt-3 text-sm text-[#5b88b2]">{message}</p>}
       </motion.section>
 
       <TripResultView trip={generatedTrip} />
