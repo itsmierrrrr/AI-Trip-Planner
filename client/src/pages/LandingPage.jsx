@@ -151,18 +151,18 @@ const LandingPage = () => {
 
   return (
     <div className="relative min-h-screen overflow-hidden pb-16">
-      <span className="floating-blob left-[-90px] top-[100px] h-72 w-72 bg-[#156874]/18" />
-      <span className="floating-blob right-[-90px] top-[220px] h-72 w-72 bg-[#0f535d]/16" style={{ animationDelay: "1.2s" }} />
-      <span className="floating-blob bottom-[-110px] left-1/3 h-72 w-72 bg-[#2a7f8b]/14" style={{ animationDelay: "2.2s" }} />
+      <span className="floating-blob left-[-90px] top-[100px] h-72 w-72 bg-[#122c4f]/18" />
+      <span className="floating-blob right-[-90px] top-[220px] h-72 w-72 bg-[#5b88b2]/16" style={{ animationDelay: "1.2s" }} />
+      <span className="floating-blob bottom-[-110px] left-1/3 h-72 w-72 bg-[#000000]/12" style={{ animationDelay: "2.2s" }} />
 
-      <section className="grid-backdrop relative mx-auto mt-2 w-[94%] max-w-7xl overflow-hidden rounded-[2rem] border border-[#156874]/20 bg-[#ede6e6]/70 px-4 py-20 text-center shadow-[0_20px_50px_rgba(21,104,116,0.12)]">
+      <section className="grid-backdrop relative mx-auto mt-2 w-[94%] max-w-7xl overflow-hidden rounded-[2rem] border border-[#5b88b2]/20 bg-[#fbf9e4]/74 px-4 py-20 text-center shadow-[0_20px_50px_rgba(18,44,79,0.12)]">
         {floatingDestinations.map((destination, index) => (
           <motion.div
             key={destination.name}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: [0, -8, 0] }}
             transition={{ duration: 5, delay: 0.4 + index * 0.15, repeat: Infinity, repeatType: "mirror" }}
-            className={`neon-soft absolute hidden px-5 py-3 text-sm font-medium text-[#0f535d] md:block ${destination.className}`}
+            className={`neon-soft absolute hidden px-5 py-3 text-sm font-medium text-[#122c4f] md:block ${destination.className}`}
           >
             {destination.name}
           </motion.div>
@@ -174,7 +174,7 @@ const LandingPage = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.08 }}
-            className="mx-auto inline-flex min-w-[320px] items-center justify-center rounded-2xl border border-[#156874]/28 bg-[#156874]/12 px-6 py-3 text-center font-['Anton'] text-2xl font-bold tracking-[0.08em] text-[#156874] shadow-[0_0_22px_rgba(21,104,116,0.14)] md:min-w-[420px] md:text-3xl"
+            className="mx-auto inline-flex min-w-[320px] items-center justify-center rounded-2xl border border-[#5b88b2]/28 bg-[#5b88b2]/12 px-6 py-3 text-center font-['Anton'] text-2xl font-bold tracking-[0.08em] text-[#122c4f] shadow-[0_0_22px_rgba(18,44,79,0.14)] md:min-w-[420px] md:text-3xl"
           >
             TIME: {currentTime.toLocaleTimeString()}
           </motion.div>
@@ -192,27 +192,27 @@ const LandingPage = () => {
             initial={{ opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mx-auto mt-5 max-w-2xl text-base text-[#2d6068] md:text-lg"
+            className="mx-auto mt-5 max-w-2xl text-base text-[#122c4f]/80 md:text-lg"
           >
             {env.heroSubheading}
           </motion.p>
 
-          <p className="mt-8 font-['Anton'] text-lg font-semibold uppercase tracking-[0.14em] text-[#0f535d]">
+          <p className="mt-8 font-['Anton'] text-lg font-semibold uppercase tracking-[0.14em] text-[#5b88b2]">
             Generate your trip now
           </p>
 
           <div className="mt-3">
             <Link
               to={generateNowPath}
-              className="inline-flex items-center justify-center rounded-2xl border border-[#156874]/45 bg-[#156874] px-7 py-3 font-['Anton'] text-sm font-bold uppercase tracking-[0.12em] text-[#ede6e6] shadow-[0_0_24px_rgba(21,104,116,0.22)] transition hover:border-[#0f535d] hover:bg-[#0f535d]"
+              className="inline-flex items-center justify-center rounded-2xl border border-[#122c4f]/45 bg-[#122c4f] px-7 py-3 font-['Anton'] text-sm font-bold uppercase tracking-[0.12em] text-[#fbf9e4] shadow-[0_0_24px_rgba(18,44,79,0.22)] transition hover:border-[#5b88b2] hover:bg-[#5b88b2] hover:text-[#000000]"
             >
               Generate Now
             </Link>
           </div>
 
-          <div className="mt-6 text-sm text-[#5f8b95]">Trusted by travelers from 110+ countries and 6 imaginary planets.</div>
+          <div className="mt-6 text-sm text-[#122c4f]/72">Trusted by travelers from 110+ countries and 6 imaginary planets.</div>
 
-          <div className="relative mx-auto mt-10 max-w-[88rem] overflow-hidden rounded-3xl border border-[#156874]/20 bg-[#e1d9d9]/80 p-7 md:p-8">
+          <div className="relative mx-auto mt-10 max-w-[88rem] overflow-hidden rounded-3xl border border-[#5b88b2]/20 bg-[#fbf9e4]/84 p-7 md:p-8">
             <div className="overflow-hidden">
               <motion.div
                 className="flex"
@@ -229,12 +229,12 @@ const LandingPage = () => {
                           className="h-full w-full object-cover"
                           loading="lazy"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#f3eded]/45 via-transparent to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#122c4f]/45 via-transparent to-transparent" />
                       </div>
-                      <p className="mt-3 text-lg font-semibold text-[#174b53] md:text-xl">{place.place}</p>
-                      <p className="mt-1 text-sm text-[#3f737d]">{place.country}</p>
-                      <p className="mt-2 text-xs uppercase tracking-[0.12em] text-[#0f535d]">{place.vibe}</p>
-                      <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#2d6068]">{place.description}</p>
+                      <p className="mt-3 text-lg font-semibold text-[#122c4f] md:text-xl">{place.place}</p>
+                      <p className="mt-1 text-sm text-[#5b88b2]">{place.country}</p>
+                      <p className="mt-2 text-xs uppercase tracking-[0.12em] text-[#5b88b2]">{place.vibe}</p>
+                      <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#122c4f]/82">{place.description}</p>
                     </div>
                   </article>
                 ))}
@@ -245,7 +245,7 @@ const LandingPage = () => {
               <button
                 type="button"
                 onClick={handlePrevPlace}
-                className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-[#156874]/35 bg-[#156874]/10 text-[#156874] transition hover:bg-[#156874]/20"
+                className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-[#122c4f]/35 bg-[#122c4f]/10 text-[#122c4f] transition hover:bg-[#5b88b2]/20"
                 aria-label="Previous place"
               >
                 <ChevronLeft size={18} />
@@ -258,7 +258,7 @@ const LandingPage = () => {
                     type="button"
                     onClick={() => setActivePlaceIndex(idx)}
                     className={`h-2.5 rounded-full transition-all ${
-                      idx === activePlaceIndex ? "w-8 bg-[#0f535d]" : "w-2.5 bg-[#b8afaf] hover:bg-[#cec6c6]"
+                      idx === activePlaceIndex ? "w-8 bg-[#122c4f]" : "w-2.5 bg-[#5b88b2]/40 hover:bg-[#5b88b2]/65"
                     }`}
                     aria-label={`Go to ${place.place}`}
                   />
@@ -268,7 +268,7 @@ const LandingPage = () => {
               <button
                 type="button"
                 onClick={handleNextPlace}
-                className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-[#156874]/35 bg-[#156874]/10 text-[#156874] transition hover:bg-[#156874]/20"
+                className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-[#122c4f]/35 bg-[#122c4f]/10 text-[#122c4f] transition hover:bg-[#5b88b2]/20"
                 aria-label="Next place"
               >
                 <ChevronRight size={18} />
@@ -315,11 +315,11 @@ const LandingPage = () => {
               transition={{ delay: idx * 0.08 }}
               className="neon-panel p-5"
             >
-              <div className="inline-flex rounded-2xl border border-[#156874]/30 bg-[#156874]/12 p-2 text-[#156874]">
+              <div className="inline-flex rounded-2xl border border-[#5b88b2]/30 bg-[#5b88b2]/12 p-2 text-[#122c4f]">
                 <item.icon size={18} />
               </div>
-              <h3 className="mt-4 font-['Anton'] text-lg font-semibold text-[#174b53]">{item.title}</h3>
-              <p className="mt-2 text-sm text-[#3f737d]">{item.desc}</p>
+              <h3 className="mt-4 font-['Anton'] text-lg font-semibold text-[#122c4f]">{item.title}</h3>
+              <p className="mt-2 text-sm text-[#122c4f]/78">{item.desc}</p>
             </motion.article>
           ))}
         </div>
@@ -329,12 +329,12 @@ const LandingPage = () => {
         <div className="neon-panel p-6 md:p-8">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.2em] text-[#0f535d]">How It Works</p>
-              <h2 className="mt-3 font-['Anton'] text-3xl font-bold text-[#174b53] md:text-4xl">
+              <p className="text-xs uppercase tracking-[0.2em] text-[#5b88b2]">How It Works</p>
+              <h2 className="mt-3 font-['Anton'] text-3xl font-bold text-[#122c4f] md:text-4xl">
                 One Prompt To Full Travel Blueprint
               </h2>
             </div>
-            <p className="max-w-xl text-sm text-[#3f737d]">
+            <p className="max-w-xl text-sm text-[#122c4f]/78">
               lessgo ai combines AI planning logic, destination context, weather signals, and budgeting to generate practical and exciting plans.
             </p>
           </div>
@@ -342,9 +342,9 @@ const LandingPage = () => {
           <div className="mt-7 grid gap-3 md:grid-cols-3">
             {steps.map((step, idx) => (
               <div key={step.title} className="neon-soft p-4">
-                <p className="text-xs uppercase tracking-[0.16em] text-[#0f535d]">Step {idx + 1}</p>
-                <h3 className="mt-2 text-base font-semibold text-[#174b53]">{step.title}</h3>
-                <p className="mt-2 text-sm text-[#3f737d]">{step.body}</p>
+                <p className="text-xs uppercase tracking-[0.16em] text-[#5b88b2]">Step {idx + 1}</p>
+                <h3 className="mt-2 text-base font-semibold text-[#122c4f]">{step.title}</h3>
+                <p className="mt-2 text-sm text-[#122c4f]/78">{step.body}</p>
               </div>
             ))}
           </div>
@@ -354,8 +354,8 @@ const LandingPage = () => {
       <section className="mx-auto mt-12 w-[94%] max-w-6xl">
         <div className="grid gap-4 md:grid-cols-2">
           <article className="neon-panel p-6">
-            <h3 className="font-['Anton'] text-2xl font-bold text-[#174b53]">Everything In One Place</h3>
-            <ul className="mt-4 space-y-3 text-sm text-[#3f737d]">
+            <h3 className="font-['Anton'] text-2xl font-bold text-[#122c4f]">Everything In One Place</h3>
+            <ul className="mt-4 space-y-3 text-sm text-[#122c4f]/78">
               {[
                 "Natural language trip generation",
                 "Destination-specific hotel recommendations",
@@ -364,7 +364,7 @@ const LandingPage = () => {
                 /*"Saved trips library for quick reuse",*/
               ].map((item) => (
                 <li key={item} className="inline-flex items-start gap-2">
-                  <CheckCircle2 size={16} className="mt-0.5 text-[#0f535d]" />
+                  <CheckCircle2 size={16} className="mt-0.5 text-[#5b88b2]" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -372,18 +372,18 @@ const LandingPage = () => {
           </article>
 
           <article className="neon-panel p-6">
-            <h3 className="font-['Anton'] text-2xl font-bold text-[#174b53]">Built For Real Travelers</h3>
-            <p className="mt-4 text-sm text-[#3f737d]">
+            <h3 className="font-['Anton'] text-2xl font-bold text-[#122c4f]">Built For Real Travelers</h3>
+            <p className="mt-4 text-sm text-[#122c4f]/78">
               Whether you are planning a solo escape, honeymoon, family trip, or quick city break, the platform adapts your itinerary style, pace, and spend range.
             </p>
             <div className="mt-5 grid gap-3 sm:grid-cols-2">
               <div className="neon-soft p-3">
-                <p className="text-xs uppercase tracking-[0.14em] text-[#5f8b95]">Use Cases</p>
-                <p className="mt-1 text-sm text-[#2d6068]">Backpacking, luxury, remote work, weekend escapes</p>
+                <p className="text-xs uppercase tracking-[0.14em] text-[#5b88b2]">Use Cases</p>
+                <p className="mt-1 text-sm text-[#122c4f]/78">Backpacking, luxury, remote work, weekend escapes</p>
               </div>
               <div className="neon-soft p-3">
-                <p className="text-xs uppercase tracking-[0.14em] text-[#5f8b95]">Output</p>
-                <p className="mt-1 text-sm text-[#2d6068]">Overview, timeline, hotels, tips, and budget cards</p>
+                <p className="text-xs uppercase tracking-[0.14em] text-[#5b88b2]">Output</p>
+                <p className="mt-1 text-sm text-[#122c4f]/78">Overview, timeline, hotels, tips, and budget cards</p>
               </div>
             </div>
           </article>
@@ -392,11 +392,11 @@ const LandingPage = () => {
 
       <section className="mx-auto mt-10 w-[94%] max-w-6xl">
         <div className="flex flex-col items-center gap-4 px-2 text-center">
-          <h3 className="font-['Anton'] text-2xl font-bold text-[#174b53] md:text-3xl">Ready to build your next adventure?</h3>
-          <p className="max-w-2xl text-sm text-[#3f737d]">Share your destination, budget, and travel style. The AI will generate the full itinerary in seconds.</p>
+          <h3 className="font-['Anton'] text-2xl font-bold text-[#122c4f] md:text-3xl">Ready to build your next adventure?</h3>
+          <p className="max-w-2xl text-sm text-[#122c4f]/78">Share your destination, budget, and travel style. The AI will generate the full itinerary in seconds.</p>
           <Link
             to={generateNowPath}
-            className="inline-flex items-center justify-center rounded-2xl border border-[#156874]/45 bg-[#156874] px-7 py-3 font-['Anton'] text-sm font-bold uppercase tracking-[0.12em] text-[#ede6e6] shadow-[0_0_24px_rgba(21,104,116,0.22)] transition hover:border-[#0f535d] hover:bg-[#0f535d]"
+            className="inline-flex items-center justify-center rounded-2xl border border-[#122c4f]/45 bg-[#122c4f] px-7 py-3 font-['Anton'] text-sm font-bold uppercase tracking-[0.12em] text-[#fbf9e4] shadow-[0_0_24px_rgba(18,44,79,0.22)] transition hover:border-[#5b88b2] hover:bg-[#5b88b2] hover:text-[#000000]"
           >
             Generate Now
           </Link>
@@ -407,28 +407,28 @@ const LandingPage = () => {
         <div className="neon-panel p-6">
           <div className="grid gap-6 md:grid-cols-3">
             <div>
-              <h3 className="font-['Anton'] text-lg font-semibold text-[#174b53]">{env.appName}</h3>
-              <p className="mt-2 text-sm text-[#3f737d]">
+              <h3 className="font-['Anton'] text-lg font-semibold text-[#122c4f]">{env.appName}</h3>
+              <p className="mt-2 text-sm text-[#122c4f]/78">
                 AI-powered travel planning with weather-aware itineraries, budget-first suggestions, and saved trips.
               </p>
             </div>
 
             <div>
-              <p className="text-sm font-semibold text-[#174b53]">Quick Links</p>
-              <div className="mt-2 flex flex-col gap-1 text-sm text-[#3f737d]">
-                <Link to="/planner" className="transition hover:text-[#0f535d]">Planner</Link>
-                <Link to="/saved-trips" className="transition hover:text-[#0f535d]">Saved Trips</Link>
-                <Link to="/auth" className="transition hover:text-[#0f535d]">Login / Signup</Link>
+              <p className="text-sm font-semibold text-[#122c4f]">Quick Links</p>
+              <div className="mt-2 flex flex-col gap-1 text-sm text-[#122c4f]/78">
+                <Link to="/planner" className="transition hover:text-[#5b88b2]">Planner</Link>
+                <Link to="/saved-trips" className="transition hover:text-[#5b88b2]">Saved Trips</Link>
+                <Link to="/auth" className="transition hover:text-[#5b88b2]">Login / Signup</Link>
               </div>
             </div>
 
             <div>
-              <p className="text-sm font-semibold text-[#174b53]">Support</p>
-              <p className="mt-2 text-sm text-[#3f737d]">Need help planning? Use the planner prompt to generate a rupee-based travel plan instantly.</p>
+              <p className="text-sm font-semibold text-[#122c4f]">Support</p>
+              <p className="mt-2 text-sm text-[#122c4f]/78">Need help planning? Use the planner prompt to generate a rupee-based travel plan instantly.</p>
             </div>
 
             <div className="md:col-span-3 text-center">
-              <p className="text-sm font-semibold text-[#174b53]">Follow Us</p>
+              <p className="text-sm font-semibold text-[#122c4f]">Follow Us</p>
               <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
                 {socialLinks.map((item) => (
                   <a
@@ -438,7 +438,7 @@ const LandingPage = () => {
                     title={item.label}
                     target={item.href.startsWith("mailto:") ? undefined : "_blank"}
                     rel={item.href.startsWith("mailto:") ? undefined : "noreferrer"}
-                    className="neon-input inline-flex h-10 w-10 items-center justify-center rounded-xl text-[#3f737d] transition hover:border-[#156874]/55 hover:text-[#156874]"
+                    className="neon-input inline-flex h-10 w-10 items-center justify-center rounded-xl text-[#122c4f]/78 transition hover:border-[#5b88b2]/55 hover:text-[#5b88b2]"
                   >
                     <item.icon size={13} aria-hidden="true" />
                   </a>
@@ -447,7 +447,7 @@ const LandingPage = () => {
             </div>
           </div>
 
-          <div className="mt-6 border-t border-[#156874]/20 pt-4 text-center text-xs text-[#5f8b95]">
+          <div className="mt-6 border-t border-[#5b88b2]/20 pt-4 text-center text-xs text-[#122c4f]/62">
             © {new Date().getFullYear()} {env.appName}. Crafted for smarter journeys. Founded by Imran Hashmi.
           </div>
         </div>
@@ -456,7 +456,7 @@ const LandingPage = () => {
       <div className="mx-auto mt-3 w-[94%] max-w-6xl pb-6 text-center">
         <Link
           to="/admin-security"
-          className="neon-input inline-flex items-center rounded-xl px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-[#3f737d] transition hover:border-[#156874]/55 hover:text-[#156874]"
+          className="neon-input inline-flex items-center rounded-xl px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-[#122c4f]/78 transition hover:border-[#5b88b2]/55 hover:text-[#5b88b2]"
         >
            Admin Access
         </Link>
