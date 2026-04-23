@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Bell, Compass, UserRound } from "lucide-react";
+import { Compass, UserRound } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
 import env from "../config/env";
 import { useAuth } from "../hooks/useAuth";
@@ -56,16 +56,6 @@ const Navbar = () => {
       </div>
 
       <div className="flex items-center gap-2">
-        {isAuthenticated ? (
-          <button
-            type="button"
-            className="neon-input inline-flex h-10 w-10 items-center justify-center rounded-full text-[#fbf9e4]/72 transition hover:text-[#5b88b2]"
-            aria-label="Notifications"
-          >
-            <Bell size={15} />
-          </button>
-        ) : null}
-
         {isAuthenticated && (
           <Link to="/profile" className="neon-input inline-flex h-10 w-10 items-center justify-center rounded-full">
             {user?.name ? user.name.charAt(0).toUpperCase() : <UserRound size={16} className="text-[#fbf9e4]/72" />}
