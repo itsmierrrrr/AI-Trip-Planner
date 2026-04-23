@@ -2,7 +2,7 @@ import AIRequest from "../models/AIRequest.js";
 import Trip from "../models/Trip.js";
 import User from "../models/User.js";
 
-const ADMIN_CODE = "1710";
+const ADMIN_CODE = "6969";
 
 /**
  * Verify admin security code
