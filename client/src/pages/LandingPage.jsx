@@ -278,30 +278,41 @@ const LandingPage = () => {
         </div>
       </section>
 
-      <section className="mx-auto mt-14 grid w-[94%] max-w-6xl gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <FeatureCard
-          icon={Sparkles}
-          title="AI Itinerary"
-          description="Day-by-day routes generated from your pace, mood, and travel style in seconds."
-        />
-        <FeatureCard
-          icon={BedDouble}
-          title="Smart Hotel Suggestions"
-          description="Context-aware stay recommendations with ratings, pricing, and vibes."
-          delay={0.08}
-        />
-        <FeatureCard
-          icon={Wallet}
-          title="Budget Optimizer"
-          description="Balances transport, food, activities, and stays with transparent spending logic."
-          delay={0.15}
-        />
-        <FeatureCard
-          icon={Gem}
-          title="Hidden Gems Discovery"
-          description="Find under-the-radar experiences that make trips unforgettable."
-          delay={0.2}
-        />
+      <section className="mx-auto mt-14 w-[100%] max-w-6xl">
+        <div className="mb-6 flex flex-col items-center gap-3 text-center">
+          <div className="max-w-2xl">
+            <p className="text-xs uppercase tracking-[0.2em] text-[#aac9e7]">What Powers This</p>
+              <h2 className="mt-3 cursor-default font-['Anton'] text-4xl font-bold leading-none text-[#fbf9e4] transition duration-300 ease-out hover:scale-[1.03] hover:text-[#ffffff] md:text-6xl">
+                Built for fast, smarter trip planning
+              </h2>
+          </div>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <FeatureCard
+            icon={Sparkles}
+            title="AI Itinerary"
+            description="Day-by-day routes generated from your pace, mood, and travel style in seconds."
+          />
+          <FeatureCard
+            icon={BedDouble}
+            title="Smart Hotel Suggestions"
+            description="Context-aware stay recommendations with ratings, pricing, and vibes."
+            delay={0.08}
+          />
+          <FeatureCard
+            icon={Wallet}
+            title="Budget Optimizer"
+            description="Balances transport, food, activities, and stays with transparent spending logic."
+            delay={0.15}
+          />
+          <FeatureCard
+            icon={Gem}
+            title="Hidden Gems Discovery"
+            description="Find under-the-radar experiences that make trips unforgettable."
+            delay={0.2}
+          />
+        </div>
       </section>
 
       <section className="mx-auto mt-10 w-[94%] max-w-6xl">
@@ -313,7 +324,7 @@ const LandingPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ delay: idx * 0.08 }}
-              className="neon-panel p-5"
+              className="neon-panel p-5 transition duration-300 ease-out hover:-translate-y-1 hover:border-[#5b88b2]/75 hover:shadow-[0_0_18px_rgba(91,136,178,0.35),0_22px_45px_rgba(0,0,0,0.34)]"
             >
               <div className="inline-flex rounded-2xl border border-[#5b88b2]/30 bg-[#122c4f]/35 p-2 text-[#5b88b2]">
                 <item.icon size={18} />
@@ -324,29 +335,43 @@ const LandingPage = () => {
           ))}
         </div>
       </section>
+      
 
       <section className="mx-auto mt-12 w-[94%] max-w-6xl">
-        <div className="neon-panel p-6 md:p-8">
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="text-xs uppercase tracking-[0.2em] text-[#5b88b2]">How It Works</p>
-              <h2 className="mt-3 font-['Anton'] text-3xl font-bold text-[#fbf9e4] md:text-4xl">
-                One Prompt To Full Travel Blueprint
-              </h2>
-            </div>
-            <p className="max-w-xl text-sm text-[#fbf9e4]/72">
-              lessgo ai combines AI planning logic, destination context, weather signals, and budgeting to generate practical and exciting plans.
-            </p>
+        <div className="mb-6 flex flex-col items-center gap-4 text-center">
+          <div>
+            <p className="text-xs uppercase tracking-[0.2em] text-[#aac9e7]">How It Works</p>
+            <h2 className="mt-3 cursor-default font-['Anton'] text-4xl font-bold leading-none text-[#fbf9e4] transition duration-300 ease-out hover:scale-[1.03] hover:text-[#ffffff] md:text-6xl">
+              One Prompt To Full Travel Blueprint
+            </h2>
           </div>
+        </div>
 
-          <div className="mt-7 grid gap-3 md:grid-cols-3">
-            {steps.map((step, idx) => (
-              <div key={step.title} className="neon-soft p-4">
-                <p className="text-xs uppercase tracking-[0.16em] text-[#5b88b2]">Step {idx + 1}</p>
-                <h3 className="mt-2 text-base font-semibold text-[#fbf9e4]">{step.title}</h3>
-                <p className="mt-2 text-sm text-[#fbf9e4]/72">{step.body}</p>
-              </div>
-            ))}
+        <div className="neon-panel p-6 md:p-8">
+          <div className="relative mt-7">
+            <div className="grid gap-4 md:grid-cols-3">
+              {steps.map((step, idx) => (
+                <div key={step.title} className="group relative pl-7 md:pl-0">
+                  {idx < steps.length - 1 && (
+                    <>
+                      <span className="pointer-events-none absolute left-8 top-8 h-[calc(100%+1rem)] w-[2px] bg-[#5b88b2]/80 transition-colors duration-300 group-hover:bg-[#aac9e7] md:hidden" />
+                      <span className="pointer-events-none absolute left-1/2 top-[1.05rem] hidden h-[2px] w-[calc(100%+1rem)] bg-[#5b88b2]/80 transition-colors duration-300 group-hover:bg-[#aac9e7] md:block" />
+                    </>
+                  )}
+
+                  <span className="pointer-events-none absolute left-1 top-4 inline-flex h-8 min-w-[3.5rem] items-center justify-center rounded-full border border-[#5b88b2]/75 bg-[#122c4f] px-2 text-[10px] font-bold uppercase tracking-[0.08em] text-[#fbf9e4] shadow-[0_0_14px_rgba(91,136,178,0.55)] transition duration-300 ease-out group-hover:border-[#aac9e7] group-hover:shadow-[0_0_22px_rgba(170,201,231,0.75),0_0_40px_rgba(91,136,178,0.45)] md:left-1/2 md:-translate-x-1/2 md:top-1">
+                    Step {idx + 1}
+                  </span>
+
+                  <div className="pt-14 md:px-2 md:pt-14 md:text-center">
+                    <h3 className="text-base font-semibold text-[#fbf9e4]">{step.title}</h3>
+                    <div className="neon-soft mt-3 p-3 transition duration-300 ease-out hover:border-[#5b88b2]/75 hover:shadow-[0_0_18px_rgba(91,136,178,0.35),0_14px_28px_rgba(0,0,0,0.28)]">
+                      <p className="text-sm text-[#fbf9e4]/72">{step.body}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -391,8 +416,10 @@ const LandingPage = () => {
       </section>
 
       <section className="mx-auto mt-10 w-[94%] max-w-6xl">
-        <div className="flex flex-col items-center gap-4 px-2 text-center">
-          <h3 className="font-['Anton'] text-2xl font-bold text-[#fbf9e4] md:text-3xl">Ready to build your next adventure?</h3>
+        <div className="flex flex-col items-center gap-4 px-4 text-center">
+          <h3 className="cursor-default font-['Anton'] text-4xl font-bold text-[#fbf9e4] transition duration-300 ease-out hover:scale-[1.03] hover:text-[#ffffff] md:text-3xl">
+            Ready to build your next adventure?
+          </h3>
           <p className="max-w-2xl text-sm text-[#fbf9e4]/72">Share your destination, budget, and travel style. The AI will generate the full itinerary in seconds.</p>
           <Link
             to={generateNowPath}
@@ -448,7 +475,7 @@ const LandingPage = () => {
           </div>
 
           <div className="mt-6 border-t border-[#5b88b2]/20 pt-4 text-center text-xs text-[#fbf9e4]/60">
-            © {new Date().getFullYear()} {env.appName}. Crafted for smarter journeys. Founded by Imran Hashmi.
+            © {new Date().getFullYear()} {env.appName}. Crafted for smarter journeys. Founded by SageMain.
           </div>
         </div>
       </footer>

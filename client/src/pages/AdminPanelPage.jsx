@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { AlertCircle, BarChart3, ChevronDown, Eye, Radar, Trash2, Users, X } from "lucide-react";
+import { AlertCircle, BarChart3, Bot, ChevronDown, Eye, Plane, Radar, Trash2, Users, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAdminStats, getAdminUsersWithTrips, removeAdminUser } from "../services/adminPanelService";
@@ -93,6 +93,9 @@ const AdminPanelPage = () => {
     [allTrips]
   );
 
+  const usersMax = useMemo(() => Math.max(...monthlyUsers, 1), [monthlyUsers]);
+  const tripsMax = useMemo(() => Math.max(...monthlyTrips, 1), [monthlyTrips]);
+
   const toggleUserExpand = (userId) => {
     setExpandedUsers((prev) => ({
       ...prev,
@@ -170,9 +173,9 @@ const AdminPanelPage = () => {
           className="mb-8 grid gap-4 md:grid-cols-3"
         >
           {[
-            { label: "Total Users", value: stats.totalUsers, icon: "👥" },
-            { label: "Total Trips", value: stats.totalTrips, icon: "✈️" },
-            { label: "AI Requests", value: stats.totalAIRequests, icon: "🤖" },
+            { label: "Total Users", value: stats.totalUsers, icon: Users },
+            { label: "Total Trips", value: stats.totalTrips, icon: Plane },
+            { label: "AI Requests", value: stats.totalAIRequests, icon: Bot },
           ].map((stat, index) => (
             <motion.div
               key={stat.label}
@@ -186,7 +189,7 @@ const AdminPanelPage = () => {
                   <p className="text-sm text-[#fbf9e4]/68">{stat.label}</p>
                   <p className="mt-2 text-3xl font-bold text-[#fbf9e4]">{stat.value}</p>
                 </div>
-                <span className="text-4xl">{stat.icon}</span>
+                <stat.icon size={34} className="text-[#5b88b2]" aria-hidden="true" />
               </div>
             </motion.div>
           ))}
@@ -260,11 +263,19 @@ const AdminPanelPage = () => {
             </h2>
             <div className="mt-4 grid grid-cols-12 items-end gap-2">
               {monthlyUsers.map((count, month) => (
-                <div key={month} className="flex flex-col items-center gap-2">
-                  <div
-                    className="w-full rounded-t-md bg-gradient-to-t from-[#5b88b2]/70 to-[#122c4f]/80"
-                    style={{ height: `${Math.max(10, count * 14)}px` }}
-                  />
+                <div key={month} className="group flex flex-col items-center gap-1">
+                  <div className="relative h-[140px] w-full">
+                    <span
+                      className="pointer-events-none absolute left-1/2 -translate-x-1/2 text-[10px] font-semibold text-[#fbf9e4] opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+                      style={{ bottom: `calc(${(count / usersMax) * 100}% + 4px)` }}
+                    >
+                      {count}
+                    </span>
+                    <div
+                      className="absolute bottom-0 w-full rounded-t-md bg-gradient-to-t from-[#5b88b2]/70 to-[#122c4f]/80"
+                      style={{ height: `${(count / usersMax) * 100}%` }}
+                    />
+                  </div>
                   <span className="text-[10px] text-[#fbf9e4]">{monthLabels[month]}</span>
                 </div>
               ))}
@@ -283,11 +294,19 @@ const AdminPanelPage = () => {
           </h2>
           <div className="mt-4 grid grid-cols-12 items-end gap-2">
             {monthlyTrips.map((count, month) => (
-              <div key={month} className="flex flex-col items-center gap-2">
-                <div
-                  className="w-full rounded-t-md bg-gradient-to-t from-[#122c4f]/70 to-[#5b88b2]/80"
-                  style={{ height: `${Math.max(10, count * 14)}px` }}
-                />
+              <div key={month} className="group flex flex-col items-center gap-1">
+                <div className="relative h-[140px] w-full">
+                  <span
+                    className="pointer-events-none absolute left-1/2 -translate-x-1/2 text-[10px] font-semibold text-[#fbf9e4] opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+                    style={{ bottom: `calc(${(count / tripsMax) * 100}% + 4px)` }}
+                  >
+                    {count}
+                  </span>
+                  <div
+                    className="absolute bottom-0 w-full rounded-t-md bg-gradient-to-t from-[#122c4f]/70 to-[#5b88b2]/80"
+                    style={{ height: `${(count / tripsMax) * 100}%` }}
+                  />
+                </div>
                 <span className="text-[10px] text-[#fbf9e4]">{monthLabels[month]}</span>
               </div>
             ))}

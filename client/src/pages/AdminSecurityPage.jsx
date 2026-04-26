@@ -81,11 +81,11 @@ const AdminSecurityPage = () => {
           >
             {/* Code Input */}
             <div>
-              <label className="mb-2 block text-sm font-medium tracking-[0.06em] text-[#fbf9e4]/72">-------------------Security code------------------</label>
+              <label className="mb-2 block text-center text-sm font-medium tracking-[0.06em] text-[#fbf9e4]/72">Serurity code</label>
               <div className="relative mx-auto max-w-[240px]">
                 
                 <input
-                  type="text"
+                  type="password"
                   value={code}
                   onChange={(e) => {
                     setCode(e.target.value.replace(/\D/g, "").slice(0, 4));
