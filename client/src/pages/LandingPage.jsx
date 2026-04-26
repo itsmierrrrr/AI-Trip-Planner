@@ -278,6 +278,8 @@ const LandingPage = () => {
         </div>
       </section>
 
+      <div className="mx-auto mt-8 h-px w-full max-w-none bg-gradient-to-r from-transparent via-[#b0aa71] to-transparent" />
+
       <section className="mx-auto mt-14 w-[100%] max-w-6xl">
         <div className="mb-6 flex flex-col items-center gap-3 text-center">
           <div className="max-w-2xl">
@@ -315,6 +317,7 @@ const LandingPage = () => {
         </div>
       </section>
 
+
       <section className="mx-auto mt-10 w-[94%] max-w-6xl">
         <div className="grid gap-4 md:grid-cols-3">
           {capabilityCards.map((item, idx) => (
@@ -335,7 +338,8 @@ const LandingPage = () => {
           ))}
         </div>
       </section>
-      
+
+      <div className="mx-auto mt-8 h-px w-full max-w-none bg-gradient-to-r from-transparent via-[#b0aa71] to-transparent" />
 
       <section className="mx-auto mt-12 w-[94%] max-w-6xl">
         <div className="mb-6 flex flex-col items-center gap-4 text-center">
@@ -376,6 +380,8 @@ const LandingPage = () => {
         </div>
       </section>
 
+      <div className="mx-auto mt-8 h-px w-full max-w-none bg-gradient-to-r from-transparent via-[#b0aa71] to-transparent" />
+
       <section className="mx-auto mt-12 w-[94%] max-w-6xl">
         <div className="grid gap-4 md:grid-cols-2">
           <article className="neon-panel p-6">
@@ -414,6 +420,8 @@ const LandingPage = () => {
           </article>
         </div>
       </section>
+
+      <div className="mx-auto mt-8 h-px w-full max-w-none bg-gradient-to-r from-transparent via-[#b0aa71] to-transparent" />
 
       <section className="mx-auto mt-10 w-[94%] max-w-6xl">
         <div className="flex flex-col items-center gap-4 px-4 text-center">
