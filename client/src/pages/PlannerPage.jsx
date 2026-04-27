@@ -122,7 +122,7 @@ const PlannerPage = () => {
         animate={{ opacity: 1, y: 0 }}
         className="neon-panel p-6"
       >
-        <h1 className="font-['Anton'] text-3xl font-bold text-[#fbf9e4]">Planner Dashboard</h1>
+        <h1 className="font-['Anton'] text-3xl font-bold text-[#fbf9e4]">Generate A Trip</h1>
         <p className="mt-2 text-sm text-[#fbf9e4]">Describe your ideal journey and let the travel AI orchestrate every detail.</p>
 
         <form onSubmit={onGenerate} className="mt-5 space-y-4">
@@ -141,7 +141,7 @@ const PlannerPage = () => {
             </div>
             <div>
               <label className="text-xs font-medium text-[#fbf9e4]">Budget <span className="text-[#5b88b2]">*</span></label>
-              <input className={fieldClass} placeholder="e.g., ₹50,000 or $500" value={form.budget} onChange={(e) => onChange("budget", e.target.value)} required />
+              <input className={fieldClass} placeholder="e.g., INR 1,50,000 " value={form.budget} onChange={(e) => onChange("budget", e.target.value)} required />
             </div>
             <div>
               <label className="text-xs font-medium text-[#fbf9e4]">Days <span className="text-[#5b88b2]">*</span></label>
