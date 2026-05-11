@@ -1,6 +1,7 @@
 # AI Trip Planner
 
-AI-powered trip planning app with a React + Vite frontend and a Node.js + Express backend.
+- Built an AI-powered trip planning platform using React + Vite on the frontend and Node.js + Express on the backend.
+- The app generates intelligent travel itineraries, personalized destination recommendations, budget-aware plans, and real-time trip insights through a smooth, responsive user experience.
 
 ## Tech Stack
 
