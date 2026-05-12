@@ -36,39 +36,6 @@ server/
 - DELETE /api/admin/users/:id
 - DELETE /api/admin/trips/:id
 
-## Environment Setup
-
-Create `server/.env` from `server/.env.example`:
-
-```env
-MONGODB_URI=<your_mongodb_connection_string>
-JWT_SECRET=<your_long_random_jwt_secret>
-OPENROUTER_API_KEY=<your_openrouter_api_key>
-OPENROUTER_API_URL=https://openrouter.ai/api/v1/chat/completions
-OPENROUTER_MODEL=openrouter/free
-OPENROUTER_APP_NAME=AI Trip Planner
-GOOGLE_CLIENT_ID=<your_google_oauth_client_id>
-GOOGLE_CLIENT_SECRET=<your_google_oauth_client_secret>
-CLIENT_URL=http://localhost:5173
-CLIENT_URLS=http://localhost:5173,http://localhost:5178
-CORS_ALLOW_LOCALHOST=true
-SERVER_URL=http://localhost:5000
-PORT=5000
-```
-
-Create `client/.env`:
-
-```env
-VITE_GOOGLE_CLIENT_ID=<your_google_oauth_client_id>
-VITE_API_URL=http://localhost:5000/api
-VITE_APP_NAME=TripOS AI
-VITE_HERO_HEADLINE=Your Next Trip, Designed by AI
-VITE_HERO_SUBHEADING=A futuristic travel intelligence layer that builds routes, budgets, and discoveries.
-VITE_HERO_PROMPT_EXAMPLE=Plan me a 7-day Japan trip under 1000 USD
-VITE_PLANNER_PROMPT_PLACEHOLDER=Describe your trip
-VITE_LOADING_MESSAGES=Scanning destinations...|Comparing routes...|Building your itinerary...
-```
-
 ## Security Guidelines
 
 - Never commit real keys, tokens, passwords, or OAuth secrets.
