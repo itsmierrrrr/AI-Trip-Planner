@@ -8,6 +8,19 @@
 - Frontend: React, Vite, Tailwind CSS, React Router, Axios, Framer Motion
 - Backend: Node.js, Express, MongoDB, Mongoose, JWT, Google OAuth, OpenRouter
 
+## Key Features 
+
+- AI-powered itinerary generation
+- Personalized travel recommendations
+- Real-time trip optimization
+- Smart budget tracking
+- Interactive travel dashboard
+- Secure login & cloud data storage
+- Responsive and high-performance frontend
+- RESTful backend architecture
+- Modern UI/UX with scalable design principles
+- End-to-end trip management ecosystem 
+
 ## Project Structure
 
 ```txt
