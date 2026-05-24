@@ -8,7 +8,7 @@
 - Frontend: React, Vite, Tailwind CSS, React Router, Axios, Framer Motion
 - Backend: Node.js, Express, MongoDB, Mongoose, JWT, Google OAuth, OpenRouter
 
-## Key Features 
+## Key Highlights 
 
 - AI-powered itinerary generation
 - Personalized travel recommendations
