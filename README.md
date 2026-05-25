@@ -3,7 +3,7 @@
 - Built an AI-powered trip planning platform using React + Vite on the frontend and Node.js + Express on the backend.
 - The app generates intelligent travel itineraries, personalized destination recommendations, budget-aware plans, and real-time trip insights through a smooth, responsive user experience.
 
-## Tech Stack
+## Stack
 
 - Frontend: React, Vite, Tailwind CSS, React Router, Axios, Framer Motion
 - Backend: Node.js, Express, MongoDB, Mongoose, JWT, Google OAuth, OpenRouter
