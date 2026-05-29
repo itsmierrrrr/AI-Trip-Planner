@@ -483,7 +483,7 @@ const LandingPage = () => {
           </div>
 
           <div className="mt-6 border-t border-[#5b88b2]/20 pt-4 text-center text-xs text-[#fbf9e4]/60">
-            © {new Date().getFullYear()} {env.appName}. Smarter journeys, simplified. Built by SageMain.
+            © {new Date().getFullYear()} {env.appName}. Smarter journeys, simplified. Built by Mihir Sawant.
           </div>
         </div>
       </footer>
